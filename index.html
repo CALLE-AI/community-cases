@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Reusable CALL-E phone-task examples from the community.">
+    <title>CALL-E Community Cases</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f7f7f5;
+        color: #18181b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-header,
+      main,
+      footer {
+        width: min(100% - 40px, 1040px);
+        margin-inline: auto;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 72px;
+        border-bottom: 1px solid #dfdfdc;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #ffd72e;
+        display: grid;
+        place-items: center;
+        color: #18181b;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .github-link {
+        color: #52525b;
+        font-size: 14px;
+      }
+
+      main {
+        padding-block: 72px 88px;
+      }
+
+      .intro {
+        max-width: 680px;
+        margin-bottom: 36px;
+      }
+
+      .eyebrow,
+      .case-kind {
+        margin: 0;
+        color: #71717a;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 10px 0 14px;
+        font-size: clamp(36px, 7vw, 64px);
+        line-height: 1;
+        letter-spacing: -0.055em;
+      }
+
+      .intro-copy {
+        margin: 0;
+        color: #52525b;
+        font-size: 18px;
+        line-height: 1.55;
+      }
+
+      .case-card {
+        overflow: hidden;
+        background: #ffffff;
+        border: 1px solid #dfdfdc;
+        border-radius: 18px;
+        box-shadow: 0 18px 44px rgba(24, 24, 27, 0.07);
+      }
+
+      .case-card-main {
+        padding: 30px;
+      }
+
+      .case-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 22px;
+      }
+
+      .case-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: #fff6bf;
+        color: #604a00;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .case-status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #e0b800;
+      }
+
+      h2 {
+        max-width: 720px;
+        margin: 0 0 12px;
+        font-size: clamp(26px, 5vw, 40px);
+        line-height: 1.12;
+        letter-spacing: -0.035em;
+      }
+
+      .case-summary {
+        max-width: 720px;
+        margin: 0;
+        color: #52525b;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin: 26px 0;
+      }
+
+      .fact {
+        padding: 15px;
+        border-radius: 12px;
+        background: #f7f7f5;
+      }
+
+      .fact-label {
+        display: block;
+        margin-bottom: 6px;
+        color: #71717a;
+        font-size: 12px;
+      }
+
+      .fact-value {
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid #18181b;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .action-primary {
+        background: #18181b;
+        color: #ffffff;
+      }
+
+      .action-secondary {
+        background: #ffffff;
+      }
+
+      .case-details {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 32px;
+        padding: 26px 30px 30px;
+        border-top: 1px solid #dfdfdc;
+        background: #fafaf9;
+      }
+
+      .detail h3 {
+        margin: 0 0 7px;
+        font-size: 14px;
+      }
+
+      .detail p {
+        margin: 0;
+        color: #52525b;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .safety {
+        grid-column: 1 / -1;
+        padding-top: 20px;
+        border-top: 1px solid #dfdfdc;
+      }
+
+      footer {
+        padding-block: 24px 36px;
+        border-top: 1px solid #dfdfdc;
+        color: #71717a;
+        font-size: 13px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          background: #121214;
+          color: #fafafa;
+        }
+
+        .site-header,
+        footer,
+        .case-card,
+        .case-details,
+        .safety {
+          border-color: #3f3f46;
+        }
+
+        .github-link,
+        .eyebrow,
+        .case-kind,
+        .intro-copy,
+        .case-summary,
+        .fact-label,
+        .detail p,
+        footer {
+          color: #b4b4bc;
+        }
+
+        .case-card,
+        .action-secondary {
+          background: #1b1b1f;
+        }
+
+        .case-card {
+          box-shadow: none;
+        }
+
+        .case-status {
+          background: #473d00;
+          color: #ffeb85;
+        }
+
+        .fact,
+        .case-details {
+          background: #242428;
+        }
+
+        .action {
+          border-color: #fafafa;
+        }
+
+        .action-primary {
+          background: #fafafa;
+          color: #18181b;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .site-header,
+        main,
+        footer {
+          width: min(100% - 28px, 1040px);
+        }
+
+        main {
+          padding-block: 48px 64px;
+        }
+
+        .facts,
+        .case-details {
+          grid-template-columns: 1fr;
+        }
+
+        .case-card-main,
+        .case-details {
+          padding: 22px;
+        }
+
+        .safety {
+          grid-column: auto;
+        }
+
+        .actions,
+        .action {
+          width: 100%;
+        }
+
+        .action {
+          min-height: 46px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="https://www.heycall-e.com/" aria-label="CALL-E website">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span>CALL-E</span>
+      </a>
+      <a class="github-link" href="https://github.com/CALLE-AI/community-cases">View on GitHub</a>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Community cases</p>
+        <h1 id="page-title">Phone tasks you can inspect and reuse.</h1>
+        <p class="intro-copy">Each case shows the task, what has been tested, what you can reuse, and where to start.</p>
+      </section>
+
+      <article class="case-card" aria-labelledby="n8n-case-title">
+        <div class="case-card-main">
+          <div class="case-topline">
+            <p class="case-kind">n8n · Workflow template</p>
+            <span class="case-status">Awaiting community feedback</span>
+          </div>
+
+          <h2 id="n8n-case-title">Test authorized IVR calls from n8n</h2>
+          <p class="case-summary">Run CALL-E call tasks one at a time, wait for completion, and review status, transcripts, summaries, and structured results inside n8n.</p>
+
+          <div class="facts" aria-label="Case overview">
+            <div class="fact">
+              <span class="fact-label">Best for</span>
+              <span class="fact-value">Developers testing owned or authorized IVR numbers</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Reusable material</span>
+              <span class="fact-value">Community Node and importable workflow JSON</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Current evidence</span>
+              <span class="fact-value">Package and template published; no community trial recorded</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="action action-primary" href="https://github.com/CALLE-AI/awesome-phone-call-agents/tree/main/plugins/n8n-calle-api">Get the workflow</a>
+            <a class="action action-secondary" href="https://github.com/CALLE-AI/n8n-nodes-calle">View the n8n node</a>
+          </div>
+        </div>
+
+        <div class="case-details">
+          <section class="detail">
+            <h3>What it does</h3>
+            <p>Creates two call tasks, waits for each final status, and returns a compact result view with masked phone-bearing values.</p>
+          </section>
+          <section class="detail">
+            <h3>What you need</h3>
+            <p>An n8n deployment, a CALL-E API key, and phone numbers you own or have permission to call.</p>
+          </section>
+          <section class="detail">
+            <h3>What you can change</h3>
+            <p>Replace the sample IVR task, locale, metadata, and blocked placeholder numbers with your authorized test setup.</p>
+          </section>
+          <section class="detail">
+            <h3>Maintenance</h3>
+            <p>Maintained by CALL-E. Use the linked repositories for setup instructions, source code, and issue reporting.</p>
+          </section>
+          <section class="detail safety">
+            <h3>Before running</h3>
+            <p>This workflow can place real outbound calls. Keep it inactive until the API key, destination numbers, and task wording have been reviewed.</p>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      This is an early community-case prototype. Case status is shown separately from technical availability.
+    </footer>
+  </body>
+</html>
