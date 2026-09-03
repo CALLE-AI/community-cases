@@ -4,32 +4,62 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Reusable CALL-E phone-task examples from the community.">
+    <meta name="theme-color" content="#ffd733">
+    <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
     <title>CALL-E Community Cases</title>
     <style>
       :root {
-        color-scheme: light dark;
+        color-scheme: light;
+        --page: #f9f9f5;
+        --surface: #ffffff;
+        --ink: #2e2f33;
+        --muted: #5b6472;
+        --border: #dde5ef;
+        --shell: #f4f9ff;
+        --accent: #eff6ff;
+        --signal: #2563eb;
+        --action: #26272b;
+        --action-hover: #111827;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f7f7f5;
-        color: #18181b;
+        background: var(--page);
+        color: var(--ink);
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        background: var(--page);
+      }
+
       body {
         margin: 0;
         min-width: 320px;
+        background: var(--page);
+        color: var(--ink);
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
       }
 
       a {
         color: inherit;
       }
 
+      .brand-shell {
+        overflow: hidden;
+        border-bottom: 1px solid rgba(46, 47, 51, 0.12);
+        background:
+          radial-gradient(circle at 34% -18%, rgba(161, 222, 255, 0.9) 0, rgba(161, 222, 255, 0.45) 20%, transparent 43%),
+          radial-gradient(circle at 84% 8%, rgba(255, 250, 218, 0.78) 0, transparent 34%),
+          linear-gradient(135deg, #ffe13f 0%, #f7df75 100%);
+      }
+
       .site-header,
+      .intro,
       main,
-      footer {
-        width: min(100% - 40px, 1040px);
+      .footer-inner {
+        width: min(calc(100% - 40px), 1120px);
         margin-inline: auto;
       }
 
@@ -37,73 +67,152 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 72px;
-        border-bottom: 1px solid #dfdfdc;
+        min-height: 76px;
+        border-bottom: 1px solid rgba(46, 47, 51, 0.12);
       }
 
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
         text-decoration: none;
-        font-weight: 700;
-        letter-spacing: -0.02em;
       }
 
-      .brand-mark {
-        width: 28px;
-        height: 28px;
+      .brand-logo {
+        width: 110px;
+        height: auto;
         display: block;
       }
 
-      .github-link {
-        color: #52525b;
-        font-size: 14px;
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
-      main {
-        padding-block: 72px 88px;
+      .site-link {
+        position: relative;
+        padding: 10px 12px;
+        color: rgba(46, 47, 51, 0.78);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .site-link:hover {
+        color: var(--ink);
+      }
+
+      .site-link[aria-current="page"]::after {
+        position: absolute;
+        right: 12px;
+        bottom: 4px;
+        left: 12px;
+        height: 2px;
+        background: var(--signal);
+        content: "";
+      }
+
+      .header-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        gap: 8px;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: var(--action);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .header-cta:hover {
+        background: var(--action-hover);
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--signal);
+        outline-offset: 3px;
       }
 
       .intro {
-        max-width: 680px;
-        margin-bottom: 36px;
+        max-width: 900px;
+        padding-block: 82px 100px;
+        text-align: center;
       }
 
       .eyebrow,
+      .section-kicker,
       .case-kind {
         margin: 0;
-        color: #71717a;
+        font-family: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 11px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.38);
+      }
+
+      .eyebrow::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--signal);
+        content: "";
+      }
+
       h1 {
-        margin: 10px 0 14px;
-        font-size: clamp(36px, 7vw, 64px);
-        line-height: 1;
-        letter-spacing: -0.055em;
+        margin: 24px 0 20px;
+        font-size: clamp(44px, 7vw, 68px);
+        font-weight: 400;
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+      }
+
+      h1 span {
+        text-decoration: underline;
+        text-decoration-color: var(--signal);
+        text-decoration-thickness: 4px;
+        text-underline-offset: 0.12em;
       }
 
       .intro-copy {
-        margin: 0;
-        color: #52525b;
+        max-width: 650px;
+        margin: 0 auto;
+        color: rgba(46, 47, 51, 0.82);
         font-size: 18px;
-        line-height: 1.55;
+        line-height: 1.65;
+      }
+
+      main {
+        padding-block: 64px 88px;
+      }
+
+      .section-kicker {
+        margin-bottom: 14px;
+        color: var(--signal);
       }
 
       .case-card {
         overflow: hidden;
-        background: #ffffff;
-        border: 1px solid #dfdfdc;
-        border-radius: 18px;
-        box-shadow: 0 18px 44px rgba(24, 24, 27, 0.07);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: inset 3px 0 0 var(--signal), 0 1px 2px rgba(17, 24, 39, 0.04);
       }
 
       .case-card-main {
-        padding: 30px;
+        padding: 38px 40px;
       }
 
       .case-topline {
@@ -112,17 +221,22 @@
         justify-content: space-between;
         gap: 16px;
         flex-wrap: wrap;
-        margin-bottom: 22px;
+        margin-bottom: 24px;
+      }
+
+      .case-kind {
+        color: var(--muted);
       }
 
       .case-status {
         display: inline-flex;
         align-items: center;
         gap: 7px;
-        padding: 7px 11px;
+        padding: 6px 10px;
+        border: 1px solid rgba(37, 99, 235, 0.22);
         border-radius: 999px;
-        background: #fff6bf;
-        color: #604a00;
+        background: var(--accent);
+        color: #1d4ed8;
         font-size: 12px;
         font-weight: 700;
       }
@@ -132,48 +246,52 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: #e0b800;
+        background: var(--signal);
       }
 
       h2 {
         max-width: 720px;
-        margin: 0 0 12px;
-        font-size: clamp(26px, 5vw, 40px);
-        line-height: 1.12;
+        margin: 0 0 14px;
+        font-size: clamp(30px, 5vw, 42px);
+        line-height: 1.16;
         letter-spacing: -0.035em;
       }
 
       .case-summary {
         max-width: 720px;
         margin: 0;
-        color: #52525b;
+        color: var(--muted);
         font-size: 16px;
-        line-height: 1.6;
+        line-height: 1.7;
       }
 
       .facts {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-        margin: 26px 0;
+        gap: 1px;
+        overflow: hidden;
+        margin: 30px 0;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--border);
       }
 
       .fact {
-        padding: 15px;
-        border-radius: 12px;
-        background: #f7f7f5;
+        padding: 18px;
+        background: #f7fafd;
       }
 
       .fact-label {
         display: block;
-        margin-bottom: 6px;
-        color: #71717a;
+        margin-bottom: 7px;
+        color: var(--muted);
         font-size: 12px;
       }
 
       .fact-value {
         font-size: 14px;
-        line-height: 1.45;
+        font-weight: 650;
+        line-height: 1.5;
       }
 
       .actions {
@@ -186,121 +304,127 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 42px;
-        padding: 0 16px;
-        border: 1px solid #18181b;
-        border-radius: 10px;
+        min-height: 44px;
+        padding: 0 17px;
+        border: 1px solid var(--action);
+        border-radius: 8px;
         font-size: 14px;
         font-weight: 700;
         text-decoration: none;
       }
 
       .action-primary {
-        background: #18181b;
+        background: var(--action);
         color: #ffffff;
       }
 
+      .action-primary:hover {
+        background: var(--action-hover);
+      }
+
       .action-secondary {
-        background: #ffffff;
+        background: var(--surface);
+      }
+
+      .action-secondary:hover {
+        background: var(--accent);
       }
 
       .case-details {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 24px 32px;
-        padding: 26px 30px 30px;
-        border-top: 1px solid #dfdfdc;
-        background: #fafaf9;
+        padding: 30px 40px 34px;
+        border-top: 1px solid var(--border);
+        background: var(--shell);
       }
 
       .detail h3 {
-        margin: 0 0 7px;
+        margin: 0 0 8px;
         font-size: 14px;
       }
 
       .detail p {
         margin: 0;
-        color: #52525b;
+        color: var(--muted);
         font-size: 14px;
-        line-height: 1.55;
+        line-height: 1.65;
       }
 
       .safety {
         grid-column: 1 / -1;
         padding-top: 20px;
-        border-top: 1px solid #dfdfdc;
+        border-top: 1px solid var(--border);
       }
 
       footer {
-        padding-block: 24px 36px;
-        border-top: 1px solid #dfdfdc;
-        color: #71717a;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-block: 26px 34px;
+        color: var(--muted);
         font-size: 13px;
       }
 
-      @media (prefers-color-scheme: dark) {
-        :root {
-          background: #121214;
-          color: #fafafa;
-        }
+      .footer-links {
+        display: flex;
+        gap: 18px;
+      }
 
-        .site-header,
-        footer,
-        .case-card,
-        .case-details,
-        .safety {
-          border-color: #3f3f46;
-        }
-
-        .github-link,
-        .eyebrow,
-        .case-kind,
-        .intro-copy,
-        .case-summary,
-        .fact-label,
-        .detail p,
-        footer {
-          color: #b4b4bc;
-        }
-
-        .case-card,
-        .action-secondary {
-          background: #1b1b1f;
-        }
-
-        .case-card {
-          box-shadow: none;
-        }
-
-        .case-status {
-          background: #473d00;
-          color: #ffeb85;
-        }
-
-        .fact,
-        .case-details {
-          background: #242428;
-        }
-
-        .action {
-          border-color: #fafafa;
-        }
-
-        .action-primary {
-          background: #fafafa;
-          color: #18181b;
-        }
+      .footer-links a {
+        text-underline-offset: 3px;
       }
 
       @media (max-width: 680px) {
         .site-header,
+        .intro,
         main,
-        footer {
-          width: min(100% - 28px, 1040px);
+        .footer-inner {
+          width: min(calc(100% - 28px), 1120px);
+        }
+
+        .brand-logo {
+          width: 96px;
+        }
+
+        .site-nav {
+          gap: 2px;
+        }
+
+        .nav-cases,
+        .nav-github {
+          display: none;
+        }
+
+        .site-link {
+          padding-inline: 9px;
+        }
+
+        .header-cta {
+          padding-inline: 13px;
+        }
+
+        .intro {
+          padding-block: 58px 70px;
+        }
+
+        h1 {
+          font-size: 36px;
+          line-height: 1.1;
+        }
+
+        h1 br {
+          display: none;
         }
 
         main {
-          padding-block: 48px 64px;
+          padding-block: 42px 64px;
         }
 
         .facts,
@@ -310,7 +434,7 @@
 
         .case-card-main,
         .case-details {
-          padding: 22px;
+          padding: 24px;
         }
 
         .safety {
@@ -325,25 +449,46 @@
         .action {
           min-height: 46px;
         }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
       }
     </style>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="https://www.heycall-e.com/" aria-label="CALL-E website">
-        <img class="brand-mark" src="./assets/call-e-mark.svg" alt="" />
-        <span>CALL-E</span>
-      </a>
-      <a class="github-link" href="https://github.com/CALLE-AI/community-cases">View on GitHub</a>
-    </header>
+    <div class="brand-shell">
+      <header class="site-header">
+        <a class="brand" href="https://www.heycall-e.com/">
+          <img class="brand-logo" src="./assets/call-e-logo.svg" alt="CALL-E" />
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a class="site-link nav-cases" href="./" aria-current="page">Cases</a>
+          <a class="site-link nav-docs" href="https://docs.heycall-e.com/">Docs</a>
+          <a class="site-link nav-github" href="https://github.com/CALLE-AI/community-cases">GitHub</a>
+          <a class="header-cta" href="https://dashboard.heycall-e.com/">Dashboard <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
 
-    <main>
       <section class="intro" aria-labelledby="page-title">
         <p class="eyebrow">Community cases</p>
-        <h1 id="page-title">Phone tasks you can inspect and reuse.</h1>
+        <h1 id="page-title">Phone tasks you can<br> <span>inspect and reuse.</span></h1>
         <p class="intro-copy">Each case shows the task, what has been tested, what you can reuse, and where to start.</p>
       </section>
+    </div>
 
+    <main>
+      <p class="section-kicker">Featured case</p>
       <article class="case-card" aria-labelledby="n8n-case-title">
         <div class="case-card-main">
           <div class="case-topline">
@@ -401,7 +546,14 @@
     </main>
 
     <footer>
-      This is an early community-case prototype. Case status is shown separately from technical availability.
+      <div class="footer-inner">
+        <span>This is an early community-case prototype. Case status is shown separately from technical availability.</span>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://www.heycall-e.com/">Website</a>
+          <a href="https://docs.heycall-e.com/">Docs</a>
+          <a href="https://github.com/CALLE-AI/community-cases">GitHub</a>
+        </nav>
+      </div>
     </footer>
   </body>
 </html>
