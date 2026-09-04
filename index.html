@@ -265,6 +265,60 @@
         line-height: 1.7;
       }
 
+      .cascade-label {
+        margin: 28px 0 10px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .cascade-preview {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .cascade-step {
+        min-height: 104px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #f7fafd;
+      }
+
+      .cascade-index {
+        display: block;
+        color: var(--muted);
+        font-family: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+        font-size: 11px;
+      }
+
+      .cascade-name {
+        display: block;
+        margin: 20px 0 4px;
+        font-size: 14px;
+      }
+
+      .cascade-result {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .cascade-step.is-match {
+        border-color: #a9d8ba;
+        background: #eaf7ef;
+      }
+
+      .cascade-step.is-match .cascade-result {
+        color: #176b42;
+        font-weight: 700;
+      }
+
+      .cascade-step.is-skipped {
+        background: #f5f6ee;
+        opacity: 0.72;
+      }
+
       .facts {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -330,31 +384,98 @@
         background: var(--accent);
       }
 
-      .case-details {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 24px 32px;
-        padding: 30px 40px 34px;
+      .case-story {
+        margin-top: 72px;
+        padding-top: 64px;
         border-top: 1px solid var(--border);
-        background: var(--shell);
+        scroll-margin-top: 24px;
       }
 
-      .detail h3 {
-        margin: 0 0 8px;
-        font-size: 14px;
+      .story-header {
+        max-width: 720px;
       }
 
-      .detail p {
+      .story-header h2 {
+        margin-bottom: 14px;
+      }
+
+      .story-summary {
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 32px;
+      }
+
+      .story-step {
+        min-height: 190px;
+        padding: 28px;
+        background: #ebecdc;
+      }
+
+      .story-number {
+        display: block;
+        color: var(--muted);
+        font-family: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+        font-size: 12px;
+      }
+
+      .story-step h3,
+      .note-panel h3 {
+        margin: 28px 0 10px;
+        font-size: 20px;
+        line-height: 1.3;
+      }
+
+      .story-step p,
+      .note-panel p {
         margin: 0;
         color: var(--muted);
         font-size: 14px;
         line-height: 1.65;
       }
 
-      .safety {
-        grid-column: 1 / -1;
-        padding-top: 20px;
-        border-top: 1px solid var(--border);
+      .case-notes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .note-panel {
+        padding: 30px;
+        border: 1px solid var(--border);
+        background: var(--shell);
+      }
+
+      .note-panel h3 {
+        margin-top: 12px;
+      }
+
+      .note-panel-evidence {
+        background: var(--surface);
+      }
+
+      .case-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .source-link {
+        padding: 8px 4px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+        text-underline-offset: 3px;
       }
 
       footer {
@@ -428,22 +549,39 @@
         }
 
         .facts,
-        .case-details {
+        .story-grid,
+        .case-notes {
           grid-template-columns: 1fr;
         }
 
+        .cascade-preview {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .case-card-main,
-        .case-details {
+        .story-step,
+        .note-panel {
           padding: 24px;
         }
 
-        .safety {
-          grid-column: auto;
+        .case-story {
+          margin-top: 56px;
+          padding-top: 48px;
         }
 
         .actions,
+        .case-links,
         .action {
           width: 100%;
+        }
+
+        .case-links {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .source-link {
+          text-align: center;
         }
 
         .action {
@@ -489,60 +627,105 @@
 
     <main>
       <p class="section-kicker">Featured case</p>
-      <article class="case-card" aria-labelledby="n8n-case-title">
+      <article class="case-card" aria-labelledby="hungrycall-card-title">
         <div class="case-card-main">
           <div class="case-topline">
-            <p class="case-kind">n8n · Workflow template</p>
-            <span class="case-status">Awaiting community feedback</span>
+            <p class="case-kind">Food delivery · Multi-call workflow</p>
+            <span class="case-status">Author-reported live tests</span>
           </div>
 
-          <h2 id="n8n-case-title">Test authorized IVR calls from n8n</h2>
-          <p class="case-summary">Run CALL-E call tasks one at a time, wait for completion, and review status, transcripts, summaries, and structured results inside n8n.</p>
+          <h2 id="hungrycall-card-title">Find a restaurant that delivers within your budget</h2>
+          <p class="case-summary">HungryCall contacts restaurants one by one and stops when one meets the delivery, price, and preference rules.</p>
+
+          <p class="cascade-label">Example demo flow</p>
+          <div class="cascade-preview" aria-label="Example restaurant calling sequence">
+            <div class="cascade-step">
+              <span class="cascade-index">01</span>
+              <strong class="cascade-name">Trattoria</strong>
+              <span class="cascade-result">Over budget</span>
+            </div>
+            <div class="cascade-step">
+              <span class="cascade-index">02</span>
+              <strong class="cascade-name">Burger House</strong>
+              <span class="cascade-result">No delivery</span>
+            </div>
+            <div class="cascade-step is-match">
+              <span class="cascade-index">03</span>
+              <strong class="cascade-name">Asia Wok</strong>
+              <span class="cascade-result">Match found</span>
+            </div>
+            <div class="cascade-step is-skipped">
+              <span class="cascade-index">04</span>
+              <strong class="cascade-name">Sushi Kudo</strong>
+              <span class="cascade-result">Not called</span>
+            </div>
+          </div>
 
           <div class="facts" aria-label="Case overview">
             <div class="fact">
-              <span class="fact-label">Best for</span>
-              <span class="fact-value">Developers testing owned or authorized IVR numbers</span>
+              <span class="fact-label">Task</span>
+              <span class="fact-value">Find one restaurant that meets the delivery and budget rules</span>
             </div>
             <div class="fact">
-              <span class="fact-label">Reusable material</span>
-              <span class="fact-value">Community Node and importable workflow JSON</span>
+              <span class="fact-label">Reusable pattern</span>
+              <span class="fact-value">Rank candidates, call in sequence, stop on success</span>
             </div>
             <div class="fact">
-              <span class="fact-label">Current evidence</span>
-              <span class="fact-value">Package and template published; no community trial recorded</span>
+              <span class="fact-label">Evidence</span>
+              <span class="fact-value">The author reports two live sessions; the public demo uses fixtures</span>
             </div>
           </div>
 
           <div class="actions">
-            <a class="action action-primary" href="https://github.com/CALLE-AI/awesome-phone-call-agents/tree/main/plugins/n8n-calle-api">Get the workflow</a>
-            <a class="action action-secondary" href="https://github.com/CALLE-AI/n8n-nodes-calle">View the n8n node</a>
+            <a class="action action-primary" href="https://yr5xa7sodp76bt6uvivprlvz5i0wbfcd.lambda-url.eu-central-1.on.aws/?lang=en">Try the demo</a>
+            <a class="action action-secondary" href="#hungrycall-case">Read the case</a>
           </div>
         </div>
+      </article>
 
-        <div class="case-details">
-          <section class="detail">
-            <h3>What it does</h3>
-            <p>Creates two call tasks, waits for each final status, and returns a compact result view with masked phone-bearing values.</p>
+      <section id="hungrycall-case" class="case-story" aria-labelledby="hungrycall-case-title">
+        <div class="story-header">
+          <p class="section-kicker">HungryCall case</p>
+          <h2 id="hungrycall-case-title">How HungryCall works</h2>
+          <p class="story-summary">You define the conditions once. HungryCall checks candidates in order and stops after one restaurant confirms a match.</p>
+        </div>
+
+        <div class="story-grid">
+          <section class="story-step">
+            <span class="story-number">01</span>
+            <h3>Set the conditions</h3>
+            <p>You enter the location, food preference, delivery requirement, and maximum total price.</p>
           </section>
-          <section class="detail">
-            <h3>What you need</h3>
-            <p>An n8n deployment, a CALL-E API key, and phone numbers you own or have permission to call.</p>
+          <section class="story-step">
+            <span class="story-number">02</span>
+            <h3>Call candidates in order</h3>
+            <p>CALL-E asks one restaurant at a time about delivery, total price, and estimated arrival.</p>
           </section>
-          <section class="detail">
-            <h3>What you can change</h3>
-            <p>Replace the sample IVR task, locale, metadata, and blocked placeholder numbers with your authorized test setup.</p>
-          </section>
-          <section class="detail">
-            <h3>Maintenance</h3>
-            <p>Maintained by CALL-E. Use the linked repositories for setup instructions, source code, and issue reporting.</p>
-          </section>
-          <section class="detail safety">
-            <h3>Before running</h3>
-            <p>This workflow can place real outbound calls. Keep it inactive until the API key, destination numbers, and task wording have been reviewed.</p>
+          <section class="story-step">
+            <span class="story-number">03</span>
+            <h3>Stop on a match</h3>
+            <p>HungryCall ends the sequence after one restaurant meets the rules, so it does not create a duplicate order.</p>
           </section>
         </div>
-      </article>
+
+        <div class="case-notes">
+          <section class="note-panel">
+            <p class="case-kind">Reusable pattern</p>
+            <h3>A ranked calling cascade</h3>
+            <p>Rank candidates, define the hard conditions, call one at a time, and stop after a confirmed match. The pattern also fits restaurant reservations, appointment searches, and local supplier checks.</p>
+          </section>
+          <section class="note-panel note-panel-evidence">
+            <p class="case-kind">Test record</p>
+            <h3>Two author-run live sessions</h3>
+            <p>The author routed each call to one consenting test number and played the restaurant roles. The public demo uses saved responses and cannot place calls.</p>
+            <div class="case-links">
+              <a class="action action-primary" href="https://yr5xa7sodp76bt6uvivprlvz5i0wbfcd.lambda-url.eu-central-1.on.aws/?lang=en">Try the demo</a>
+              <a class="action action-secondary" href="https://youtu.be/5RIq7lpKv4w">Watch demo video</a>
+              <a class="source-link" href="https://github.com/ellmos-ai/hungrycall">View source</a>
+            </div>
+          </section>
+        </div>
+      </section>
     </main>
 
     <footer>
