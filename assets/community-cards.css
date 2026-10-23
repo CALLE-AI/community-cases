@@ -1,0 +1,131 @@
+/* Hallmark · scope: component · composition: split artwork and story · tone: soft · anchor: CALL-E yellow and blue */
+@import url("../tokens.css");
+
+.cases-heading {
+  margin: 0 0 var(--space-card-medium);
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.case-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
+  overflow: clip;
+  border-radius: var(--radius-feature);
+  background: var(--color-card-surface);
+  color: var(--color-card-text);
+  scroll-margin-top: var(--space-card-medium);
+}
+
+.case-feature + .case-feature { margin-top: 28px; }
+
+.case-artwork {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow: clip;
+}
+
+.case-artwork img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-content {
+  min-width: 0;
+  padding: var(--space-card);
+}
+
+.case-content h2 {
+  margin: 0 0 var(--space-card-small);
+  font-size: clamp(34px, 3.6vw, 44px);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.case-lead {
+  margin: 0 0 var(--space-card-medium);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+}
+
+.case-description {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.case-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-card-small) var(--space-card-medium);
+  margin-top: var(--space-card-medium);
+}
+
+.case-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 160ms var(--ease-card);
+}
+
+.case-play {
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--color-card-action);
+  color: var(--color-card-surface);
+}
+
+.case-play svg { fill: currentColor; }
+.case-play:hover { background: var(--color-card-action-hover); }
+.case-explore { color: var(--color-card-link); }
+.case-explore:hover { text-decoration: underline; text-underline-offset: 4px; }
+.case-actions a:active { transform: scale(0.98); }
+.case-actions a:focus-visible { outline: 3px solid var(--color-card-link); outline-offset: 4px; }
+
+.case-includes,
+.case-credit {
+  color: var(--color-card-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.case-includes { margin: var(--space-card-small) 0 0; }
+.case-credit { margin-top: var(--space-card-large); }
+.case-credit p { margin: 0; }
+
+@media (max-width: 800px) {
+  .case-feature { grid-template-columns: minmax(0, 1fr); }
+  .case-artwork { aspect-ratio: 8 / 5; max-height: 360px; }
+  .case-artwork img { object-position: center 54%; }
+  .case-content { padding: 32px; }
+  .case-actions { gap: var(--space-card-small); }
+  .case-credit { margin-top: var(--space-card-medium); }
+}
+
+@media (max-width: 400px) {
+  .case-content { padding: var(--space-card-medium); }
+  .case-lead { font-size: 23px; }
+  .case-description { font-size: 16px; }
+  .case-actions a { font-size: 14px; }
+  .case-play { padding-inline: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-actions a { transition: none; }
+  .case-actions a:active { transform: none; }
+}

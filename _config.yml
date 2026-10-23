@@ -1,0 +1,8 @@
+# Keep repository tooling and design records out of the public site.
+exclude:
+  - .agents
+  - .impeccable
+  - AGENTS.md
+  - DESIGN.md
+  - PRODUCT.md
+  - tests
