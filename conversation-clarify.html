@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Conversation-Clarify uses one approved CALL-E question to clarify an email reply and prepare a draft for human review.">
+    <meta name="theme-color" content="#ffe13f">
+    <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/local-atlas.css">
+    <title>Conversation-Clarify — CALL-E Community Cases</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="brand-shell header-shell">
+      <header class="site-header wrap">
+        <a class="brand" href="https://www.heycall-e.com/"><img src="./assets/call-e-logo.svg" width="110" height="32" alt="CALL-E"></a>
+        <nav aria-label="Primary navigation">
+          <a class="nav-case" href="./">Community cases</a>
+          <a href="https://docs.heycall-e.com/">Docs</a>
+          <a class="header-cta" href="https://dashboard.heycall-e.com/">Dashboard <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+    </div>
+    <div class="page-nav-shell">
+      <nav class="contents wrap" aria-label="On this page">
+        <a class="case-name" href="#page-title">Conversation-Clarify</a>
+        <div class="contents-links">
+          <a href="#workflow">How it works</a>
+          <a href="#reuse">Reuse the pattern</a>
+          <a href="#evidence">Evidence &amp; limits</a>
+        </div>
+      </nav>
+    </div>
+    <main id="main">
+      <div class="brand-shell">
+        <section class="hero wrap" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <h1 id="page-title">Settle one<br>missing detail.</h1>
+            <p class="hero-description">An email reply can sound like agreement while leaving a question open. Conversation-Clarify proposes one focused phone question, then prepares a draft for you to review.</p>
+            <p class="byline">Built by <a href="https://github.com/apple171">apple171</a> with CALL-E. Most Innovative · CALL-E Hackathon.</p>
+            <div class="actions">
+              <a class="button primary" href="https://www.youtube.com/watch?v=cv56z3bUmhc">Watch the demo <span aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="#reuse">Explore the local demo <span aria-hidden="true">↓</span></a>
+            </div>
+            <p class="entry-note">A Chrome extension and Python server. The local fixture mode places no calls. Drafts still need your review and manual sending.</p>
+          </div>
+          <figure class="hero-artwork">
+            <img src="./assets/conversation-clarify-office.png" width="1448" height="1086" alt="Concept illustration of a yellow telephone connecting two envelopes beside a desk and calendar tiles." decoding="async">
+          </figure>
+        </section>
+      </div>
+      <div class="case-body wrap">
+        <section id="workflow" class="section workflow-section" aria-labelledby="workflow-title">
+          <div class="section-intro">
+            <h2 id="workflow-title">Find the unanswered part.</h2>
+            <p>The extension reads the open Gmail conversation, identifies an unsettled choice or date and shows the question before any call.</p>
+          </div>
+          <div>
+            <ol class="workflow">
+              <li><span class="step-number" aria-hidden="true">1</span><div><h3>Inspect the finding</h3><p>Review the email evidence, proposed question, caller script and masked number. The number comes from the thread or from you.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">2</span><div><h3>Approve one call</h3><p>Confirm the destination and question. The server sends the CALL-E request and polls for its result; the API credential stays on the server.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">3</span><div><h3>Review the draft</h3><p>The app checks the answer and supporting words before drafting. You decide whether the result settles the question and how to reply.</p></div></li>
+            </ol>
+            <details class="demo-sequence">
+              <summary>A written example</summary>
+              <p>This fictional exchange illustrates the flow. It is not a transcript or a new call result.</p>
+              <dl class="sequence-checks">
+                <div><dt>Question</dt><dd>Would you prefer the morning or afternoon visit?</dd></div>
+                <div><dt>Unclear reply</dt><dd>That sounds fine. The time is still missing.</dd></div>
+                <div><dt>Phone question</dt><dd>Ask which of the two times the person wants.</dd></div>
+                <div><dt>Review</dt><dd>Check the answer and quote before writing the reply.</dd></div>
+              </dl>
+            </details>
+          </div>
+        </section>
+        <section id="reuse" class="section pattern-section" aria-labelledby="reuse-title">
+          <div class="section-intro">
+            <h2 id="reuse-title">A question with boundaries.</h2>
+            <p>Use a phone call when a written exchange leaves one concrete detail unsettled. Keep the question, approval and evidence attached to that detail.</p>
+            <a class="text-link" href="https://github.com/apple171/awesome-phone-call-agents/blob/f21212b989b966ef8dec3a56cb1d4dba28c179a2/apps/web/conversation-clarify/DEMO.md">Open the author’s fixture walkthrough <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="pattern-content">
+            <h3>Try both outcomes.</h3>
+            <p>The author provides a standalone browser harness and five saved outcomes: resolved, voicemail, no answer, unresolved and an answer outside the offered options. You can inspect the flow without a Gmail account or a real call.</p>
+            <ul class="limits">
+              <li><strong>Preview before dialing.</strong> Show the exact question and destination together.</li>
+              <li><strong>Keep unresolved results visible.</strong> A completed call can still leave the original question unanswered.</li>
+              <li><strong>Review the words.</strong> Compare the answer with the transcript and the allowed options, including negation.</li>
+              <li><strong>Let the person send.</strong> A draft is an intermediate result, ready for review.</li>
+            </ul>
+            <p class="source-note">The <a href="https://github.com/apple171/awesome-phone-call-agents/tree/f21212b989b966ef8dec3a56cb1d4dba28c179a2/apps/web/conversation-clarify">application</a> and <a href="https://github.com/apple171/awesome-phone-call-agents/tree/f21212b989b966ef8dec3a56cb1d4dba28c179a2/skills/conversation-clarify">companion skill</a> are available at the reviewed revision. The app carries an <a href="https://github.com/apple171/awesome-phone-call-agents/blob/f21212b989b966ef8dec3a56cb1d4dba28c179a2/apps/web/conversation-clarify/LICENSE">MIT license</a>.</p>
+          </div>
+        </section>
+        <section id="evidence" class="section evidence-section" aria-labelledby="evidence-title">
+          <div class="section-intro">
+            <h2 id="evidence-title">What’s been checked.</h2>
+            <p>These checks cover source code and local fixtures. They do not establish a complete live Gmail-to-phone workflow.</p>
+            <a class="text-link" href="https://github.com/apple171/awesome-phone-call-agents/tree/f21212b989b966ef8dec3a56cb1d4dba28c179a2/apps/web/conversation-clarify">Reviewed source: <code>f21212b9</code> <span aria-hidden="true">↗</span></a>
+          </div>
+          <div>
+            <dl class="checks">
+              <div><dt>Local checks<span>19 Oct 2026</span></dt><dd>109 repository tests passed. A separate transport check exercised the app’s CALL-E create/get serialization without contacting the phone service.</dd></div>
+              <div><dt>Source refresh<span>23 Oct 2026</span></dt><dd>The submitted <a href="https://github.com/CALLE-AI/awesome-phone-call-agents/pull/622">PR #622</a> still identifies the reviewed revision. The README, fixture instructions and license were read again for this guide.</dd></div>
+            </dl>
+            <h3 class="limits-title">Check the answer yourself.</h3>
+            <ul class="limits">
+              <li><strong>The gate can accept an unsettled answer.</strong> At this revision, local probes using a negated option or two possible days still produced a draft. Inspect the answer and quote before using it.</li>
+              <li><strong>Original-thread reply is manual.</strong> The implementation offers an in-panel draft, copy and a new Gmail compose window. It does not bind that compose window to the original thread or recipient.</li>
+              <li><strong>Detection is limited.</strong> Rules cover selected patterns; Gmail markup can change. Live calling and a broad mailbox evaluation were not repeated for this guide.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="closing" aria-labelledby="closing-title">
+          <div><h2 id="closing-title">Start with one question.</h2><p>Watch the flow, then explore the author’s local fixtures.</p></div>
+          <div class="closing-links"><a class="button primary" href="https://www.youtube.com/watch?v=cv56z3bUmhc">Watch the demo <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/apple171/awesome-phone-call-agents/blob/f21212b989b966ef8dec3a56cb1d4dba28c179a2/apps/web/conversation-clarify/DEMO.md">Open fixture guide <span aria-hidden="true">↗</span></a></div>
+        </section>
+        <p class="ownership">Conversation-Clarify is contributed by <a href="https://github.com/apple171">apple171</a>. CALL-E maintains this case guide. The office illustration and written example are conceptual; they are not product screenshots or call records.</p>
+      </div>
+    </main>
+    <footer><div class="wrap footer-inner"><a href="./">All community cases</a><span>Built with CALL-E. Made useful by the community.</span><a href="https://docs.heycall-e.com/">CALL-E docs</a></div></footer>
+  </body>
+</html>

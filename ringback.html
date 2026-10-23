@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How RingBack uses CALL-E to call a waiting list, fill an appointment opening and update a local appointment book.">
+    <meta name="theme-color" content="#ffe13f">
+    <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/local-atlas.css">
+    <title>RingBack — CALL-E Community Cases</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="brand-shell header-shell">
+      <header class="site-header wrap">
+        <a class="brand" href="https://www.heycall-e.com/"><img src="./assets/call-e-logo.svg" width="110" height="32" alt="CALL-E"></a>
+        <nav aria-label="Primary navigation">
+          <a class="nav-case" href="./">Community cases</a>
+          <a href="https://docs.heycall-e.com/">Docs</a>
+          <a class="header-cta" href="https://dashboard.heycall-e.com/">Dashboard <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+    </div>
+    <div class="page-nav-shell">
+      <nav class="contents wrap" aria-label="On this page">
+        <a class="case-name" href="#page-title">RingBack</a>
+        <div class="contents-links">
+          <a href="#workflow">How it works</a>
+          <a href="#reuse">Reuse the pattern</a>
+          <a href="#evidence">Evidence &amp; limits</a>
+        </div>
+      </nav>
+    </div>
+    <main id="main">
+      <div class="brand-shell">
+        <section class="hero wrap" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <h1 id="page-title">An open slot.<br>Filled by phone.</h1>
+            <p class="hero-description">When an appointment opens up, RingBack calls the waiting list in order. The first person to accept gets the slot, and the result updates the local appointment book.</p>
+            <p class="byline">Built by <a href="https://github.com/Ludo321">Ludo321</a> with CALL-E. Honorable Mention · CALL-E Hackathon.</p>
+            <div class="actions">
+              <a class="button primary" href="https://www.youtube.com/watch?v=S909yG8oZkU">Watch the demo <span aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="#reuse">Explore the local demo <span aria-hidden="true">↓</span></a>
+            </div>
+            <p class="entry-note">A local Python application. Simulation is the default. The submitted video uses simulation and a local calendar.</p>
+          </div>
+          <figure class="hero-artwork">
+            <img src="./assets/ringback-appointments.png" width="1448" height="1086" alt="Concept illustration of a service studio, a yellow telephone and an appointment block beside an empty diary slot." decoding="async">
+          </figure>
+        </section>
+      </div>
+      <div class="case-body wrap">
+        <section id="workflow" class="section workflow-section" aria-labelledby="workflow-title">
+          <div class="section-intro">
+            <h2 id="workflow-title">One slot. One acceptance.</h2>
+            <p>The app keeps the appointment state connected to the calling sequence, including cancellations, rescheduling and outcomes that need a person.</p>
+          </div>
+          <div>
+            <ol class="workflow">
+              <li><span class="step-number" aria-hidden="true">1</span><div><h3>Choose the opening</h3><p>Select the appointment slot and eligible waiting-list contacts. Review the proposed campaign and its calling conditions.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">2</span><div><h3>Offer it in order</h3><p>Ask one person at a time. A clear acceptance stops calls to the remaining contacts for that opening.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">3</span><div><h3>Update the diary</h3><p>Check the result and slot availability before saving. Ambiguous results or multiple possible old bookings need human continuation.</p></div></li>
+            </ol>
+            <details class="demo-sequence">
+              <summary>A written waitlist example</summary>
+              <p>This fictional sequence explains the stop condition. It is not a record of real calls or bookings.</p>
+              <dl class="sequence-checks">
+                <div><dt>First contact</dt><dd>Declines the offered time. Continue.</dd></div>
+                <div><dt>Second contact</dt><dd>Accepts the opening. Check that it is still available.</dd></div>
+                <div class="sequence-match"><dt>Local booking</dt><dd>Save the confirmed replacement and stop the sequence.</dd></div>
+                <div class="sequence-skipped"><dt>Remaining contacts</dt><dd>Not called for that opening.</dd></div>
+              </dl>
+            </details>
+          </div>
+        </section>
+        <section id="reuse" class="section pattern-section" aria-labelledby="reuse-title">
+          <div class="section-intro">
+            <h2 id="reuse-title">Keep the booking in sync.</h2>
+            <p>A useful calling cascade needs a reliable state change after acceptance: reserve the slot, retain the outcome and stop the remaining calls.</p>
+            <a class="text-link" href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback#quick-start">Open the author’s local setup <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="pattern-content">
+            <h3>Start in simulation.</h3>
+            <p>The author’s quick start runs a local web interface with Python 3.12 and its standard library. Demo data, CSV and ICS imports let you inspect the appointment flow before configuring real calls.</p>
+            <ul class="limits">
+              <li><strong>Test the stop rule.</strong> A confirmed acceptance should leave later contacts uncalled for that slot.</li>
+              <li><strong>Check before saving.</strong> Recheck slot availability and resolve which earlier booking should be released.</li>
+              <li><strong>Recover uncertain results.</strong> Keep an available call ID and read its result before deciding on another attempt.</li>
+              <li><strong>Make follow-up deliberate.</strong> The app queues follow-ups for a person to trigger.</li>
+            </ul>
+            <p class="source-note">The reviewed <a href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback">application</a> is in a repository with an <a href="https://github.com/Ludo321/awesome-phone-call-agents/blob/644db89627a5c5310435e724e45d453a05bfaca5/LICENSE">MIT license</a>. The setup instructions and safety controls belong to that version.</p>
+          </div>
+        </section>
+        <section id="evidence" class="section evidence-section" aria-labelledby="evidence-title">
+          <div class="section-intro">
+            <h2 id="evidence-title">What’s been checked.</h2>
+            <p>Local test results support the implemented flow. They leave real practice deployment and business outcomes unverified.</p>
+            <a class="text-link" href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback">Reviewed source: <code>644db896</code> <span aria-hidden="true">↗</span></a>
+          </div>
+          <div>
+            <dl class="checks">
+              <div><dt>Repository suite<span>19 Oct 2026</span></dt><dd>1,219 of 1,221 tests passed; two fixed-date tests failed after their dates became stale. A separate clock-controlled diagnosis passed those two cases. The original full-suite result remains two failures.</dd></div>
+              <div><dt>Simulated end to end<span>19 Oct 2026</span></dt><dd>The local bench passed 661 checks across 121 scenarios, covering the visible interface and database. Its HTTP call adapter tests used a local fake API.</dd></div>
+              <div><dt>Source refresh<span>23 Oct 2026</span></dt><dd><a href="https://github.com/CALLE-AI/awesome-phone-call-agents/pull/297">PR #297</a> is still open and points to the reviewed revision. The app README and repository license were read again for this guide.</dd></div>
+            </dl>
+            <h3 class="limits-title">Local booking has limits.</h3>
+            <ul class="limits">
+              <li><strong>External calendars are separate.</strong> The reviewed implementation uses a local diary and file imports. Google Calendar and Outlook two-way synchronization are not established.</li>
+              <li><strong>Unknown creation needs care.</strong> If a create request times out without a call ID, a person must reconcile it before retrying.</li>
+              <li><strong>Real outcomes remain unverified.</strong> These checks did not validate live calls, actual filled appointments, revenue or use by an external practice.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="closing" aria-labelledby="closing-title">
+          <div><h2 id="closing-title">Follow one opening.</h2><p>Watch the simulated sequence, then inspect it in the local app.</p></div>
+          <div class="closing-links"><a class="button primary" href="https://www.youtube.com/watch?v=S909yG8oZkU">Watch the demo <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback#quick-start">Open local setup <span aria-hidden="true">↗</span></a></div>
+        </section>
+        <p class="ownership">RingBack is contributed by <a href="https://github.com/Ludo321">Ludo321</a>. CALL-E maintains this case guide. The studio illustration and written waitlist example are conceptual; they are not product screenshots, call records or evidence of revenue.</p>
+      </div>
+    </main>
+    <footer><div class="wrap footer-inner"><a href="./">All community cases</a><span>Built with CALL-E. Made useful by the community.</span><a href="https://docs.heycall-e.com/">CALL-E docs</a></div></footer>
+  </body>
+</html>

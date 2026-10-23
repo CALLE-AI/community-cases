@@ -8,6 +8,8 @@
   letter-spacing: -0.025em;
 }
 
+.cases-section + .cases-section { margin-top: 64px; }
+
 .case-feature {
   display: grid;
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
@@ -39,7 +41,7 @@
   padding: var(--space-card);
 }
 
-.case-content h2 {
+.case-content h3 {
   margin: 0 0 var(--space-card-small);
   font-size: clamp(34px, 3.6vw, 44px);
   font-weight: 650;

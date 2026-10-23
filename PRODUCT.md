@@ -16,7 +16,7 @@ Help visitors understand the value of a phone task and obtain reusable material 
 
 ## Operating Context
 
-This is an existing static HTML/CSS/JavaScript site. The homepage in `index.html` lists Local Atlas and HungryCall using shared card styles. Full guides live in `local-atlas.html` and `hungrycall.html`; the homepage does not repeat a case's detail sections. Local Atlas also provides `examples/local-atlas-starter.md`. The guides offer app and demo entries before source links.
+This is an existing static HTML/CSS/JavaScript site. The homepage in `index.html` groups the four CALL-E Hackathon main-award projects together: Local Atlas, Conversation-Clarify, Care Call AI and RingBack. HungryCall remains under more community cases. All five use shared card styles and have a separate HTML guide; the homepage does not repeat their detail sections. Local Atlas also provides `examples/local-atlas-starter.md`. The guides offer app and demo entries before source links.
 
 ## Capabilities and Constraints
 
@@ -28,7 +28,7 @@ This is an existing static HTML/CSS/JavaScript site. The homepage in `index.html
 
 Preserve the official CALL-E logo and the incumbent warm white, yellow-and-blue, dark-button appearance evidenced in `index.html` and `assets/local-atlas.css`. This sample extends the existing site; it does not establish a replacement visual system.
 
-The two case guides share the same illustrated opening, page navigation, type scale, action styles and evidence layout. Neutral reading surfaces keep the long guides legible; blue marks links and yellow marks the closing action. Local Atlas places its synthetic answer beside the walkthrough, while HungryCall shows an ordered candidate sequence. Both retain their original links and reusable material.
+The case guides share the same illustrated opening, page navigation, type scale, action styles and evidence layout. Neutral reading surfaces keep the long guides legible; blue marks links and yellow marks the closing action. Each guide explains its own workflow and available material. Original concept illustrations and written examples do not establish actual calls or fulfillment.
 
 Shared design rules live in [DESIGN.md](DESIGN.md). Project skill routing and implementation checks live in [AGENTS.md](AGENTS.md).
 
@@ -37,6 +37,10 @@ Shared design rules live in [DESIGN.md](DESIGN.md). Project skill routing and im
 - Reviewed Local Atlas source: `0b1095d1ad02530f3aead96c01e523e24dfd1a55`. The recorded 19 Oct 2026 checks include 98 passing repository tests and an HTTP simulation of creation, polling, FAQ storage and reuse; these are prior results, not newly rerun checks.
 - The recorded 22 Oct 2026 check loaded the public app, returned Boston places and confirmed that repository HEAD still matched the reviewed source. Sign-in and live calling were not tested.
 - The café, answer and quotes shown in the sample are explicitly synthetic. Neither these examples nor the simulation establish a real call, production reliability or community adoption.
+- The final main-award list was reread on 23 Oct 2026: Local Atlas — Most Practical; Conversation-Clarify — Most Innovative; Care Call AI and RingBack — Honorable Mention. Feedback prizes are outside this project-case batch.
+- The 19 Oct source audit recorded Conversation-Clarify at `f21212b989b966ef8dec3a56cb1d4dba28c179a2`, Care Call AI at `b10621eb343a40de99cc5f1e80931b9f163eb0b7` and RingBack at `644db89627a5c5310435e724e45d453a05bfaca5`. Their submitted PR heads or application HEAD, README material and licenses were reread on 23 Oct. The recorded test counts are dated prior results, not tests rerun while writing these guides.
+- Conversation-Clarify's reviewed gate has known false acceptances, and its Gmail compose action does not bind to the original thread or recipient. RingBack's full suite recorded two stale date-fixture failures; its simulated end-to-end bench passed. Neither guide claims live end-to-end validation.
+- Care Call AI's public application is proprietary and allows limited hackathon evaluation. Its guide is original editorial prose and concept art, links to the author, and distributes no application code or design assets. Production deployment, Siri hardware and real support fulfillment remain unverified.
 
 ## Ownership and Publication
 

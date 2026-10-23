@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Care Call AI uses approved CALL-E check-ins to collect everyday support requests and prepare coordinator-reviewed handoff sheets.">
+    <meta name="theme-color" content="#ffe13f">
+    <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/local-atlas.css">
+    <title>Care Call AI — CALL-E Community Cases</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="brand-shell header-shell">
+      <header class="site-header wrap">
+        <a class="brand" href="https://www.heycall-e.com/"><img src="./assets/call-e-logo.svg" width="110" height="32" alt="CALL-E"></a>
+        <nav aria-label="Primary navigation">
+          <a class="nav-case" href="./">Community cases</a>
+          <a href="https://docs.heycall-e.com/">Docs</a>
+          <a class="header-cta" href="https://dashboard.heycall-e.com/">Dashboard <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+    </div>
+    <div class="page-nav-shell">
+      <nav class="contents wrap" aria-label="On this page">
+        <a class="case-name" href="#page-title">Care Call AI</a>
+        <div class="contents-links">
+          <a href="#workflow">How it works</a>
+          <a href="#reuse">Learn from the flow</a>
+          <a href="#evidence">Evidence &amp; limits</a>
+        </div>
+      </nav>
+    </div>
+    <main id="main">
+      <div class="brand-shell">
+        <section class="hero wrap" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <h1 id="page-title">Hear the need.<br>Plan the help.</h1>
+            <p class="hero-description">Care Call AI helps a coordinator turn approved phone check-ins into everyday support requests, review uncertain results and prepare a printable handoff for the team.</p>
+            <p class="byline">Built by <a href="https://github.com/NeoSPU">Alex Raixon</a> with CALL-E. Honorable Mention · CALL-E Hackathon.</p>
+            <div class="actions">
+              <a class="button primary" href="https://youtu.be/Hc2bWjTnKFQ">Watch the demo <span aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="https://about.care.alexraixon.com/">Visit the project <span aria-hidden="true">↗</span></a>
+            </div>
+            <p class="entry-note">Author-hosted project. The application is proprietary; this guide explains the workflow. It is designed for non-clinical support.</p>
+          </div>
+          <figure class="hero-artwork">
+            <img src="./assets/care-call-support.png" width="1448" height="1086" alt="Concept illustration of a community support room, a yellow telephone and groceries prepared for handoff." decoding="async">
+          </figure>
+        </section>
+      </div>
+      <div class="case-body wrap">
+        <section id="workflow" class="section workflow-section" aria-labelledby="workflow-title">
+          <div class="section-intro">
+            <h2 id="workflow-title">From a call to a handoff.</h2>
+            <p>The coordinator remains responsible for outreach and follow-through. CALL-E handles the conversation; the app organizes the resulting requests.</p>
+          </div>
+          <div>
+            <ol class="workflow">
+              <li><span class="step-number" aria-hidden="true">1</span><div><h3>Review and approve</h3><p>Check recipient eligibility, call context and the proposed batch. A no-call preflight precedes the coordinator’s explicit approval.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">2</span><div><h3>Collect the request</h3><p>Import completed call results and supporting conversation text. Keep unclear, restricted and no-request outcomes available for review.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">3</span><div><h3>Prepare the handoff</h3><p>Combine same-day needs, preserve their history and let the coordinator review a printable support order for the relevant team.</p></div></li>
+            </ol>
+            <details class="demo-sequence">
+              <summary>A written handoff example</summary>
+              <p>This fictional example explains the record flow. It does not describe a real person, call or delivery.</p>
+              <dl class="sequence-checks">
+                <div><dt>First request</dt><dd>A person asks for help with cleaning.</dd></div>
+                <div><dt>Later callback</dt><dd>The same person also asks for groceries that day.</dd></div>
+                <div><dt>Coordinator review</dt><dd>Keep the cleaning request and add the groceries, with their history.</dd></div>
+                <div><dt>Team handoff</dt><dd>Review and print the requests. A person arranges the actual help.</dd></div>
+              </dl>
+            </details>
+          </div>
+        </section>
+        <section id="reuse" class="section pattern-section" aria-labelledby="reuse-title">
+          <div class="section-intro">
+            <h2 id="reuse-title">Keep the request traceable.</h2>
+            <p>The useful design idea is the connection between outreach, review, request history and a practical handoff.</p>
+            <a class="text-link" href="https://youtu.be/Hc2bWjTnKFQ">See the author’s walkthrough <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="pattern-content">
+            <h3>Give each outcome a place.</h3>
+            <p>A useful support workflow needs a visible result even when a call does not produce a new request. Coordinators need to distinguish a request, no request, a failed connection and an outcome requiring human review.</p>
+            <ul class="limits">
+              <li><strong>Carry context forward.</strong> A same-day callback should retain earlier requests and show what changed.</li>
+              <li><strong>Keep approval specific.</strong> Review who will be called and what the outreach is meant to collect.</li>
+              <li><strong>Make the handoff usable.</strong> A printable sheet can give a team concrete work to review and complete.</li>
+              <li><strong>Keep fulfillment separate.</strong> A recorded request or printed sheet does not establish that help was delivered.</li>
+            </ul>
+            <p class="source-note">The author’s <a href="https://github.com/NeoSPU/care-call-ai/blob/b10621eb343a40de99cc5f1e80931b9f163eb0b7/LICENSE">proprietary license</a> permits limited hackathon evaluation. General reuse, redistribution and hosting of the application require separate permission. This case does not distribute its code or design assets.</p>
+          </div>
+        </section>
+        <section id="evidence" class="section evidence-section" aria-labelledby="evidence-title">
+          <div class="section-intro">
+            <h2 id="evidence-title">What’s been checked.</h2>
+            <p>The public hackathon edition supports inspection of the workflow. The author describes a separate private production repository.</p>
+            <a class="text-link" href="https://github.com/NeoSPU/care-call-ai/tree/b10621eb343a40de99cc5f1e80931b9f163eb0b7">Reviewed source: <code>b10621eb</code> <span aria-hidden="true">↗</span></a>
+          </div>
+          <div>
+            <dl class="checks">
+              <div><dt>Local checks<span>19 Oct 2026</span></dt><dd>162 backend tests and 134 frontend tests on Node 24 passed. Type checks and a production build passed. An earlier Node 26 frontend test run had 52 failures in its localStorage test environment.</dd></div>
+              <div><dt>Source refresh<span>23 Oct 2026</span></dt><dd>The public repository still points to the reviewed revision. Its README, project entries and proprietary license were read again for this guide.</dd></div>
+            </dl>
+            <h3 class="limits-title">A coordinator stays involved.</h3>
+            <ul class="limits">
+              <li><strong>Production is unverified here.</strong> Live deployment, Siri on a physical device and real support delivery were not independently validated in these checks.</li>
+              <li><strong>Results need review.</strong> The app accepts structured needs and can also extract them from a summary. A strict result schema is optional in the Developer API configuration.</li>
+              <li><strong>Everyday support only.</strong> The author excludes clinical care and emergency response. Actual transport, deliveries and other services still require people to arrange them.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="closing" aria-labelledby="closing-title">
+          <div><h2 id="closing-title">Follow a request through.</h2><p>See how the author connects a check-in with a reviewed handoff.</p></div>
+          <div class="closing-links"><a class="button primary" href="https://youtu.be/Hc2bWjTnKFQ">Watch the demo <span aria-hidden="true">↗</span></a><a class="text-link" href="https://about.care.alexraixon.com/">Visit the project <span aria-hidden="true">↗</span></a></div>
+        </section>
+        <p class="ownership">Care Call AI is maintained by <a href="https://github.com/NeoSPU">Alex Raixon</a>. CALL-E maintains this independently written case guide. The support-room illustration is original concept art; the written example is fictional. Neither is evidence of a real call or delivery.</p>
+      </div>
+    </main>
+    <footer><div class="wrap footer-inner"><a href="./">All community cases</a><span>Built with CALL-E. Made useful by the community.</span><a href="https://docs.heycall-e.com/">CALL-E docs</a></div></footer>
+  </body>
+</html>
