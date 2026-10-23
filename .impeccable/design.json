@@ -56,8 +56,8 @@
     {
       "name": "Case page navigation",
       "kind": "nav",
-      "description": "开场图文之后的三个章节入口；普通文档流、不悬浮、不重复案例名，窄屏允许换行。",
-      "html": "<nav class=\"ds-nav\" aria-label=\"On this page\"><a href=\"hungrycall.html#workflow\">Workflow</a><a href=\"hungrycall.html#reuse\">Reuse</a><a href=\"hungrycall.html#evidence\">Evidence</a></nav>",
+      "description": "开场图文后的流程、示例与尝试入口；普通文档流、不悬浮，窄屏允许换行。",
+      "html": "<nav class=\"ds-nav\" aria-label=\"On this page\"><a href=\"hungrycall.html#workflow\">Workflow</a><a href=\"hungrycall.html#evidence\">Example</a><a href=\"hungrycall.html#reuse\">Try it</a></nav>",
       "css": ".ds-nav{display:flex;align-items:center;flex-wrap:wrap;gap:8px 28px;min-height:44px;margin-bottom:40px;color:var(--color-detail-muted,#59636f);font:550 14px system-ui}.ds-nav a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:none;white-space:nowrap}.ds-nav a:hover{color:var(--color-detail-link,#245bce);text-decoration:underline;text-underline-offset:4px}.ds-nav a:focus-visible{outline:3px solid var(--color-detail-link,#245bce);outline-offset:4px}@media(max-width:760px){.ds-nav{column-gap:24px;margin-bottom:32px;font-size:13px}}"
     },
     {
@@ -66,18 +66,11 @@
       "description": "原生折叠控件承载次要材料；预览文字为组件示例。",
       "html": "<details class=\"ds-disclosure\"><summary>Result schema</summary><p>Component example: the complete schema appears in the case guide.</p></details>",
       "css": ".ds-disclosure{padding:0 20px;border-radius:16px;background:var(--color-detail-surface,#ffffff);color:var(--color-detail-ink,#25282d);font-family:system-ui}.ds-disclosure[open]{padding-bottom:20px}.ds-disclosure summary{padding:18px 0;min-height:20px;font-size:16px;font-weight:600;cursor:pointer}.ds-disclosure summary:hover{color:var(--color-detail-link,#245bce)}.ds-disclosure summary:focus-visible{outline:3px solid var(--color-detail-link,#245bce);outline-offset:4px}.ds-disclosure p{font-size:14px;line-height:1.65;color:var(--color-detail-muted,#59636f);margin:0}"
-    },
-    {
-      "name": "Evidence entry",
-      "kind": "card",
-      "description": "检查类型与结果并列；示例文案不构成一次核查记录。",
-      "html": "<dl class=\"ds-evidence\"><div><dt>Check type<span>Component example</span></dt><dd>Record the result, source and remaining limitation here.</dd></div></dl>",
-      "css": ".ds-evidence{margin:0;font-family:system-ui;color:var(--color-detail-ink,#25282d)}.ds-evidence>div{display:grid;grid-template-columns:minmax(0,140px) minmax(0,1fr);gap:24px;padding:24px;border-radius:16px;background:var(--color-detail-surface,#ffffff)}.ds-evidence dt{font-size:15px;font-weight:650;line-height:1.5}.ds-evidence dt span{display:block;margin-top:6px;font-size:12px;font-weight:400;color:var(--color-detail-muted,#59636f)}.ds-evidence dd{margin:0;font-size:15px;line-height:1.65}@media(max-width:760px){.ds-evidence>div{grid-template-columns:minmax(0,1fr);gap:12px}}"
     }
   ],
   "narrative": {
-    "northStar": "让读者先看懂一个电话任务能解决什么，再进入案例了解流程、证据和可复用材料。",
-    "overview": "让读者先看懂一个电话任务能解决什么，再进入案例了解流程、证据和可复用材料。页面应清楚、亲切、易读；用具体场景和内容建立辨识度。",
+    "northStar": "让读者看懂项目解决什么问题、如何使用 CALL-E、会得到什么结果，以及自己怎么尝试。",
+    "overview": "让读者看懂项目解决什么问题、如何使用 CALL-E、会得到什么结果，以及自己怎么尝试。页面应清楚、亲切、易读；用具体场景、使用步骤和示例输出建立辨识度。",
     "keyCharacteristics": [
       "保留 CALL-E 标识、暖白底色、黄蓝点缀和深色主按钮。",
       "首页负责发现案例：每个案例只出现一张摘要卡。",

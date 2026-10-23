@@ -6,7 +6,7 @@
     <meta name="description" content="How Care Call AI uses approved CALL-E check-ins to collect everyday support requests and prepare coordinator-reviewed handoff sheets.">
     <meta name="theme-color" content="#ffe13f">
     <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/local-atlas.css?v=e24890da">
+    <link rel="stylesheet" href="./assets/local-atlas.css?v=cf6322ea">
     <title>Care Call AI — CALL-E Community Cases</title>
   </head>
   <body>
@@ -39,8 +39,8 @@
       </div>
       <nav class="contents wrap" aria-label="On this page">
         <a href="#workflow">Workflow</a>
-        <a href="#reuse">Approach</a>
-        <a href="#evidence">Evidence</a>
+        <a href="#evidence">Example</a>
+        <a href="#reuse">Explore</a>
       </nav>
       <div class="case-body wrap">
         <section id="workflow" class="section workflow-section" aria-labelledby="workflow-title">
@@ -51,26 +51,27 @@
           <div>
             <ol class="workflow">
               <li><span class="step-number" aria-hidden="true">1</span><div><h3>Review and approve</h3><p>Check recipient eligibility, call context and the proposed batch. A no-call preflight precedes the coordinator’s explicit approval.</p></div></li>
-              <li><span class="step-number" aria-hidden="true">2</span><div><h3>Collect the request</h3><p>Import completed call results and supporting conversation text. Keep unclear, restricted and no-request outcomes available for review.</p></div></li>
+              <li><span class="step-number" aria-hidden="true">2</span><div><h3>Collect the request</h3><p>Import completed call results and supporting conversation text. Review needs extracted from a summary, and keep unclear, restricted and no-request outcomes visible.</p></div></li>
               <li><span class="step-number" aria-hidden="true">3</span><div><h3>Prepare the handoff</h3><p>Combine same-day needs, preserve their history and let the coordinator review a printable support order for the relevant team.</p></div></li>
             </ol>
-            <details class="demo-sequence">
-              <summary>A written handoff example</summary>
-              <p>This fictional example explains the record flow. It does not describe a real person, call or delivery.</p>
+            <div id="evidence" class="demo-sequence" aria-labelledby="evidence-title">
+              <h3 id="evidence-title">One handoff with the day’s requests.</h3>
+              <p class="source-note">Illustrative example with a fictional person and requests.</p>
               <dl class="sequence-checks">
                 <div><dt>First request</dt><dd>A person asks for help with cleaning.</dd></div>
                 <div><dt>Later callback</dt><dd>The same person also asks for groceries that day.</dd></div>
                 <div><dt>Coordinator review</dt><dd>Keep the cleaning request and add the groceries, with their history.</dd></div>
-                <div><dt>Team handoff</dt><dd>Review and print the requests. A person arranges the actual help.</dd></div>
+                <div class="sequence-match"><dt>Printable handoff</dt><dd>One sheet lists cleaning and groceries for the team to arrange.</dd></div>
               </dl>
-            </details>
+              <p class="source-note">A coordinator reviews the sheet and arranges the services. Care Call AI is for everyday support; it excludes clinical care and emergency response.</p>
+            </div>
           </div>
         </section>
         <section id="reuse" class="section pattern-section" aria-labelledby="reuse-title">
           <div class="section-intro">
-            <h2 id="reuse-title">Keep the request traceable.</h2>
-            <p>The useful design idea is the connection between outreach, review, request history and a practical handoff.</p>
-            <a class="text-link" href="https://youtu.be/Hc2bWjTnKFQ">See the author’s walkthrough <span aria-hidden="true">↗</span></a>
+            <h2 id="reuse-title">Follow the author’s walkthrough.</h2>
+            <p>See how a coordinator moves from an approved check-in to a reviewed request and a printable handoff.</p>
+            <a class="text-link" href="https://about.care.alexraixon.com/">Explore Care Call AI <span aria-hidden="true">↗</span></a>
           </div>
           <div class="pattern-content">
             <h3>Give each outcome a place.</h3>
@@ -82,25 +83,6 @@
               <li><strong>Keep fulfillment separate.</strong> A recorded request or printed sheet does not establish that help was delivered.</li>
             </ul>
             <p class="source-note">The author’s <a href="https://github.com/NeoSPU/care-call-ai/blob/b10621eb343a40de99cc5f1e80931b9f163eb0b7/LICENSE">proprietary license</a> permits limited hackathon evaluation. General reuse, redistribution and hosting of the application require separate permission. This case does not distribute its code or design assets.</p>
-          </div>
-        </section>
-        <section id="evidence" class="section evidence-section" aria-labelledby="evidence-title">
-          <div class="section-intro">
-            <h2 id="evidence-title">What’s been checked.</h2>
-            <p>The public hackathon edition supports inspection of the workflow. The author describes a separate private production repository.</p>
-            <a class="text-link" href="https://github.com/NeoSPU/care-call-ai/tree/b10621eb343a40de99cc5f1e80931b9f163eb0b7">Reviewed source: <code>b10621eb</code> <span aria-hidden="true">↗</span></a>
-          </div>
-          <div>
-            <dl class="checks">
-              <div><dt>Local checks<span>19 Oct 2026</span></dt><dd>162 backend tests and 134 frontend tests on Node 24 passed. Type checks and a production build passed. An earlier Node 26 frontend test run had 52 failures in its localStorage test environment.</dd></div>
-              <div><dt>Source refresh<span>23 Oct 2026</span></dt><dd>The public repository still points to the reviewed revision. Its README, project entries and proprietary license were read again for this guide.</dd></div>
-            </dl>
-            <h3 class="limits-title">A coordinator stays involved.</h3>
-            <ul class="limits">
-              <li><strong>Production is unverified here.</strong> Live deployment, Siri on a physical device and real support delivery were not independently validated in these checks.</li>
-              <li><strong>Results need review.</strong> The app accepts structured needs and can also extract them from a summary. A strict result schema is optional in the Developer API configuration.</li>
-              <li><strong>Everyday support only.</strong> The author excludes clinical care and emergency response. Actual transport, deliveries and other services still require people to arrange them.</li>
-            </ul>
           </div>
         </section>
         <section class="closing" aria-labelledby="closing-title">

@@ -6,7 +6,7 @@
     <meta name="description" content="How RingBack uses CALL-E to call a waiting list, fill an appointment opening and update a local appointment book.">
     <meta name="theme-color" content="#ffe13f">
     <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/local-atlas.css?v=e24890da">
+    <link rel="stylesheet" href="./assets/local-atlas.css?v=cf6322ea">
     <title>RingBack — CALL-E Community Cases</title>
   </head>
   <body>
@@ -39,8 +39,8 @@
       </div>
       <nav class="contents wrap" aria-label="On this page">
         <a href="#workflow">Workflow</a>
-        <a href="#reuse">Reuse</a>
-        <a href="#evidence">Evidence</a>
+        <a href="#evidence">Example</a>
+        <a href="#reuse">Try it</a>
       </nav>
       <div class="case-body wrap">
         <section id="workflow" class="section workflow-section" aria-labelledby="workflow-title">
@@ -54,22 +54,23 @@
               <li><span class="step-number" aria-hidden="true">2</span><div><h3>Offer it in order</h3><p>Ask one person at a time. A clear acceptance stops calls to the remaining contacts for that opening.</p></div></li>
               <li><span class="step-number" aria-hidden="true">3</span><div><h3>Update the diary</h3><p>Check the result and slot availability before saving. Ambiguous results or multiple possible old bookings need human continuation.</p></div></li>
             </ol>
-            <details class="demo-sequence">
-              <summary>A written waitlist example</summary>
-              <p>This fictional sequence explains the stop condition. It is not a record of real calls or bookings.</p>
+            <div id="evidence" class="demo-sequence" aria-labelledby="evidence-title">
+              <h3 id="evidence-title">A replacement booking in the diary.</h3>
+              <p class="source-note">Illustrative waitlist and booking. The author’s video demonstrates the flow in simulation.</p>
               <dl class="sequence-checks">
                 <div><dt>First contact</dt><dd>Declines the offered time. Continue.</dd></div>
                 <div><dt>Second contact</dt><dd>Accepts the opening. Check that it is still available.</dd></div>
                 <div class="sequence-match"><dt>Local booking</dt><dd>Save the confirmed replacement and stop the sequence.</dd></div>
                 <div class="sequence-skipped"><dt>Remaining contacts</dt><dd>Not called for that opening.</dd></div>
               </dl>
-            </details>
+              <p class="source-note">The app uses its own local diary, with CSV and ICS imports. It does not provide two-way Google Calendar or Outlook synchronization.</p>
+            </div>
           </div>
         </section>
         <section id="reuse" class="section pattern-section" aria-labelledby="reuse-title">
           <div class="section-intro">
-            <h2 id="reuse-title">Keep the booking in sync.</h2>
-            <p>A useful calling cascade needs a reliable state change after acceptance: reserve the slot, retain the outcome and stop the remaining calls.</p>
+            <h2 id="reuse-title">Try an opening in simulation.</h2>
+            <p>Load the demo data, choose an appointment opening and follow the waiting list through to an updated local diary.</p>
             <a class="text-link" href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback#quick-start">Open the author’s local setup <span aria-hidden="true">↗</span></a>
           </div>
           <div class="pattern-content">
@@ -81,27 +82,8 @@
               <li><strong>Recover uncertain results.</strong> Keep an available call ID and read its result before deciding on another attempt.</li>
               <li><strong>Make follow-up deliberate.</strong> The app queues follow-ups for a person to trigger.</li>
             </ul>
-            <p class="source-note">The reviewed <a href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback">application</a> is in a repository with an <a href="https://github.com/Ludo321/awesome-phone-call-agents/blob/644db89627a5c5310435e724e45d453a05bfaca5/LICENSE">MIT license</a>. The setup instructions and safety controls belong to that version.</p>
-          </div>
-        </section>
-        <section id="evidence" class="section evidence-section" aria-labelledby="evidence-title">
-          <div class="section-intro">
-            <h2 id="evidence-title">What’s been checked.</h2>
-            <p>Local test results support the implemented flow. They leave real practice deployment and business outcomes unverified.</p>
-            <a class="text-link" href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback">Reviewed source: <code>644db896</code> <span aria-hidden="true">↗</span></a>
-          </div>
-          <div>
-            <dl class="checks">
-              <div><dt>Repository suite<span>19 Oct 2026</span></dt><dd>1,219 of 1,221 tests passed; two fixed-date tests failed after their dates became stale. A separate clock-controlled diagnosis passed those two cases. The original full-suite result remains two failures.</dd></div>
-              <div><dt>Simulated end to end<span>19 Oct 2026</span></dt><dd>The local bench passed 661 checks across 121 scenarios, covering the visible interface and database. Its HTTP call adapter tests used a local fake API.</dd></div>
-              <div><dt>Source refresh<span>23 Oct 2026</span></dt><dd><a href="https://github.com/CALLE-AI/awesome-phone-call-agents/pull/297">PR #297</a> is still open and points to the reviewed revision. The app README and repository license were read again for this guide.</dd></div>
-            </dl>
-            <h3 class="limits-title">Local booking has limits.</h3>
-            <ul class="limits">
-              <li><strong>External calendars are separate.</strong> The reviewed implementation uses a local diary and file imports. Google Calendar and Outlook two-way synchronization are not established.</li>
-              <li><strong>Unknown creation needs care.</strong> If a create request times out without a call ID, a person must reconcile it before retrying.</li>
-              <li><strong>Real outcomes remain unverified.</strong> These checks did not validate live calls, actual filled appointments, revenue or use by an external practice.</li>
-            </ul>
+            <p class="source-note">If a real call request times out before returning a call ID, reconcile that attempt before retrying.</p>
+            <p class="source-note">The author’s <a href="https://github.com/Ludo321/awesome-phone-call-agents/tree/644db89627a5c5310435e724e45d453a05bfaca5/apps/python/ringback">application</a> is in a repository with an <a href="https://github.com/Ludo321/awesome-phone-call-agents/blob/644db89627a5c5310435e724e45d453a05bfaca5/LICENSE">MIT license</a>. The linked setup instructions apply to that source version.</p>
           </div>
         </section>
         <section class="closing" aria-labelledby="closing-title">

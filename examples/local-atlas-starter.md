@@ -94,14 +94,11 @@ REVIEW_MODE=1 CALLE_DRY_RUN=1 npm start
 
 Outcomes may be answered, unclear, refused or unreachable. `CALLE_DRY_RUN=1` prevents real calls even if a CALL-E key is present. Review mode requires Supabase to be unconfigured; a fresh clone has no user credentials. The simulated path skips the confirmation gate used by real calls.
 
-## 5. Limits and verification
+## 5. Before making real calls
 
-- Answered shared FAQs default to 90 days; other outcomes to one day. The reviewed implementation does not shorten expiry based on question type. Use a stricter policy for time-sensitive questions.
+- Answered shared FAQs default to 90 days; other outcomes to one day. This version does not shorten expiry based on question type. Use a stricter policy for time-sensitive questions.
 - Real calls need credentials, an access code, a callable number and explicit confirmation. This guide does not verify live calling.
 - Preset questions work without an external moderation model; custom questions require one.
-- On 19 Oct 2026, 98 repository tests passed and a local HTTP simulation checked creation, polling, storage and reuse. These are prior checks, not newly rerun results.
-- On 22 Oct 2026, the public app loaded and returned Boston places. The repository HEAD still matched the reviewed commit. Sign-in and live calling were not tested.
-- The editorial case copy is awaiting the author's review. No community adoption or production reliability claim is made.
 
 ## Links
 
