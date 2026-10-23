@@ -30,6 +30,8 @@ Preserve the official CALL-E logo and the incumbent warm white, yellow-and-blue,
 
 The case guides share the same illustrated opening, page navigation, type scale, action styles and evidence layout. Neutral reading surfaces keep the long guides legible; blue marks links and yellow marks the closing action. Each guide explains its own workflow and available material. Original concept illustrations and written examples do not establish actual calls or fulfillment.
 
+Detail pages use one compact header with the CALL-E logo and a return-to-cases link. The case name is the main heading, with its purpose in the introduction. Three chapter links follow the opening; documentation and Dashboard links appear in the footer.
+
 Shared design rules live in [DESIGN.md](DESIGN.md). Project skill routing and implementation checks live in [AGENTS.md](AGENTS.md).
 
 ## Evidence on Hand
