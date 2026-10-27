@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#ffe13f">
     <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/local-atlas.css?v=cf6322ea">
-    <link rel="stylesheet" href="./assets/local-atlas-demo.css">
+    <link rel="stylesheet" href="./assets/local-atlas-demo.css?v=d66038913c">
     <title>Local Atlas — CALL-E Community Cases</title>
   </head>
   <body>
@@ -63,7 +63,7 @@
               <input type="range" class="atlas-progress" id="atlas-progress" min="0" max="25" step="0.1" value="0" aria-label="Demo progress">
               <time id="atlas-time">0:00 / 0:25</time>
             </div>
-            <div class="atlas-chapters" aria-label="Demo chapters"><span>Ask</span><span>Call</span><span>Save</span><span>Reuse</span></div>
+            <nav class="atlas-chapters" aria-label="Explore the 3D story"><button type="button" data-atlas-time="2.2" aria-controls="atlas-world">Ask</button><button type="button" data-atlas-time="4.8" aria-controls="atlas-world">Call</button><button type="button" data-atlas-time="10" aria-controls="atlas-world">Save</button><button type="button" data-atlas-time="19.2" aria-controls="atlas-world">Reuse</button></nav>
             <p id="atlas-audio-status" class="atlas-audio-status" role="status" hidden></p>
           </div>
           <audio id="atlas-narration" src="./assets/local-atlas-demo/narration-female-sweet.mp3" preload="metadata"></audio>
@@ -211,6 +211,6 @@ REVIEW_MODE=1 CALLE_DRY_RUN=1 npm start</code></pre>
       </div>
     </footer>
     <script src="./assets/local-atlas.js"></script>
-    <script type="module" src="./assets/local-atlas-demo.mjs"></script>
+    <script type="module" src="./assets/local-atlas-demo.mjs?v=3d5e53e927"></script>
   </body>
 </html>

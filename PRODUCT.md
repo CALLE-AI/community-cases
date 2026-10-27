@@ -25,7 +25,7 @@ The Local Atlas page places a full-width, 25-second Three.js WebGL café story a
 ## Capabilities and Constraints
 
 - Local Atlas asks a business one factual question, saves the answer with supporting words and a collection date, and lets later visitors reuse a valid shared answer.
-- The explanation plays silently by default; an explicit narration action starts generated English speech from the beginning. Pause, replay and paused seeking keep narration and visuals aligned; playback pauses offscreen or when the page is hidden. Reduced motion starts at the completed result and removes spatial movement during explicit playback. A text transcript and silent playback remain available if narration fails.
+- The explanation plays silently by default; an explicit narration action starts generated English speech from the beginning. Pause, replay and paused seeking keep narration and visuals aligned. Ask, Call, Save and Reuse buttons seek to a scene and pause playback; playback also pauses offscreen or when the page is hidden. Reduced motion starts at the completed result and removes spatial movement during explicit playback. A text transcript and silent playback remain available if narration fails.
 - The browser mock offers two fixed synthetic questions and reuses a valid answer for the same normalized question. Visitors can recheck or reset; state lasts only for the open page. It uses no account, map service, API key or real phone call.
 - The starter contains an adapted prompt, result schema, synthetic examples and instructions for the author's local simulation. It is not a complete calling app.
 - Answered FAQs default to 90 days; other outcomes to one day. Expiry is not adjusted by question type, so time-sensitive answers need a stricter policy.

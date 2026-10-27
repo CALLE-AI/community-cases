@@ -7,13 +7,14 @@ const mix = (a, b, k) => a + (b - a) * k;
 
 export function createCafeScene(host, { entry }) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+  renderer.setPixelRatio(window.devicePixelRatio || 1);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
-  host.replaceChildren(renderer.domElement);
+  const overlay=document.createElement('div');overlay.className='atlas-native-overlay';overlay.setAttribute('aria-hidden','true');
+  host.replaceChildren(renderer.domElement,overlay);
   renderer.domElement.setAttribute('role', 'presentation');
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-6, 6, 5, -5, .1, 60);
@@ -291,91 +292,66 @@ export function createCafeScene(host, { entry }) {
   rod([.08,.98,.15],[.06,.85,.18],.013,palette.teal,staff.group);
 
   const collected = new Date(entry.collectedAt).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-  function wrapped(ctx, text, x, y, maxWidth, size, color, weight = 600, lineHeight = 1.23) {
-    ctx.font = `${weight} ${size}px system-ui, sans-serif`; ctx.fillStyle = color;
-    let line = '', row = 0;
-    for (const word of text.split(' ')) {
-      if (line && ctx.measureText(line + ' ' + word).width > maxWidth) {
-        ctx.fillText(line, x, y + row * size * lineHeight); row++; line = word;
-      } else line += (line ? ' ' : '') + word;
-    }
-    ctx.fillText(line, x, y + row * size * lineHeight);
-    return y + (row + 1) * size * lineHeight;
+  const tickIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>';
+  function surface(w,h,designWidth,frameColor,depth=.1,faceColor='#fbfaf5') {
+    const group=new THREE.Group();root.add(group);
+    const frame=box(w,h,depth,0,0,0,material(frameColor),.08,group,false);
+    const face=mesh(new THREE.PlaneGeometry(w*.94,h*.94),new THREE.MeshBasicMaterial({color:faceColor,toneMapped:false}),0,0,depth*.55,group,false);face.receiveShadow=false;
+    const screen=document.createElement('div');screen.className='atlas-native-screen';screen.hidden=true;overlay.append(screen);
+    return {group,frame,face,screen,w:w*.94,h:h*.94,designWidth,depth,key:'',layoutKey:''};
   }
-  function check(ctx, x, y, size, color = '#2f7151') {
-    ctx.strokeStyle=color;ctx.lineWidth=size*.085;ctx.lineCap='round';ctx.lineJoin='round';
-    ctx.beginPath();ctx.arc(x,y,size*.45,0,Math.PI*2);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(x-size*.22,y);ctx.lineTo(x-size*.035,y+size*.18);ctx.lineTo(x+size*.25,y-size*.19);ctx.stroke();
+  function placeScreen(panel) {
+    const {screen,group}=panel;
+    if(!group.visible){screen.hidden=true;return;}
+    const center=new THREE.Vector3(0,0,panel.depth*.55).applyMatrix4(group.matrixWorld).project(camera);
+    const ratio=renderer.getPixelRatio(),snap=n=>Math.round(n*ratio)/ratio;
+    const w=snap(panel.w*group.scale.x*width/(camera.right-camera.left));
+    const h=snap(panel.h*group.scale.y*height/(camera.top-camera.bottom));
+    const x=snap((center.x+1)*width/2-w/2),y=snap((1-center.y)*height/2-h/2);
+    screen.hidden=center.z< -1||center.z>1||w<1||h<1;
+    if(screen.hidden)return;
+    const key=[x,y,w,h].join(',');if(panel.layoutKey===key)return;panel.layoutKey=key;
+    screen.style.left=x+'px';screen.style.top=y+'px';screen.style.width=w+'px';screen.style.height=h+'px';
+    screen.style.setProperty('--u',w/panel.designWidth+'px');
   }
-  function surface(w,h,pw,ph,frameColor,depth=.1) {
-    const group = new THREE.Group();root.add(group);
-    const frame = box(w,h,depth,0,0,0,material(frameColor),.08,group,false);
-    const canvas=document.createElement('canvas');canvas.width=pw;canvas.height=ph;
-    const ctx=canvas.getContext('2d'),texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
-    const face=mesh(new THREE.PlaneGeometry(w*.94,h*.94),new THREE.MeshBasicMaterial({map:texture,toneMapped:false}),0,0,depth*.55,group,false);
-    face.receiveShadow=false;
-    return {group,frame,canvas,ctx,texture,key:''};
-  }
-  const phoneView=surface(1.94,3.4,1024,1792,'#263732',.15);phoneView.group.name='visitor-phone';
+  const phoneView=surface(1.94,3.4,1024,'#263732',.15);phoneView.group.name='visitor-phone';
   box(.31,.026,.02,0,1.57,.10,palette.metal,.008,phoneView.group,false);
   box(.31,.025,.02,0,-1.57,.10,palette.metal,.008,phoneView.group,false);
   box(.035,.30,.06,-.99,.66,0,palette.metal,.008,phoneView.group,false);
   const tapMat=new THREE.MeshBasicMaterial({color:'#ffffff',transparent:true,opacity:.8});
   const tap=mesh(new THREE.TorusGeometry(.11,.012,8,32),tapMat,0,-.81,.13,phoneView.group,false);
-  function phoneScreen(mode, typed) {
-    const key=mode+':'+typed;if(phoneView.key===key)return;phoneView.key=key;
-    const c=phoneView.ctx;c.fillStyle='#fbfaf5';c.fillRect(0,0,1024,1792);c.textAlign='left';c.textBaseline='top';
-    c.fillStyle='#2f6048';c.fillRect(0,0,1024,174);c.fillStyle='#ffffff';c.font='600 60px system-ui, sans-serif';c.fillText('LOCAL ATLAS',76,57);
-    c.fillStyle='#58645a';c.font='500 48px system-ui, sans-serif';c.fillText('Example café',76,242);
-    c.fillStyle='#dde5da';c.fillRect(76,332,872,3);
-    if(mode==='answer') {
-      check(c,158,472,115);
-      wrapped(c,'Shared answer',250,419,680,66,'#2f7151');
-      wrapped(c,entry.answer,76,625,862,105,'#263d32');
-      wrapped(c,'Café staff · '+collected,76,1165,860,49,'#526357',500);
-      c.fillStyle='#e2eddf';c.fillRect(76,1370,872,174);
-      wrapped(c,'No new call',134,1424,760,74,'#2f7151');
-      wrapped(c,'From the place’s saved FAQ',76,1635,870,43,'#526357',500);
-    } else {
-      wrapped(c,'Ask the place',76,420,860,64,'#2f6048');
-      wrapped(c,entry.question.slice(0,typed),76,590,858,112,'#263d32');
-      c.fillStyle=mode==='sending'?'#d8e6d4':'#f4d74a';c.fillRect(76,1265,872,180);
-      wrapped(c,mode==='sending'?'Sending…':'Ask',153,1319,720,87,'#263d32');
-      wrapped(c,mode==='repeat'?'Same place. Same question.':'One useful question.',76,1560,870,49,'#526357',500);
-    }
-    phoneView.texture.needsUpdate=true;
+  phoneView.screen.classList.add('atlas-native-phone');
+  phoneView.screen.innerHTML=`
+    <div class="atlas-phone-brand">LOCAL ATLAS</div><p class="atlas-phone-place">Example café</p><div class="atlas-phone-rule"></div>
+    <div class="atlas-phone-question-block"><p class="atlas-phone-prompt">Ask the place</p><p class="atlas-phone-question" data-question></p><span class="atlas-phone-send" data-send>Ask</span><p class="atlas-phone-hint" data-hint>One useful question.</p></div>
+    <div class="atlas-phone-result-block"><p class="atlas-phone-result-title">${tickIcon}<span>Shared answer</span></p><p class="atlas-phone-answer" data-answer></p><p class="atlas-phone-source" data-source></p><p class="atlas-phone-no-call">No new call</p><p class="atlas-phone-footer">From the place’s saved FAQ</p></div>`;
+  const phoneFields={question:phoneView.screen.querySelector('[data-question]'),send:phoneView.screen.querySelector('[data-send]'),hint:phoneView.screen.querySelector('[data-hint]')};
+  phoneView.screen.querySelector('[data-answer]').textContent=entry.answer;
+  phoneView.screen.querySelector('[data-source]').textContent='Café staff · '+collected;
+  function phoneScreen(mode,typed) {
+    const key=mode+':'+typed;if(phoneView.key===key)return;phoneView.key=key;phoneView.screen.dataset.mode=mode;
+    phoneFields.question.textContent=entry.question.slice(0,typed);
+    phoneFields.send.textContent=mode==='sending'?'Sending…':'Ask';
+    phoneFields.hint.textContent=mode==='repeat'?'Same place. Same question.':'One useful question.';
   }
-  const message=surface(2.94,1.48,1280,640,'#f2d351');message.group.name='place-answer';
+  const message=surface(2.94,1.48,1280,'#f2d351');message.group.name='place-answer';message.screen.classList.add('atlas-native-message');
   const pinTip=mesh(new THREE.ConeGeometry(.18,.28,4),palette.blue,0,-.88,0,message.group,false);pinTip.rotation.z=Math.PI;
-  const copied=surface(1.05,.56,960,512,'#356aba',.07);copied.group.name='answer-copy';
-  function answerToken(c,w,h) {
-    c.fillStyle='#fbfaf5';c.fillRect(0,0,w,h);c.textBaseline='middle';c.textAlign='left';
-    check(c,w*.15,h*.5,h*.47);c.font=`600 ${Math.round(h*.17)}px system-ui, sans-serif`;c.fillStyle='#2f6048';c.fillText('PARKING',w*.31,h*.44);
-    c.font=`500 ${Math.round(h*.12)}px system-ui, sans-serif`;c.fillStyle='#526357';c.fillText('Shared FAQ',w*.31,h*.67);
-  }
-  answerToken(copied.ctx,960,512);copied.texture.needsUpdate=true;
+  const copied=surface(1.05,.56,960,'#356aba',.07);copied.group.name='answer-copy';copied.screen.classList.add('atlas-native-copy');
+  const token=`<div class="atlas-native-token">${tickIcon}<p class="atlas-token-title">PARKING</p><p class="atlas-token-subtitle">Shared FAQ</p></div>`;
+  copied.screen.innerHTML=token;
+  message.screen.innerHTML=`<div class="atlas-message-content"><p class="atlas-message-label" data-label></p><p class="atlas-message-answer" data-text></p><p class="atlas-message-source" data-source></p></div>${token}`;
+  const messageFields={label:message.screen.querySelector('[data-label]'),text:message.screen.querySelector('[data-text]'),source:message.screen.querySelector('[data-source]')};
   function messageScreen(mode) {
-    if(message.key===mode)return;message.key=mode;
-    const c=message.ctx;c.textAlign='left';c.textBaseline='top';c.fillStyle='#fbfaf5';c.fillRect(0,0,1280,640);
-    if(mode==='token')answerToken(c,1280,640);
-    else {
-      c.fillStyle=mode==='question'?'#8b681b':'#2f7151';c.font='600 50px system-ui, sans-serif';
-      c.fillText(mode==='question'?'CALL-E IS ASKING':mode==='reply'?'CAFÉ STAFF':'SAVED AT THIS PLACE',68,52);
-      wrapped(c,mode==='question'?entry.question:entry.evidenceQuote,68,164,1140,93,'#263d32');
-      c.font='500 45px system-ui, sans-serif';c.fillStyle='#526357';
-      c.fillText(mode==='question'?'One factual question':mode==='reply'?'Customer parking, out back':'Café staff · '+collected,68,544);
-    }
-    message.texture.needsUpdate=true;
+    if(message.key===mode)return;message.key=mode;message.screen.dataset.mode=mode;
+    messageFields.label.textContent=mode==='question'?'CALL-E IS ASKING':mode==='reply'?'CAFÉ STAFF':'SAVED AT THIS PLACE';
+    messageFields.text.textContent=mode==='question'?entry.question:entry.evidenceQuote;
+    messageFields.source.textContent=mode==='question'?'One factual question':mode==='reply'?'Customer parking, out back':'Café staff · '+collected;
   }
   const storeAnchor=new THREE.Vector3(2.25,1.85,2.10);
   cylinder(.025,1.45,storeAnchor.x,.92,storeAnchor.z,palette.metal);
   cylinder(.11,.06,storeAnchor.x,.21,storeAnchor.z,palette.metal);
-  const assistant=surface(.67,.72,512,512,'#edc83b');
-  assistant.ctx.fillStyle='#f4d74a';assistant.ctx.fillRect(0,0,512,512);assistant.ctx.fillStyle='#263d32';assistant.ctx.font='700 94px system-ui, sans-serif';assistant.ctx.textAlign='center';assistant.ctx.fillText('CALL-E',256,284);assistant.texture.needsUpdate=true;
-  new THREE.TextureLoader().load(new URL('../call-e-mark.svg',import.meta.url).href,texture=>{
-    texture.colorSpace=THREE.SRGBColorSpace;
-    const logo=mesh(new THREE.PlaneGeometry(.53,.53),new THREE.MeshBasicMaterial({map:texture,transparent:true,toneMapped:false}),0,0,.064,assistant.group,false);logo.receiveShadow=false;render();
-  });
+  const assistant=surface(.67,.72,512,'#edc83b',.1,'#f4d74a');assistant.screen.classList.add('atlas-native-assistant');
+  const assistantLogo=document.createElement('img');assistantLogo.src=new URL('../call-e-mark.svg',import.meta.url).href;assistantLogo.alt='';assistant.screen.append(assistantLogo);
   const telephone=new THREE.Group();telephone.name='telephone-base';telephone.position.set(-.40,1.30,.31);root.add(telephone);
   box(.50,.085,.30,0,0,0,palette.metal,.04,telephone);
   box(.12,.012,.07,0,.055,.035,material('#9cc9a4',{emissive:'#5ba56c',emissiveIntensity:.3}),.01,telephone,false);
@@ -424,6 +400,7 @@ export function createCafeScene(host, { entry }) {
   const v=(x,y,z)=>new THREE.Vector3(x,y,z);
   function render(state=current) {
     current=state;if(lost)return;
+    const pixelRatio=window.devicePixelRatio||1;if(renderer.getPixelRatio()!==pixelRatio)renderer.setPixelRatio(pixelRatio);
     const t=state.time,reduced=state.reduced,portrait=width/height<1.1;
     const motion=(a,b)=>reduced?Number(t>=b):phase(t,a,b);
     const walk1=reduced?1:phase(t,.05,.85),walk2=reduced?1:phase(t,13,15.0);
@@ -482,16 +459,26 @@ export function createCafeScene(host, { entry }) {
     camera.position.set(cx+Math.sin(angle)*12,cy+Math.sin(elevation)*12,cz+Math.cos(angle)*Math.cos(elevation)*12);
     camera.lookAt(cx,cy,cz);camera.updateProjectionMatrix();
     for(const panel of [phoneView,message,assistant,copied])panel.group.quaternion.copy(camera.quaternion);
-    renderer.render(scene,camera);host.dataset.renderer='webgl';host.dataset.triangles=renderer.info.render.triangles;
+    renderer.render(scene,camera);
+    for(const panel of [phoneView,message,assistant,copied])placeScreen(panel);
+    host.dataset.renderer='webgl';host.dataset.textRenderer='dom';host.dataset.pixelRatio=renderer.getPixelRatio();host.dataset.triangles=renderer.info.render.triangles;
     host.dataset.beat=t<3?'ask':t<8?'call':t<13?'save':t<21.75?'reuse':'resolve';
   }
   function resize() {
     const bounds=host.getBoundingClientRect();width=Math.max(1,bounds.width);height=Math.max(1,bounds.height);
+    const ratio=window.devicePixelRatio||1;if(renderer.getPixelRatio()!==ratio)renderer.setPixelRatio(ratio);
     renderer.setSize(width,height,false);render();
   }
-  const observer=new ResizeObserver(resize);observer.observe(host);
-  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();lost=true;host.parentElement.classList.remove('scene-ready');host.dataset.renderer='fallback';});
-  renderer.domElement.addEventListener('webglcontextrestored',()=>{lost=false;host.parentElement.classList.add('scene-ready');render();});
+  let densityQuery;
+  function watchPixelDensity() {
+    densityQuery?.removeEventListener('change',densityChanged);
+    densityQuery=window.matchMedia(`(resolution: ${window.devicePixelRatio||1}dppx)`);
+    densityQuery.addEventListener('change',densityChanged,{once:true});
+  }
+  function densityChanged() { resize();watchPixelDensity(); }
+  const observer=new ResizeObserver(resize);observer.observe(host);window.addEventListener('resize',resize);watchPixelDensity();
+  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();lost=true;overlay.hidden=true;host.parentElement.classList.remove('scene-ready');host.dataset.renderer='fallback';});
+  renderer.domElement.addEventListener('webglcontextrestored',()=>{lost=false;overlay.hidden=false;host.parentElement.classList.add('scene-ready');render();});
   host.parentElement.classList.add('scene-ready');resize();
-  return { render, dispose() { observer.disconnect();scene.traverse(node=>{node.geometry?.dispose();});mats.forEach(m=>m.dispose());glass.dispose();renderer.dispose(); } };
+  return { render, dispose() { observer.disconnect();window.removeEventListener('resize',resize);densityQuery?.removeEventListener('change',densityChanged);overlay.remove();[phoneView,message,assistant,copied].forEach(panel=>panel.face.material.dispose());scene.traverse(node=>{node.geometry?.dispose();});mats.forEach(m=>m.dispose());glass.dispose();renderer.dispose(); } };
 }

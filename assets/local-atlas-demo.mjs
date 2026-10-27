@@ -10,7 +10,7 @@ function startStory() {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const entry = makeEntry(samples[0], Date.now());
   let cafeScene = null, sceneState = { time: 0, reduced: reduced.matches };
-  import('./local-atlas-demo/cafe-scene.mjs').then(({ createCafeScene }) => {
+  import('./local-atlas-demo/cafe-scene.mjs?v=71edcb8afd').then(({ createCafeScene }) => {
     cafeScene = createCafeScene(world, { entry }); cafeScene.render(sceneState);
   }).catch(() => { world.dataset.renderer = 'fallback'; });
   const play = byId('atlas-play'), seek = byId('atlas-progress'), voice = byId('atlas-voice');
@@ -31,7 +31,7 @@ function startStory() {
       byId('atlas-story-calls').textContent = current ? '1' : '0';
       byId('atlas-story-calls').nextSibling.textContent = current ? ' simulated call' : ' simulated calls';
       byId('atlas-connection-label').textContent = ['One useful question.', 'CALL-E asks Example café.', 'The answer stays with this place.', 'Shared FAQ. No new call.', 'Shared FAQ. No new call.'][current];
-      document.querySelectorAll('.atlas-chapters span').forEach((el, i) => {
+      document.querySelectorAll('.atlas-chapters button').forEach((el, i) => {
         if (i === Math.min(3, current)) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current');
       });
     }
@@ -67,6 +67,7 @@ function startStory() {
     else prepareNarration().then(() => playback.enableNarration()).catch(narrationLoadError);
   });
   seek.addEventListener('input', () => playback.seek(Number(seek.value)));
+  document.querySelectorAll('.atlas-chapters button').forEach(button => button.addEventListener('click', () => playback.seek(Number(button.dataset.atlasTime))));
   audio.addEventListener('ended', () => playback.ended());
   audio.addEventListener('error', () => { if (playback.snapshot().narration) playback.failNarration(); });
   new IntersectionObserver(entries => playback.setInView(entries[0].isIntersecting), { threshold: .15 }).observe(stage);

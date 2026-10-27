@@ -6,7 +6,7 @@ Source: https://github.com/omarmiri/Local-atlas/tree/0b1095d1ad02530f3aead96c01e
 
 `story-faq.html` uses the same original `factHTML` renderer in the “See the saved FAQ” disclosure below the animation, with larger text, an explicit collection date and no recheck control. The animation is an original explanation, not a recording of the author's app.
 
-`cafe-scene.mjs` is original café scene code for this explanation. It uses Three.js 0.180.0 (r180), with two browser modules vendored from the official npm package. Package provenance and verified SHA-512 integrity are recorded in [vendor/SOURCE.md](vendor/SOURCE.md); the renderer's original MIT license is retained in [vendor/THREE-LICENSE.txt](vendor/THREE-LICENSE.txt). No package installation or scripts were run.
+`cafe-scene.mjs` is original café scene code for this explanation. Its WebGL canvas follows the display's native device pixel ratio on rendering, resize and density changes. Moving phone, question, answer, shared-FAQ and assistant content uses native HTML/SVG anchored to the 3D screen planes without CSS transform scaling; physical café signs remain canvas textures. It uses Three.js 0.180.0 (r180), with two browser modules vendored from the official npm package. Package provenance and verified SHA-512 integrity are recorded in [vendor/SOURCE.md](vendor/SOURCE.md); the renderer's original MIT license is retained in [vendor/THREE-LICENSE.txt](vendor/THREE-LICENSE.txt). No package installation or scripts were run.
 
 `cafe-poster.webp` is a crop of the current café scene captured in the browser and resized to 812×400, used when WebGL is unavailable or its context is lost. It is not AI-generated.
 
