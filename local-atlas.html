@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#ffe13f">
     <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/local-atlas.css?v=cf6322ea">
+    <link rel="stylesheet" href="./assets/local-atlas-demo.css">
     <title>Local Atlas — CALL-E Community Cases</title>
   </head>
   <body>
@@ -21,7 +22,7 @@
     </div>
     <main id="main">
       <div class="brand-shell">
-        <section class="hero wrap" aria-labelledby="page-title">
+        <section class="hero wrap atlas-intro" aria-labelledby="page-title">
           <div class="hero-copy">
             <h1 id="page-title">Local Atlas</h1>
             <p class="hero-description"><strong>Ask once. Share the answer.</strong> A map can tell you where a café is. A phone call can tell you whether there’s parking. Local Atlas turns that answer into a dated FAQ for the next visitor.</p>
@@ -32,42 +33,74 @@
             </div>
             <p class="entry-note">Author-hosted app. Sign in to ask a place.<br>Prefer to start here? <a href="#example">Explore the example below.</a></p>
           </div>
-          <figure class="hero-artwork">
-            <img src="./assets/local-atlas-neighborhood.png" width="1448" height="1086" alt="Concept illustration of a neighborhood café marked with a yellow location pin." decoding="async">
-          </figure>
+
         </section>
       </div>
 
+      <section id="example" class="atlas-story wrap" aria-labelledby="atlas-scene-title">
+        <div class="atlas-stage" id="atlas-stage">
+          <div class="atlas-stage-heading">
+            <h2 id="atlas-scene-title">Is there parking?</h2>
+            <p class="atlas-call-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m7 3 3 4-2 2a15 15 0 0 0 7 7l2-2 4 3v3c-9 2-19-8-18-16Z"/></svg><span><b id="atlas-story-calls">0</b> simulated calls</span></p>
+          </div>
+          <div class="atlas-film">
+            <div class="atlas-setting" aria-hidden="true">
+              <p class="atlas-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Example café</p>
+              <div class="atlas-visual">
+                <img class="atlas-fallback" src="./assets/local-atlas-demo/cafe-poster.webp" alt="">
+                <div class="atlas-world" id="atlas-world"></div>
+              </div>
+              <div class="atlas-connection" id="atlas-connection"><img src="./assets/call-e-mark.svg" alt=""><span id="atlas-connection-label">One useful question.</span></div>
+            </div>
+
+          </div>
+          <p class="atlas-caption" id="atlas-caption">A visitor needs a detail the map doesn’t show.</p>
+          <div class="atlas-stage-controls">
+            <div class="atlas-playback">
+              <button type="button" id="atlas-play">Pause</button>
+              <button type="button" id="atlas-replay">Replay</button>
+              <button type="button" id="atlas-voice" aria-pressed="false">Play with narration</button>
+              <input type="range" class="atlas-progress" id="atlas-progress" min="0" max="25" step="0.1" value="0" aria-label="Demo progress">
+              <time id="atlas-time">0:00 / 0:25</time>
+            </div>
+            <div class="atlas-chapters" aria-label="Demo chapters"><span>Ask</span><span>Call</span><span>Save</span><span>Reuse</span></div>
+            <p id="atlas-audio-status" class="atlas-audio-status" role="status" hidden></p>
+          </div>
+          <audio id="atlas-narration" src="./assets/local-atlas-demo/narration-female-sweet.mp3" preload="metadata"></audio>
+        </div>
+        <p class="note">A fictional café and simulated replies. The animation condenses time; no real phone is dialled.</p>
+        <details class="atlas-reading"><summary>See the saved FAQ</summary><iframe id="atlas-story-faq" src="./assets/local-atlas-demo/story-faq.html" title="Saved parking answer with source and collection date"></iframe></details>
+        <details class="atlas-transcript"><summary>Read the narration</summary><p>Need to know if there’s parking? Local Atlas asks the café using CALL-E. The answer is saved with the staff’s words and a date. When the next visitor asks the same question, they get the saved answer while it’s still valid. Ask once. Share the answer.</p></details>
+      </section>
       <nav class="contents wrap" aria-label="On this page">
-        <a href="#example">Workflow</a>
-        <a href="#evidence">Example</a>
-        <a href="#reuse">Try it</a>
+        <a href="#example">Watch the flow</a><a href="#evidence">Try the mock</a><a href="#reuse">Build your own</a>
       </nav>
     <div class="case-body wrap">
-      <section id="example" class="section example-section" aria-labelledby="example-title">
+      <section id="evidence" class="section atlas-mock-section" aria-labelledby="atlas-mock-title">
         <div class="section-intro">
-          <h2 id="example-title">A question worth sharing.</h2>
-          <p>Local Atlas checks for a reusable answer first. When one is missing, CALL-E handles the phone conversation; the app checks and stores the result.</p>
-          <p class="note">Illustrative example with a fictional café and answer.</p>
+          <h2 id="atlas-mock-title">Try it yourself.</h2>
+          <p>Ask the café a question, save the answer, then see what the next visitor finds. This mock uses the original Local Atlas question and FAQ components with fixed sample replies.</p>
+          <p class="note">Interactive mock · no real calls. State stays in this page and resets when you reload.</p>
         </div>
-        <div class="example-showcase">
-          <figure id="evidence" class="answer-preview" aria-labelledby="preview-question">
-            <div class="preview-top"><span>Example café</span><span>Simulated example</span></div>
-            <h3 id="preview-question">“Is there parking on site?”</h3>
-            <div class="preview-answer">
-              <span class="answer-label">Answer saved</span>
-              <p>Yes. There’s a customer lot behind the café.</p>
-              <blockquote>“Yes, we have a small customer lot out back.”</blockquote>
-              <p class="answer-date">Example date: 22 Oct 2026</p>
-            </div>
-            <figcaption id="evidence-title"><strong>The next visitor can use the same answer.</strong><br>While the FAQ is valid, the same question reuses it without another call.</figcaption>
-          </figure>
-        <ol class="workflow">
-          <li><span class="step-number" aria-hidden="true">1</span><div><h3>Ask one factual question</h3><p>Choose a place with a listed phone number, then ask: “Is there parking on site?” For a real call, review the number and question before confirming.</p></div></li>
-          <li><span class="step-number" aria-hidden="true">2</span><div><h3>Save a dated answer</h3><p>The assistant identifies itself as AI, asks the question and lets the staff member finish. The app saves a clear answer with their words and a collection date.</p></div></li>
-          <li><span class="step-number" aria-hidden="true">3</span><div><h3>Reuse the answer</h3><p>Someone opening the same place can read the shared FAQ. Asking the same question while its result is still valid reuses that result without another call.</p></div></li>
-        </ol>
+        <div class="atlas-mock-toolbar">
+          <div class="atlas-visitor-label"><span id="atlas-visitor-number">1</span><label id="atlas-visitor-label">First visitor</label></div>
+          <button type="button" id="atlas-next-visitor" disabled>Next visitor</button>
+          <button type="button" id="atlas-reset">Reset demo</button>
         </div>
+        <div class="atlas-mock-grid">
+          <div class="atlas-mock-app">
+            <div class="atlas-place-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><div><h3>Example café</h3><p>A fictional place for this demonstration</p></div></div>
+            <iframe id="atlas-product" src="./assets/local-atlas-demo/product.html" title="Local Atlas interactive question and shared FAQ" loading="lazy"></iframe>
+          </div>
+          <div class="atlas-session">
+            <h3 id="atlas-session-title">What would you like to know?</h3>
+            <p id="atlas-session-status" role="status">Choose a sample question in the café panel to start.</p>
+            <ol id="atlas-activity" aria-label="Your demo activity"></ol>
+            <p class="atlas-stats" id="atlas-stats">0 simulated calls · 0 shared answers</p>
+            <button type="button" id="atlas-use-answer" hidden>Ask the same question</button>
+          </div>
+        </div>
+        <p class="atlas-mock-source">Question presets, FAQ rendering and reuse rules are adapted from <a href="https://github.com/omarmiri/Local-atlas/tree/0b1095d1ad02530f3aead96c01e523e24dfd1a55">the author’s MIT-licensed source</a>. This guided mock covers public facts; the author’s app includes the full map and calling setup.</p>
       </section>
 
       <section id="reuse" class="section reuse-section" aria-labelledby="reuse-title">
@@ -178,5 +211,6 @@ REVIEW_MODE=1 CALLE_DRY_RUN=1 npm start</code></pre>
       </div>
     </footer>
     <script src="./assets/local-atlas.js"></script>
+    <script type="module" src="./assets/local-atlas-demo.mjs"></script>
   </body>
 </html>

@@ -20,9 +20,13 @@ The public story follows the problem, usage, example outcome and next step. Inte
 
 This is an existing static HTML/CSS/JavaScript site. The homepage in `index.html` groups the four CALL-E Hackathon main-award projects together: Local Atlas, Conversation-Clarify, Care Call AI and RingBack. HungryCall remains under more community cases. All five use shared card styles and have a separate HTML guide; the homepage does not repeat their detail sections. Local Atlas also provides `examples/local-atlas-starter.md`. The guides offer app and demo entries before source links.
 
+The Local Atlas page places a full-width, 25-second Three.js WebGL café story above a clickable mock. In the scene, a visitor types and sends a parking question; a café cutaway reveals staff answering the telephone. The reply gains staff and date provenance and shrinks into a persistent shared-FAQ marker. Another visitor asks the same question and receives a copy while the original remains at the café and the call count stays at one. The location label and connection caption occupy separate layout rows outside the canvas. “See the saved FAQ” reveals the original native FAQ renderer; the lower mock retains the author's original public-facts components inside a style-isolated iframe.
+
 ## Capabilities and Constraints
 
 - Local Atlas asks a business one factual question, saves the answer with supporting words and a collection date, and lets later visitors reuse a valid shared answer.
+- The explanation plays silently by default; an explicit narration action starts generated English speech from the beginning. Pause, replay and paused seeking keep narration and visuals aligned; playback pauses offscreen or when the page is hidden. Reduced motion starts at the completed result and removes spatial movement during explicit playback. A text transcript and silent playback remain available if narration fails.
+- The browser mock offers two fixed synthetic questions and reuses a valid answer for the same normalized question. Visitors can recheck or reset; state lasts only for the open page. It uses no account, map service, API key or real phone call.
 - The starter contains an adapted prompt, result schema, synthetic examples and instructions for the author's local simulation. It is not a complete calling app.
 - Answered FAQs default to 90 days; other outcomes to one day. Expiry is not adjusted by question type, so time-sensitive answers need a stricter policy.
 
@@ -30,9 +34,9 @@ This is an existing static HTML/CSS/JavaScript site. The homepage in `index.html
 
 Preserve the official CALL-E logo and the incumbent warm white, yellow-and-blue, dark-button appearance evidenced in `index.html` and `assets/local-atlas.css`. This sample extends the existing site; it does not establish a replacement visual system.
 
-The case guides share the same illustrated opening, page navigation, type scale and action styles. Neutral reading surfaces keep the guides legible; blue marks links and yellow marks the closing action. Each guide explains its workflow, shows an example output and offers available material. Original concept illustrations and written examples do not establish actual calls or fulfillment.
+The case guides share page navigation, type scale and action styles. Neutral reading surfaces keep the guides legible; blue marks links and yellow marks the closing action. Each guide explains its workflow, shows an example output and offers available material. Original concept illustrations, animations and written examples do not establish actual calls or fulfillment.
 
-Detail pages use one compact header with the CALL-E logo and a return-to-cases link. The case name is the main heading, with its purpose in the introduction. Three chapter links follow the opening: Workflow, Example and Try it (Explore for the proprietary Care Call AI project). Documentation and Dashboard links appear in the footer. Existing evidence anchors now lead to the visible example output.
+Detail pages use one compact header with the CALL-E logo and a return-to-cases link. The case name is the main heading, with its purpose in the introduction. Three chapter links follow the opening: Workflow, Example and Try it (Explore for the proprietary Care Call AI project). The Local Atlas page uses Watch the flow, Try the mock and Build your own. Documentation and Dashboard links appear in the footer. Existing evidence anchors lead to the visible example output or mock.
 
 Shared design rules live in [DESIGN.md](DESIGN.md). Project skill routing and implementation checks live in [AGENTS.md](AGENTS.md).
 

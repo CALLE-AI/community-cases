@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Local Atlas saved FAQ</title>
+<link rel="stylesheet" href="product.css">
+<style>
+:root{font-size:22px}html,body{height:auto;overflow:hidden;background:transparent}
+body{padding:0}.ask-sec{display:block;margin:0;padding:0;border:0}.fact{padding:4px 0}.ask-again{display:none}
+.fact-title{font-family:inherit}.faq-a{font-size:1rem;line-height:1.35}.faq-quote{font-size:.7rem;line-height:1.45}
+.fact-src{font-size:12px}.fact-age{font-size:11px}.story-date{font-size:12px;line-height:1.4;margin:8px 0 0 28px;color:var(--ink-soft)}
+@media(max-width:330px){:root{font-size:20px}}
+</style></head><body><div id="saved-faq"></div>
+<script>const SIGNED_IN=()=>true;</script><script src="product.js"></script>
+<script>
+addEventListener('message',e=>{
+ if(e.source!==parent||e.origin!==location.origin||e.data?.type!=='atlas:story-faq')return;
+ const entry=e.data.entry;
+ if(!entry||typeof entry.answer!=='string'||!Number.isFinite(entry.collectedAt))return;
+ document.getElementById('saved-faq').innerHTML='<div class="ask-sec">'+factHTML(entry,0,{name:'Example café'})+'</div>';
+ const date=document.createElement('p');date.className='story-date';
+ date.textContent='Collected '+new Date(entry.collectedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+ document.getElementById('saved-faq').append(date);
+});
+parent.postMessage({type:'atlas:story-ready'},location.origin);
+new ResizeObserver(()=>parent.postMessage({type:'atlas:story-height',height:document.getElementById('saved-faq').scrollHeight},location.origin)).observe(document.getElementById('saved-faq'));
+</script></body></html>

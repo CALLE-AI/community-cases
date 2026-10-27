@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Local Atlas interactive mock</title>
+<link rel="stylesheet" href="product.css">
+<style>
+html,body{height:auto;overflow:hidden;background:transparent;font-size:18px}
+body{padding:2px} .ask-panel{background:var(--surface-2);padding:18px}
+.ask-err{min-height:0}.ask-note{font-size:.72rem}.ask-sec .tag{font-size:.66rem}
+.ask-form button,.ask-chips button,.ask-again{min-height:44px}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}
+</style></head><body><div id="native-panel" class="ask-box"></div>
+<script>const SIGNED_IN=()=>true;</script><script src="product.js"></script>
+<script>
+const panel=document.getElementById('native-panel');
+let current={facts:[],samples:[],pending:null};
+function render(data){
+ current=data;
+ const it={name:'Example café'};
+ const chips=data.samples.filter(s=>!data.facts.some(e=>e.qHash===s.key));
+ panel.innerHTML='<div class="ask-panel">'+factsPaneHTML(it,0,data.facts,chips)+'<div class="ask-err" role="status" hidden></div></div>';
+ if(data.pending){
+  panel.querySelectorAll('button,input').forEach(el=>el.disabled=true);
+  liveNote(panel,'Calling Example café in the simulation…','',false);
+ }
+}
+function ask(id){parent.postMessage({type:'atlas:ask',id},location.origin)}
+panel.addEventListener('click',e=>{
+ const chip=e.target.closest('button[data-t]');
+ if(chip)ask(chip.dataset.t);
+ const recheck=e.target.closest('.ask-again');
+ if(recheck){const sample=current.samples.find(s=>s.text===recheck.dataset.q);if(sample)parent.postMessage({type:'atlas:recheck',id:sample.id},location.origin)}
+});
+panel.addEventListener('submit',e=>{
+ e.preventDefault();const value=e.target.elements.q?.value||'';
+ const sample=current.samples.find(s=>s.text.trim().toLowerCase()===value.trim().toLowerCase());
+ if(sample)ask(sample.id);
+ else{const err=panel.querySelector('.ask-err');err.hidden=false;err.textContent='This mock includes the two sample questions above. Choose one to continue.';}
+});
+addEventListener('message',e=>{if(e.source===parent&&e.origin===location.origin&&e.data.type==='atlas:state')render(e.data.state)});
+new ResizeObserver(()=>parent.postMessage({type:'atlas:height',height:document.body.scrollHeight},location.origin)).observe(document.body);
+parent.postMessage({type:'atlas:ready'},location.origin);
+</script></body></html>
