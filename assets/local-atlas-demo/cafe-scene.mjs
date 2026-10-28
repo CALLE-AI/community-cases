@@ -337,9 +337,11 @@ export function createCafeScene(host, { entry }) {
   const message=surface(2.94,1.48,1280,'#f2d351');message.group.name='place-answer';message.screen.classList.add('atlas-native-message');
   const pinTip=mesh(new THREE.ConeGeometry(.18,.28,4),palette.blue,0,-.88,0,message.group,false);pinTip.rotation.z=Math.PI;
   const copied=surface(1.05,.56,960,'#356aba',.07);copied.group.name='answer-copy';copied.screen.classList.add('atlas-native-copy');
-  const token=`<div class="atlas-native-token">${tickIcon}<p class="atlas-token-title">PARKING</p><p class="atlas-token-subtitle">Shared FAQ</p></div>`;
+  const markUrl = new URL('../call-e-mark.svg', import.meta.url).href;
+  const wordmarkUrl = new URL('../call-e-logo.svg', import.meta.url).href;
+  const token=`<div class="atlas-native-token"><img class="atlas-token-brand" src="${markUrl}" alt=""><p class="atlas-token-title">PARKING</p><p class="atlas-token-subtitle">Shared FAQ</p></div>`;
   copied.screen.innerHTML=token;
-  message.screen.innerHTML=`<div class="atlas-message-content"><p class="atlas-message-label" data-label></p><p class="atlas-message-answer" data-text></p><p class="atlas-message-source" data-source></p></div>${token}`;
+  message.screen.innerHTML=`<div class="atlas-message-content"><img class="atlas-message-brand" src="${wordmarkUrl}" alt=""><p class="atlas-message-label" data-label></p><p class="atlas-message-answer" data-text></p><p class="atlas-message-source" data-source></p></div>${token}`;
   const messageFields={label:message.screen.querySelector('[data-label]'),text:message.screen.querySelector('[data-text]'),source:message.screen.querySelector('[data-source]')};
   function messageScreen(mode) {
     if(message.key===mode)return;message.key=mode;message.screen.dataset.mode=mode;

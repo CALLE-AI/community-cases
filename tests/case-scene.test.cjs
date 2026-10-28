@@ -11,7 +11,7 @@ for (const kind of ['office', 'care', 'studio', 'restaurants']) {
                 const head = new THREE.Box3().setFromObject(actor.head);
                 const phone = new THREE.Box3().setFromObject(actor.phone);
                 assert.equal(head.intersectsBox(phone), false, `phone/head at ${frame / 30}s`);
-                for (const item of story.moving)
+                for (const item of [...story.moving, ...story.callMarks])
                     if (item.visible) {
                         assert.equal(new THREE.Box3().setFromObject(actor.g).intersectsBox(new THREE.Box3().setFromObject(item)), false, `record/person at ${frame / 30}s`);
                         for (const solid of story.solids)
@@ -77,7 +77,7 @@ for (const kind of ['office', 'care', 'studio', 'restaurants']) {
         for (const aspect of [1120 / 480, 269 / 360]) {
             for (let frame = 0; frame <= 750; frame++) {
                 positionCamera(camera, story, kind, frame / 30, aspect);
-                for (const record of story.moving) if (record.visible) {
+                for (const record of [...story.moving, ...story.callMarks]) if (record.visible) {
                     const recordBounds = projectedBox(record, camera, THREE);
                     assert.ok(recordBounds.min.x >= -1 && recordBounds.max.x <= 1 && recordBounds.min.y >= -1 && recordBounds.max.y <= 1, `${record.name} clipped at ${frame / 30}s, aspect ${aspect}`);
                     for (const actor of story.actors) {

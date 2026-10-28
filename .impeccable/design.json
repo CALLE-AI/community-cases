@@ -66,13 +66,6 @@
       "description": "原生折叠控件承载次要材料；预览文字为组件示例。",
       "html": "<details class=\"ds-disclosure\"><summary>Result schema</summary><p>Component example: the complete schema appears in the case guide.</p></details>",
       "css": ".ds-disclosure{padding:0 20px;border-radius:16px;background:var(--color-detail-surface,#ffffff);color:var(--color-detail-ink,#25282d);font-family:system-ui}.ds-disclosure[open]{padding-bottom:20px}.ds-disclosure summary{padding:18px 0;min-height:20px;font-size:16px;font-weight:600;cursor:pointer}.ds-disclosure summary:hover{color:var(--color-detail-link,#245bce)}.ds-disclosure summary:focus-visible{outline:3px solid var(--color-detail-link,#245bce);outline-offset:4px}.ds-disclosure p{font-size:14px;line-height:1.65;color:var(--color-detail-muted,#59636f);margin:0}"
-    },
-    {
-      "name": "3D demo brand",
-      "kind": "custom",
-      "description": "五个原生 3D 演示统一的品牌栏，独占正常文档流，不遮挡场景。",
-      "html": "<div class=\"demo-brand\"><span>Powered by</span><img src=\"./assets/call-e-logo.svg\" width=\"134\" height=\"44\" alt=\"CALL-E\"></div>",
-      "css": ".demo-brand { display:flex; align-items:center; gap:12px; padding:18px 32px; background:#ffe34b; color:#25282d; }\n.demo-brand span { font-size:13px; line-height:1.4; }\n.demo-brand img { display:block; width:110px; height:auto; }\n@media(max-width:760px) { .demo-brand { padding:14px 20px; gap:10px; } .demo-brand img { width:100px; } }\n"
     }
   ],
   "narrative": {

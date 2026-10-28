@@ -73,7 +73,7 @@ reduced.addEventListener('change', () => { if (reduced.matches)
     playback.seek(duration);
 else
     render(playback.snapshot()); });
-import('./scene.mjs?v=bedc0bb142').then(({ createScene }) => { scene = createScene(find('.demo-world'), config); render(playback.snapshot()); }).catch(() => { find('.demo-world').dataset.renderer = 'fallback'; });
+import('./scene.mjs?v=f15d73f0e7').then(({ createScene }) => { scene = createScene(find('.demo-world'), config); render(playback.snapshot()); }).catch(() => { find('.demo-world').dataset.renderer = 'fallback'; });
 if (reduced.matches)
     playback.seek(duration);
 else

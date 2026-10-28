@@ -1,6 +1,6 @@
 import { timing, chapterAt, storyTime } from './timing.mjs?v=151a699909';
 import * as THREE from '../local-atlas-demo/vendor/three.module.min.js';
-import { buildStory } from './stories.mjs?v=07e64311b0';
+import { buildStory } from './stories.mjs?v=9a38cff5c0';
 function cameraPose(story, kind, time, reduced) {
     let pose = story.sample(time);
     if (reduced)
@@ -38,7 +38,14 @@ export function createScene(host, config) {
     renderer.setClearColor(0xeaf2fb, 1);
     host.append(renderer.domElement);
     const scene = new THREE.Scene();
-    const story = buildStory(config.kind);
+    const loader = new THREE.TextureLoader();
+    const textures = Object.fromEntries([['mark', 'call-e-mark.svg'], ['wordmark', 'call-e-logo.svg']].map(([key, file]) => {
+        const texture = loader.load(new URL('../' + file, import.meta.url).href, () => resize());
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+        return [key, texture];
+    }));
+    const story = buildStory(config.kind, textures);
     scene.add(story.root);
     renderer.domElement.setAttribute('role', 'img');
     renderer.domElement.setAttribute('aria-label', story.description);

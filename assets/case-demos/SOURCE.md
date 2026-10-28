@@ -11,3 +11,5 @@ The scene geometry and absolute-time choreography are in `stories.mjs`; `scene.m
 `timing.mjs` maps each narration’s phrase boundaries to the scene choreography and chapter previews. Care Call AI and HungryCall use four individually verified speech segments, padded to their chapter boundaries; their JSON files retain segment parameters and hashes. Narration downloads hold the opening frame, and subsequent playback controls cancel a pending narration start.
 
 Scene checks sample the actual camera projection at 30 fps in desktop and narrow portrait aspect ratios, checking moving records against faces and viewport edges in addition to world-space clearance. RingBack’s accepted-contact card travels above Sam; HungryCall moves the returned match sideways before lowering it past the chef.
+
+Official CALL-E SVGs appear on the active call relay and inside returned records. They are scene-attached surfaces with depth testing, not page overlays. Record branding stays within the original card outline; relay geometry is included in face-clearance, viewport and solid-intersection checks.

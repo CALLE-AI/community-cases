@@ -5,10 +5,10 @@ const ease = x => { x = clamp(x); return x * x * (3 - 2 * x); };
 const between = (t, a, b) => ease((t - a) / (b - a));
 const v = a => new THREE.Vector3(...a);
 // Every pose is a function of absolute time, including reverse seeks and replay.
-export function buildStory(kind) {
+export function buildStory(kind, textures = {}) {
     const root = new THREE.Group();
     const materials = new Map();
-    const actors = [], solids = [], moving = [];
+    const actors = [], solids = [], moving = [], callMarks = [];
     function material(color) {
         if (!materials.has(color))
             materials.set(color, new THREE.MeshStandardMaterial({ color, roughness: .85 }));
@@ -100,6 +100,13 @@ export function buildStory(kind) {
         icon(g, type, 0, 0, .1, 1, tint);
         return g;
     }
+    function brandFace(parent, texture, width, height, x, y, z) {
+        const face = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({ map: texture || null, transparent: true, toneMapped: false, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
+        face.position.set(x, y, z);
+        face.name = 'call-e-brand';
+        parent.add(face);
+        return face;
+    }
     function desk(x, z, w = 2.1) {
         const g = group(root, x, 0, z);
         box(g, w, .14, .9, C.wood, 0, 1.08, 0);
@@ -162,12 +169,31 @@ export function buildStory(kind) {
     }
     function call(from, to, start, end) {
         const a = v(from), b = v(to), mid = a.clone().lerp(b, .5);
-        mid.y = Math.max(a.y, b.y) + (kind === 'restaurants' ? 2.2 : 1.05);
+        mid.y = Math.max(a.y, b.y) + (kind === 'restaurants' ? 3.4 : 1.05);
         const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
-        const wire = mesh(new THREE.TubeGeometry(curve, 50, .018, 8, false), C.blue, root);
+        const wire = group(root);
+        const gap = .3 / (curve.getPoint(.501).distanceTo(curve.getPoint(.499)) / .002);
+        for (const [start, end] of [[0, .5 - gap], [.5 + gap, 1]]) {
+            const segment = new THREE.CatmullRomCurve3(Array.from({ length: 31 }, (_, i) => curve.getPoint(start + (end - start) * i / 30)));
+            mesh(new THREE.TubeGeometry(segment, 30, .018, 8, false), C.blue, wire);
+        }
         const pulse = sphere(root, .09, C.yellow);
-        return { update(time) { const active = time >= start && time < end; wire.visible = pulse.visible = active; if (active)
-                pulse.position.copy(curve.getPoint(((time - start) % 1.3) / 1.3)); } };
+        const hub = group(root);
+        hub.name = 'call-e-connection';
+        hub.position.copy(curve.getPoint(.5));
+        const coin = mesh(new THREE.CylinderGeometry(.25, .25, .035, 32), C.yellow, hub);
+        coin.rotation.x = Math.PI / 2;
+        brandFace(hub, textures.mark, .5, .5, 0, 0, .021);
+        callMarks.push(hub);
+        // Reveal the relay after the camera reaches this call, not across the preceding shot.
+        return { update(time) {
+            const active = time >= start && time < end;
+            wire.visible = active;
+            hub.visible = active && time >= start + .8;
+            const progress = ((time - start) % 1.3) / 1.3;
+            pulse.visible = active && Math.abs(progress - .5) > gap + .03;
+            if (active) pulse.position.copy(curve.getPoint(progress));
+        } };
     }
     function travel(object, from, to, start, end, t, lift = .45) {
         const p = between(t, start, end);
@@ -212,6 +238,7 @@ export function buildStory(kind) {
         moving.push(answer);
         // Front-of-desk route: the answer never crosses a person or the monitor volume.
         const draft = board(-2, 1.5, 1.45, 1.6, .9);
+        brandFace(draft, textures.wordmark, .48, .158, -.43, .31, .121);
         icon(draft, 'mail', -.45, 0, .16, .7);
         icon(draft, 'afternoon', .4, 0, .17, .7);
         const pencil = group(root, -.9, 2.1, 1.5);
@@ -412,6 +439,13 @@ export function buildStory(kind) {
         root.updateMatrixWorld(true);
         return focus(t);
     }
+    for (const record of moving) {
+        // Keep the logo inside the existing card so its tested travel envelope stays unchanged.
+        const illustration = record.children[1];
+        illustration.scale.multiplyScalar(.78);
+        illustration.position.y = -.09;
+        brandFace(record, textures.wordmark, .68, .223, 0, .35, .051);
+    }
     sample(0);
-    return { root, sample, description, actors, solids, moving };
+    return { root, sample, description, actors, solids, moving, callMarks };
 }
