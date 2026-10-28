@@ -10,7 +10,7 @@ Source: https://github.com/omarmiri/Local-atlas/tree/0b1095d1ad02530f3aead96c01e
 
 `cafe-poster.webp` is a crop of the current café scene captured in the browser and resized to 812×400, used when WebGL is unavailable or its context is lost. It is not AI-generated.
 
-`narration-female-sweet.mp3` is English narration generated with ECNU `ecnu-tts`, voice `female_sweet`, on 27 October 2026. Pauses at measured sentence boundaries align it with the 25-second animation. It is not a recording of a phone call. Generation parameters, transcript and hashes are in `narration.json`; API credentials are not distributed with this site. Audio plays only after an explicit narration action, and is fully buffered locally so seeking also works on preview servers without HTTP Range support.
+`narration-female-sweet.mp3` retains its existing filename but now contains English narration generated on 28 October 2026 with Microsoft Edge online TTS, voice `en-US-JennyNeural`, using `edge-tts` 7.3.1 and the upstream Lemo `tts_zh.py` helper bundled with Claude Motion. Five phrases are padded to the existing scene boundaries; speech is not truncated or time-stretched. It is not a recording of a phone call. Generation parameters, transcript, source script and hashes are in `narration.json`. Only the fictional narration text was sent for synthesis; the website serves the resulting local MP3 and does not call a speech service. Audio plays only after an explicit narration action, and is fully buffered locally so seeking also works on preview servers without HTTP Range support.
 
 ## Original Local Atlas component license
 

@@ -1,5 +1,5 @@
-import { timing, chapterAt } from './timing.mjs?v=151a699909';
-import { cases, initialState, advanceMock } from './data.mjs?v=de3dd7f6f9';
+import { timing, chapterAt } from './timing.mjs?v=241e38dd42';
+import { cases, initialState, advanceMock } from './data.mjs?v=b94ec03a65';
 import { createPlayback } from '../local-atlas-demo/playback.mjs';
 const host = document.querySelector('[data-case-demo]'), id = host.dataset.caseDemo, config = cases[id];
 const find = s => host.querySelector(s), audio = find('audio'), reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -73,7 +73,7 @@ reduced.addEventListener('change', () => { if (reduced.matches)
     playback.seek(duration);
 else
     render(playback.snapshot()); });
-import('./scene.mjs?v=f15d73f0e7').then(({ createScene }) => { scene = createScene(find('.demo-world'), config); render(playback.snapshot()); }).catch(() => { find('.demo-world').dataset.renderer = 'fallback'; });
+import('./scene.mjs?v=4a472211ec').then(({ createScene }) => { scene = createScene(find('.demo-world'), config); render(playback.snapshot()); }).catch(() => { find('.demo-world').dataset.renderer = 'fallback'; });
 if (reduced.matches)
     playback.seek(duration);
 else

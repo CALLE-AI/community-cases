@@ -1,27 +1,56 @@
 {
-  "provider": "ECNU",
-  "model": "ecnu-tts",
-  "voice": "female_sweet",
-  "speed": 0.7,
-  "generatedDate": "2026-10-27",
-  "sourceAudioSha256": "4a323eb93d60e3d96f643ef73057529cdd8d1a5c052c7b7236362337abc34fc5",
-  "sourceDurationSeconds": 21.696,
-  "targetDurationSeconds": 25,
-  "sentenceCutsSeconds": [
-    2.53,
-    6.46,
-    10.38,
-    18.48
+  "provider": "Microsoft Edge online TTS",
+  "client": "edge-tts",
+  "clientVersion": "7.3.1",
+  "voice": "en-US-JennyNeural",
+  "rate": "-15%",
+  "pitch": "+0Hz",
+  "input": "Need to know if there's parking? Local Atlas asks the café using Call E. The answer is saved with the staff's words and a date. When the next visitor asks the same question, they get the saved answer while it's still valid. Ask once. Share the answer.",
+  "response_format": "mp3",
+  "duration": 25,
+  "encodedDuration": 25.0,
+  "synthetic": true,
+  "generatedAt": "2026-10-28T08:09:28.348157+00:00",
+  "sha256": "c04d17843aeb140976e75a04c72f7cb2ea304ab4edd2284bce8f221586c40bb4",
+  "segments": [
+    {
+      "input": "Need to know if there's parking?",
+      "start": 0,
+      "end": 3,
+      "speechDuration": 1.620833,
+      "sourceSha256": "371cbccea3efaa1c09f42157e541e02d2c24cee594aa6e02afe2af4f32e5c9b9"
+    },
+    {
+      "input": "Local Atlas asks the café using Call E.",
+      "start": 3,
+      "end": 8,
+      "speechDuration": 2.922083,
+      "sourceSha256": "ea1852ba8aa8a017b04e4b129524740895ad537fa137bd34c00711e85b3a1a28"
+    },
+    {
+      "input": "The answer is saved with the staff's words and a date.",
+      "start": 8,
+      "end": 13,
+      "speechDuration": 3.057,
+      "sourceSha256": "5fabad11ca56e544217b6cda63c578eb15c9a72957f93a4f71944230ad6c39c1"
+    },
+    {
+      "input": "When the next visitor asks the same question, they get the saved answer while it's still valid.",
+      "start": 13,
+      "end": 21.75,
+      "speechDuration": 5.642167,
+      "sourceSha256": "38e4cfba08a2c6ae4e925bb289ebe18a39407ca305ce04773d0f7c5eebbc0093"
+    },
+    {
+      "input": "Ask once. Share the answer.",
+      "start": 21.75,
+      "end": 25,
+      "speechDuration": 3.133917,
+      "sourceSha256": "18d0bd40f8bdcfec541e80767e8b0adf1de2c9aeb752f9ec220407428cd20bee"
+    }
   ],
-  "sceneStartsSeconds": [
-    0,
-    3,
-    8,
-    13,
-    21.75
-  ],
-  "editing": "Pauses inserted at measured silence boundaries; loudness normalized to -18 LUFS with -1.5 dBTP target. No speech was time-stretched.",
-  "audioSha256": "6f2721845135eb2f6b951411b44d48b0470d15fbdef06ed2ed14a1168c2343f6",
-  "transcript": "Need to know if there's parking? Local Atlas asks the café using Call E. The answer is saved with the staff's words and a date. When the next visitor asks the same question, they get the saved answer while it's still valid. Ask once. Share the answer.",
-  "documentation": "https://developer.ecnu.edu.cn/vitepress/llm/api/audio.html"
+  "generatorSource": "Hype-yolo/claude-motion-skill@607fe9801529bb493b1968cd967a3e8a959d42c1",
+  "generatorPath": "skills/claude-motion/assets/cases/lemo-opuscar/core/tts/tts_zh.py",
+  "generatorSha256": "9af09a4ffd6fe57975d6863a9e33600e5d4fd3ff51997cc6d5e671b1f7645ef6",
+  "timing": "Independent phrases padded to scene cues. No speech truncated or time-stretched. Normalized to -18 LUFS with -1.5 dBTP target."
 }

@@ -316,53 +316,6 @@ export function buildStory(kind, textures = {}) {
         focus = t => t < 5 ? [-2.2, 1.3, .3, 6] : t < 9 ? [1.7, 1.5, .3, 4.7] : t < 18 ? [-.6, 1.4, .7, 8.4] : [-1.8, 1.4, 1, 6.4];
         description = 'Two calls produce a broom request and a grocery request. Each enters its own slot on the same record; the coordinator receives both together.';
     }
-    else if (kind === 'studio') {
-        platform(9, 5.5);
-        // Salon and diary share a single space; the waiting list is a visible queue of people.
-        cylinder(root, .55, .12, C.ink, -3, .12, -.8);
-        cylinder(root, .08, .6, C.ink, -3, .45, -.8);
-        box(root, .95, .2, .8, C.blue, -3, .8, -.8);
-        box(root, .95, .85, .17, C.blue, -3, 1.3, -1.2);
-        for (const x of [-3.55, -2.45])
-            box(root, .12, .15, .8, C.wood, x, 1.02, -.8);
-        const calendar = board(-.6, 2, -.9, 2.4, 2);
-        for (const x of [-1.35, -.6, .15])
-            cylinder(root, .055, .2, C.ink, x, 3.05, -.9);
-        for (let i = 0; i < 6; i++)
-            box(calendar, .61, .56, .06, i === 4 ? C.yellow : 0xd4dfd7, -.75 + (i % 3) * .75, .4 - Math.floor(i / 3) * .75, .15);
-        const old = tile('person', -.6, 1.65, -.66);
-        old.scale.setScalar(.5);
-        const queue = [person(1.3, 1.1, C.blue), person(2.5, 1.1, C.green), person(3.7, 1.1, 0x9a9d96)];
-        const no = check(root, 1.3, 2.2, 1.12, false), yes = check(root, 2.5, 2.2, 1.12, true), stop = icon(root, 'lock', 3.7, 2.2, 1.12, .6);
-        const first = call([-.6, 2.8, -.5], [.9, 1.8, 1.2], 6.25, 9.5), next = call([-.6, 2.8, -.5], [2.1, 1.8, 1.2], 10, 15.5);
-        const booking = tile('person', 2.5, 3.05, 1.5, root, C.green);
-        booking.scale.setScalar(.5);
-        booking.name = 'accepted-contact';
-        moving.push(booking);
-        const booked = check(calendar, .23, -.35, .27, true, .65);
-        update = t => {
-            old.visible = t < 4;
-            old.position.set(-.6, 1.65 + between(t, 1, 4) * 1.8, -.66);
-            old.scale.setScalar(.5 * (1 - between(t, 3, 4)));
-            queue[0].pose(between(t, 6.25, 7) - between(t, 9, 10));
-            queue[1].pose(between(t, 10, 11) - between(t, 15.5, 16.5));
-            queue[2].pose(0);
-            first.update(t);
-            next.update(t);
-            no.visible = t >= 9;
-            yes.visible = t >= 14;
-            stop.visible = t >= 15.5;
-            booking.visible = t >= 15.5;
-            // Raise in front of the queue, then approach the empty diary slot from above.
-            if (t < 20)
-                travel(booking, [2.5, 3.05, 1.5], [-.6, 3.45, .2], 16.5, 20, t, .3);
-            else
-                travel(booking, [-.6, 3.45, .2], [-.6, 1.65, -.62], 20, 23, t, 0);
-            booked.visible = t >= 23;
-        };
-        focus = t => t < 6.25 ? [-1.3, 1.6, -.4, 5.5] : t < 10 ? [1.3, 1.5, 1, 4.4] : t < 16.5 ? [2.5, 1.7, 1, 4.6] : t < 20 ? [2.5 - 3.1 * between(t, 16.5, 20), 2, .7, 5.7] : [-.2, 1.9, .2, 5.7];
-        description = 'A diary slot empties. The first waiting contact declines, the second accepts, and the third stays uncalled. The accepted person is then added to the open slot.';
-    }
     else if (kind === 'restaurants') {
         platform(12, 6.8, 0, .5);
         const xs = [-4.5, -1.5, 1.5, 4.5], colors = [0xb67858, C.yellow, C.green, C.blue];

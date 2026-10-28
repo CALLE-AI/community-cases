@@ -1,12 +1,12 @@
 # Four community demonstrations
 
 ## Direction contract
-THESIS: Make each product's decision and resulting artifact visible in a native spatial scene, then let the reader operate that decision in a mock.
+THESIS: Make each product's decision and resulting artifact visible and operable inside a native spatial scene. RingBack is the accepted baseline for subsequent revisions; the other cases retain their existing player and separate mock until revised.
 OWN-WORLD: Inherit Local Atlas's matte miniature, warm white page, yellow/blue accents, system lettering and native HTML labels. Existing static site, vendored Three.js and playback controller.
 STORY: Clarify an email through an approved question and reviewed draft; combine care requests into a reviewed handoff; stop a waitlist after acceptance and save only an available slot; stop restaurant calls at a delivery/budget match.
-FIRST VIEWPORT: Existing identity and author links, then full-width native scene with reserved readable caption area and chapter controls; interactive mock immediately below. Preserve original source and evidence notes.
+FIRST VIEWPORT: Existing identity and author links, then a full-width native scene with readable captions and compact controls. RingBack combines direct choices with idle automatic progression, with no separate player or mock. Preserve original source and evidence notes.
 FORM: Precisely requested extension of approved Local Atlas pattern; no new visual-world selection. Distinct physical environments and actions per case. Fictional data, no calls or external sends. Care Call AI uses independently authored concept code, never copied proprietary assets.
-FINISH: Browser inspection at desktop and mobile, state-model tests, female_sweet audio verification, fresh finish review and narrow documentation reconciliation before deployment.
+FINISH: Follow DESIGN.md interaction-scene acceptance criteria: desktop/narrow browser inspection, state and motion tests, matched frame-time measurement and source/claim checks. Narrated pages use Microsoft Jenny audio and retain explicit playback controls. Record untested devices before deployment.
 
 ## Motion plan
 Focal moments: an unresolved email choice is confirmed by phone and returns into an unsent draft; cleaning and grocery requests from two calls occupy separate slots in one handoff; a visible waiting queue declines/accepts before the accepted contact fills the diary; restaurant calls test price and delivery, returning only a match record while the fourth phone stays down.

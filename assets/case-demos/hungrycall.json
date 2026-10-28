@@ -1,65 +1,56 @@
 {
-  "model": "ecnu-tts",
-  "voice": "female_sweet",
+  "provider": "Microsoft Edge online TTS",
+  "client": "edge-tts",
+  "clientVersion": "7.3.1",
+  "voice": "en-US-JennyNeural",
+  "rate": "-15%",
+  "pitch": "+0Hz",
   "input": "Set a budget and require delivery. One restaurant costs too much. The next cannot deliver. The third restaurant meets both conditions. Keep the match and stop calling without placing an order.",
   "response_format": "mp3",
   "duration": 25,
+  "encodedDuration": 25.0,
   "synthetic": true,
-  "generatedAt": "2026-10-28T06:00:14.925276+00:00",
-  "sha256": "398f6c221d80e5544ade3a8b16308ef6a29c456b1b9b4831527da0268aec3013",
+  "generatedAt": "2026-10-28T08:09:32.556794+00:00",
+  "sha256": "7fc9c28d80a57f59b77fe9bfdc8161d7203a4d2391b9e1d976fd3f9dd6d745a1",
   "segments": [
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
       "input": "Set a budget and require delivery.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T05:58:00.857155+00:00",
-      "duration": 3.024,
-      "sha256": "57542f075993ac6e726f83de97251df461f869fa902770f1d848e359bdaf7be6",
       "start": 0,
       "end": 5,
-      "tempo": 0.85
+      "speechDuration": 2.241958,
+      "sourceSha256": "193b7cfb67eef228d9a5ccf99e9213f343b183cc6988bbffbf875ffc8da4886f"
     },
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
-      "input": "One restaurant costs too much. The next cannot deliver.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T05:58:02.390808+00:00",
-      "duration": 4.008,
-      "sha256": "e8e28031c3a42cab6e3187ba85cb0657079b51791e3596a7f47e0cca18cfcad1",
+      "input": "One restaurant costs too much.",
       "start": 5,
-      "end": 12,
-      "tempo": 0.85
+      "end": 8,
+      "speechDuration": 2.218208,
+      "sourceSha256": "cf366c4b96c30d76e30970a5431bfac88a0363c3fae2423d2439d7d6581070b6"
     },
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
+      "input": "The next cannot deliver.",
+      "start": 8,
+      "end": 12,
+      "speechDuration": 1.662,
+      "sourceSha256": "3ff94368d72f9820d6b7c422ba1e0065ce1b1b116aa94350869cd16d8484732f"
+    },
+    {
       "input": "The third restaurant meets both conditions.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T05:58:03.652477+00:00",
-      "duration": 2.784,
-      "sha256": "becf5373c4a40d471e855297ff004ada1ea098dc6ab999a6926a183354dbc4be",
       "start": 12,
       "end": 18,
-      "tempo": 0.85
+      "speechDuration": 2.627125,
+      "sourceSha256": "25393ea9e1ca981da08e808d8644c7ed12c38e5291bcd95a028261415663ceeb"
     },
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
       "input": "Keep the match and stop calling without placing an order.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T06:00:14.925276+00:00",
-      "duration": 3.216,
-      "sha256": "cd82d664f3644d35ced191563df50361b05057d08402ecc6269dd771b600f96b",
       "start": 18,
       "end": 25,
-      "tempo": 0.85
+      "speechDuration": 3.193,
+      "sourceSha256": "2db11ff62ccb78730b8bfb1512209234a675c1f981497a7004e277cf7218ebbd"
     }
   ],
-  "timing": "Short phrases independently synthesized and checked with local speech recognition. Tempo 0.85; silence padded to chapter boundaries, no spoken words truncated."
+  "generatorSource": "Hype-yolo/claude-motion-skill@607fe9801529bb493b1968cd967a3e8a959d42c1",
+  "generatorPath": "skills/claude-motion/assets/cases/lemo-opuscar/core/tts/tts_zh.py",
+  "generatorSha256": "9af09a4ffd6fe57975d6863a9e33600e5d4fd3ff51997cc6d5e671b1f7645ef6",
+  "timing": "Independent phrases padded to scene cues. No speech truncated or time-stretched. Normalized to -18 LUFS with -1.5 dBTP target."
 }

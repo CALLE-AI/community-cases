@@ -1,13 +1,56 @@
 {
-  "model": "ecnu-tts",
-  "voice": "female_sweet",
+  "provider": "Microsoft Edge online TTS",
+  "client": "edge-tts",
+  "clientVersion": "7.3.1",
+  "voice": "en-US-JennyNeural",
+  "rate": "-15%",
+  "pitch": "+0Hz",
   "input": "An email says, that sounds fine. But morning or afternoon is still unanswered. Review the question and destination, then approve one call. The person chooses afternoon. Their words support a reply draft. Review the draft and recipient yourself before sending.",
   "response_format": "mp3",
-  "speed": 0.85,
-  "generatedAt": "2026-10-28T05:17:46.399006+00:00",
-  "sha256": "346bc411008afedcd5f05cebd50684cd62fa0ec946934a21edd257150bd9e627",
   "duration": 25,
+  "encodedDuration": 25.0,
   "synthetic": true,
-  "originalSha256": "ea10ecb300ce0071b2df5e1d59fd2da8c7dee9660919c6a57a9a746a7233b407",
-  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+  "generatedAt": "2026-10-28T08:09:29.773145+00:00",
+  "sha256": "35722239ea10db03d5cea2addd22af581f83c5e771b162bd8ea0147e0e1fd5d7",
+  "segments": [
+    {
+      "input": "An email says, that sounds fine. But morning or afternoon is still unanswered.",
+      "start": 0,
+      "end": 8,
+      "speechDuration": 6.248875,
+      "sourceSha256": "d9ea8c7e30fea379e8caeec44c2a85afd8833567148415b483a11f97cd6596c6"
+    },
+    {
+      "input": "Review the question and destination, then approve one call.",
+      "start": 8,
+      "end": 13,
+      "speechDuration": 3.801958,
+      "sourceSha256": "c7000f257b4506a5b8e7e5aea67f917de9bd94371cca452c6cbc9d5e1f02c09d"
+    },
+    {
+      "input": "The person chooses afternoon.",
+      "start": 13,
+      "end": 15,
+      "speechDuration": 1.845125,
+      "sourceSha256": "61f93eec486baba6a94d6f84ea196c5262a453a63b5a08d209e907d8fece6c2d"
+    },
+    {
+      "input": "Their words support a reply draft.",
+      "start": 15,
+      "end": 19.3,
+      "speechDuration": 2.117708,
+      "sourceSha256": "a4b2f47fd18f59d859bcf929cc81c28f331719a65ddb20714004a817b49b64da"
+    },
+    {
+      "input": "Review the draft and recipient yourself before sending.",
+      "start": 19.3,
+      "end": 25,
+      "speechDuration": 3.315,
+      "sourceSha256": "d38f4f4336fc6fd238adf4d0636842619ba229cfa0a56a008efb633613729278"
+    }
+  ],
+  "generatorSource": "Hype-yolo/claude-motion-skill@607fe9801529bb493b1968cd967a3e8a959d42c1",
+  "generatorPath": "skills/claude-motion/assets/cases/lemo-opuscar/core/tts/tts_zh.py",
+  "generatorSha256": "9af09a4ffd6fe57975d6863a9e33600e5d4fd3ff51997cc6d5e671b1f7645ef6",
+  "timing": "Independent phrases padded to scene cues. No speech truncated or time-stretched. Normalized to -18 LUFS with -1.5 dBTP target."
 }

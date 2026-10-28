@@ -1,65 +1,49 @@
 {
-  "model": "ecnu-tts",
-  "voice": "female_sweet",
+  "provider": "Microsoft Edge online TTS",
+  "client": "edge-tts",
+  "clientVersion": "7.3.1",
+  "voice": "en-US-JennyNeural",
+  "rate": "-15%",
+  "pitch": "+0Hz",
   "input": "Approve a support check-in. First, Morgan asks for help with cleaning. A later call adds groceries. Keep both requests. Review both requests together before arranging any help.",
   "response_format": "mp3",
   "duration": 25,
+  "encodedDuration": 25.0,
   "synthetic": true,
-  "generatedAt": "2026-10-28T06:00:13.268346+00:00",
-  "sha256": "f940f2640ae5b28d7cb9542ce5869bc8868bd9139eb18995c38d81fb3ab43e7d",
+  "generatedAt": "2026-10-28T08:09:31.157864+00:00",
+  "sha256": "6b477933394fff9d549d9169a4313d3b2e866d8b604f8bec5ec495c5edd9b278",
   "segments": [
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
       "input": "Approve a support check-in.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T05:57:54.705950+00:00",
-      "duration": 1.704,
-      "sha256": "1807da01474bacfd081495e32cc42fec33112f1fc7f30642aa3805f5f3f8b98a",
       "start": 0,
       "end": 5,
-      "tempo": 0.85
+      "speechDuration": 1.648333,
+      "sourceSha256": "5dd155df8d0bc80b6b58febffc2c867691c4d8f431582453f7d8a07fc2095c14"
     },
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
       "input": "First, Morgan asks for help with cleaning.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T05:57:56.116164+00:00",
-      "duration": 3.168,
-      "sha256": "b4e2cf45536e8fa48d6eced141f748b95946fd45a33641ba37d4ae2a904ba1d3",
       "start": 5,
       "end": 11,
-      "tempo": 0.85
+      "speechDuration": 2.820917,
+      "sourceSha256": "beff73819f254a239928aee12686a6712137edabdbd95dc40ec91dab6d0b3dec"
     },
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
       "input": "A later call adds groceries. Keep both requests.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T05:57:57.584511+00:00",
-      "duration": 3.744,
-      "sha256": "7a0c8a9376742a7fa079a58fdb2bd0a7615509d3f39d54c743058b78281c2664",
       "start": 11,
       "end": 17,
-      "tempo": 0.85
+      "speechDuration": 4.632708,
+      "sourceSha256": "5e027210ef4bea82dc5956bcdb92ccecc572a63a9ffc0ebc78a7d523c4f5343c"
     },
     {
-      "model": "ecnu-tts",
-      "voice": "female_sweet",
       "input": "Review both requests together before arranging any help.",
-      "response_format": "mp3",
-      "speed": 1,
-      "generatedAt": "2026-10-28T06:00:13.268346+00:00",
-      "duration": 3.648,
-      "sha256": "7fb73bccb7327b419423c517f6f6798db4374394bfa36824f8e83a6ca2cb3f47",
       "start": 17,
       "end": 25,
-      "tempo": 0.85
+      "speechDuration": 3.527625,
+      "sourceSha256": "5f1427956bbaf17893846be834cd59a4743a771ef9d87087c335c133f416cb59"
     }
   ],
-  "timing": "Short phrases independently synthesized and checked with local speech recognition. Tempo 0.85; silence padded to chapter boundaries, no spoken words truncated."
+  "generatorSource": "Hype-yolo/claude-motion-skill@607fe9801529bb493b1968cd967a3e8a959d42c1",
+  "generatorPath": "skills/claude-motion/assets/cases/lemo-opuscar/core/tts/tts_zh.py",
+  "generatorSha256": "9af09a4ffd6fe57975d6863a9e33600e5d4fd3ff51997cc6d5e671b1f7645ef6",
+  "timing": "Independent phrases padded to scene cues. No speech truncated or time-stretched. Normalized to -18 LUFS with -1.5 dBTP target."
 }

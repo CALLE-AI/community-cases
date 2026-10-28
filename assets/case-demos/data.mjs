@@ -15,14 +15,6 @@ export const cases = {
     labels:['Coordinator','Check-in','Team handoff'],
     mockIntro:'Approve a fictional check-in, preserve same-day requests and review the handoff. Independently authored workflow simulation; no proprietary application code.'
   },
-  ringback: {
-    name:'RingBack', kind:'studio', chapters:['Opening','Offer','Accept','Book'],
-    titles:['An appointment opens up.','Offer the slot in order.','One clear acceptance.','Check, then fill the diary.'],
-    lines:['A fictional studio has a Thursday opening at 2:00 PM.','Alex declines. The next eligible contact is Sam.','Sam accepts; Taylor is not called for this opening.','Confirm the opening is still available before saving to the local diary.'],
-    narration:'A Thursday appointment opens up. RingBack offers it to the waiting list, one person at a time. Alex declines. Sam accepts, so Taylor is not called. Check that the slot is still available, then save the replacement in the local diary.',
-    labels:['Open appointment','Waiting list','Local diary'],
-    mockIntro:'Offer one opening in order. Try acceptance, an unclear answer, or a slot that becomes unavailable before saving.'
-  },
   hungrycall: {
     name:'HungryCall', kind:'restaurants', chapters:['Brief','Check','Match','Stop'],
     titles:['Delivery, within your budget.','Check restaurants in order.','A restaurant meets the conditions.','Stop with one match.'],
@@ -36,7 +28,6 @@ export const restaurants=[{name:'Trattoria',price:32,delivery:true},{name:'Burge
 export function restaurantDecision(restaurant,budget){return !restaurant.delivery?'No delivery':restaurant.price>budget?'Over budget':'Match';}
 export function draftFrom(answer){return answer==='afternoon'?'Thanks for confirming the afternoon visit.':null;}
 export function addNeed(needs,need){return needs.includes(need)?needs:[...needs,need];}
-export function canBook(answer,available){return answer==='accepted'&&available;}
 export function initialState(){return {step:0,calls:0,history:[],needs:[],done:false,title:'Ready to explore.',body:'Review the sample settings, then start the simulation.',action:'Start simulation'};}
 export function advanceMock(id,state,settings={}){
   if(state.done)return state;
@@ -52,12 +43,6 @@ export function advanceMock(id,state,settings={}){
     if(s.step===2){s.calls=1;s.needs=addNeed(s.needs,'Cleaning');s.history.push('First check-in: “Could someone help with cleaning?”');return result('Cleaning request recorded.',s.history.at(-1),'Add same-day callback');}
     if(s.step===3){s.calls=2;if(settings.callback==='groceries'){s.needs=addNeed(s.needs,'Groceries');s.history.push('Callback: “I also need groceries.”');}else{s.history.push('Callback unclear: coordinator review required.');}return result('Earlier needs stay on the list.',s.history.at(-1),'Review handoff');}
     return result('Handoff ready for coordinator review.',s.needs.join(' + ')+'. '+(settings.callback==='unclear'?'The unclear callback is flagged for follow-up. ':'')+'Support has not been arranged or delivered by this mock.','Completed',true);
-  }
-  if(id==='ringback'){
-    if(s.step===1)return result('Thursday · 2:00 PM.','One fictional opening. Eligible waiting list: Alex, Sam, Taylor.','Approve and offer to Alex');
-    if(s.step===2){s.calls=1;s.history.push('Alex declined.');return result('Alex cannot take this time.','Continue to Sam; no simultaneous offers.','Offer to Sam');}
-    if(s.step===3){s.calls=2;s.history.push(settings.answer==='accepted'?'Sam accepted. Taylor not called.':'Sam’s answer is unclear. Pause for review.');return result(settings.answer==='accepted'?'Sam accepts the opening.':'Human review needed.',s.history.at(-1),settings.answer==='accepted'?'Check availability and save':'Completed',settings.answer!=='accepted');}
-    return result(canBook(settings.answer,settings.available)?'Saved in the local diary.':'The slot is no longer available.',canBook(settings.answer,settings.available)?'Thursday · 2:00 PM → Sam. Two simulated calls. Taylor remains uncalled.':'No booking saved. A coordinator must resolve the conflict. Taylor remains uncalled.','Completed',true);
   }
   if(id==='hungrycall'){
     if(!Number.isFinite(settings.budget)||settings.budget<1||settings.budget>100)return {...state,title:'Enter a budget from $1 to $100.',body:'Use a valid maximum total price before starting.'};

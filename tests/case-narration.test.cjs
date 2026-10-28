@@ -14,7 +14,7 @@ async function page() {
   };
   const audio = {src:'narration.mp3',currentTime:0,paused:true,plays:0,load(){},pause(){this.paused=true;},play(){this.paused=false;this.plays++;return Promise.resolve();}};
   elements.set('audio',audio);
-  const host={dataset:{caseDemo:'ringback',duration:'25'},querySelector:find,querySelectorAll:s=>s==='.demo-chapters button'?chapters:[]};
+  const host={dataset:{caseDemo:'conversation-clarify',duration:'25'},querySelector:find,querySelectorAll:s=>s==='.demo-chapters button'?chapters:[]};
   let receive;
   const context={...data,...timing,createPlayback,document:{hidden:false,querySelector:()=>host,addEventListener(){},createElement:()=>({})},matchMedia:()=>({matches:false,addEventListener(){}}),requestAnimationFrame:()=>1,cancelAnimationFrame(){},URL:{createObjectURL:()=> 'blob:sample'},fetch:()=>new Promise(resolve=>{receive=resolve;}),IntersectionObserver:class{constructor(cb){this.cb=cb;}observe(){this.cb([{isIntersecting:true}]);}}};
   let code=fs.readFileSync(require.resolve('../assets/case-demos/demo.mjs'),'utf8').replace(/^import .*;\n/gm,'');

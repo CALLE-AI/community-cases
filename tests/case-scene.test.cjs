@@ -1,7 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const load = () => Promise.all([import('../assets/case-demos/stories.mjs'), import('../assets/local-atlas-demo/vendor/three.module.min.js')]);
-for (const kind of ['office', 'care', 'studio', 'restaurants']) {
+for (const kind of ['office', 'care', 'restaurants']) {
     test(kind + ': full timeline keeps phones outside heads and moving records clear of people', async () => {
         const [{ buildStory }, THREE] = await load();
         const story = buildStory(kind);
@@ -69,7 +69,7 @@ function projectedBox(object, camera, THREE) {
     return result;
 }
 
-for (const kind of ['office', 'care', 'studio', 'restaurants']) {
+for (const kind of ['office', 'care', 'restaurants']) {
     test(kind + ': moving records never mask faces through camera transitions', async () => {
         const [{ buildStory }, THREE] = await load();
         const { positionCamera } = await import('../assets/case-demos/scene.mjs');
