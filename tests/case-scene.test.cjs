@@ -57,3 +57,36 @@ test('care retains both requests through handoff; the untouched restaurant phone
         assert.ok(food.actors[3].phone.position.equals(untouched));
     }
 });
+
+function projectedBox(object, camera, THREE) {
+    const bounds = new THREE.Box3().setFromObject(object), result = new THREE.Box2();
+    for (const x of [bounds.min.x, bounds.max.x])
+        for (const y of [bounds.min.y, bounds.max.y])
+            for (const z of [bounds.min.z, bounds.max.z]) {
+                const point = new THREE.Vector3(x, y, z).project(camera);
+                result.expandByPoint(new THREE.Vector2(point.x, point.y));
+            }
+    return result;
+}
+
+for (const kind of ['office', 'care', 'studio', 'restaurants']) {
+    test(kind + ': moving records never mask faces through camera transitions', async () => {
+        const [{ buildStory }, THREE] = await load();
+        const { positionCamera } = await import('../assets/case-demos/scene.mjs');
+        const story = buildStory(kind), camera = new THREE.OrthographicCamera(-8, 8, 5, -5, .1, 100);
+        for (const aspect of [1120 / 480, 269 / 360]) {
+            for (let frame = 0; frame <= 750; frame++) {
+                positionCamera(camera, story, kind, frame / 30, aspect);
+                for (const record of story.moving) if (record.visible) {
+                    const recordBounds = projectedBox(record, camera, THREE);
+                    assert.ok(recordBounds.min.x >= -1 && recordBounds.max.x <= 1 && recordBounds.min.y >= -1 && recordBounds.max.y <= 1, `${record.name} clipped at ${frame / 30}s, aspect ${aspect}`);
+                    for (const actor of story.actors) {
+                        const overlap = recordBounds.clone().intersect(projectedBox(actor.head, camera, THREE));
+                        const size = overlap.getSize(new THREE.Vector2());
+                        assert.ok(size.x <= .005 || size.y <= .005, `${record.name} masks a face at ${frame / 30}s, aspect ${aspect}`);
+                    }
+                }
+            }
+        }
+    });
+}

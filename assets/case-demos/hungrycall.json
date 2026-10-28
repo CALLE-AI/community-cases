@@ -1,13 +1,65 @@
 {
   "model": "ecnu-tts",
   "voice": "female_sweet",
-  "input": "Set a delivery requirement and a maximum total price. HungryCall checks restaurants in order. Trattoria is over budget. Burger House cannot deliver. Asia Wok meets the conditions. Keep the match and stop the sequence. The remaining restaurant is not called. This demonstration places no order.",
+  "input": "Set a budget and require delivery. One restaurant costs too much. The next cannot deliver. The third restaurant meets both conditions. Keep the match and stop calling without placing an order.",
   "response_format": "mp3",
-  "speed": 0.85,
-  "generatedAt": "2026-10-28T05:17:59.932285+00:00",
-  "sha256": "f7e7444d705904274fa89fada4e5acf83d13f880d27e8ac5c0552202e5361f93",
   "duration": 25,
   "synthetic": true,
-  "originalSha256": "10d0565d0ba598874e1b73ee8e5569fa375759a414cdb5dd136c7a26188d7b78",
-  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+  "generatedAt": "2026-10-28T06:00:14.925276+00:00",
+  "sha256": "398f6c221d80e5544ade3a8b16308ef6a29c456b1b9b4831527da0268aec3013",
+  "segments": [
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "Set a budget and require delivery.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T05:58:00.857155+00:00",
+      "duration": 3.024,
+      "sha256": "57542f075993ac6e726f83de97251df461f869fa902770f1d848e359bdaf7be6",
+      "start": 0,
+      "end": 5,
+      "tempo": 0.85
+    },
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "One restaurant costs too much. The next cannot deliver.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T05:58:02.390808+00:00",
+      "duration": 4.008,
+      "sha256": "e8e28031c3a42cab6e3187ba85cb0657079b51791e3596a7f47e0cca18cfcad1",
+      "start": 5,
+      "end": 12,
+      "tempo": 0.85
+    },
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "The third restaurant meets both conditions.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T05:58:03.652477+00:00",
+      "duration": 2.784,
+      "sha256": "becf5373c4a40d471e855297ff004ada1ea098dc6ab999a6926a183354dbc4be",
+      "start": 12,
+      "end": 18,
+      "tempo": 0.85
+    },
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "Keep the match and stop calling without placing an order.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T06:00:14.925276+00:00",
+      "duration": 3.216,
+      "sha256": "cd82d664f3644d35ced191563df50361b05057d08402ecc6269dd771b600f96b",
+      "start": 18,
+      "end": 25,
+      "tempo": 0.85
+    }
+  ],
+  "timing": "Short phrases independently synthesized and checked with local speech recognition. Tempo 0.85; silence padded to chapter boundaries, no spoken words truncated."
 }

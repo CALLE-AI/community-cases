@@ -1,13 +1,65 @@
 {
   "model": "ecnu-tts",
   "voice": "female_sweet",
-  "input": "A coordinator approves an everyday support check-in. The person asks for help with cleaning. Later, a callback adds groceries. Keep both requests and their history together. The coordinator reviews one handoff for the team. Recording a request does not mean that help has been delivered.",
+  "input": "Approve a support check-in. First, Morgan asks for help with cleaning. A later call adds groceries. Keep both requests. Review both requests together before arranging any help.",
   "response_format": "mp3",
-  "speed": 0.85,
-  "generatedAt": "2026-10-28T05:17:50.911162+00:00",
-  "sha256": "b9168b3f7b981c035de7974b1b3a372e041230a3c64f1712f71a0ca809109021",
   "duration": 25,
   "synthetic": true,
-  "originalSha256": "0fb9aab391ada138010c907058d558b59462d1c03d53c877d351bc198567b74c",
-  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+  "generatedAt": "2026-10-28T06:00:13.268346+00:00",
+  "sha256": "f940f2640ae5b28d7cb9542ce5869bc8868bd9139eb18995c38d81fb3ab43e7d",
+  "segments": [
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "Approve a support check-in.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T05:57:54.705950+00:00",
+      "duration": 1.704,
+      "sha256": "1807da01474bacfd081495e32cc42fec33112f1fc7f30642aa3805f5f3f8b98a",
+      "start": 0,
+      "end": 5,
+      "tempo": 0.85
+    },
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "First, Morgan asks for help with cleaning.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T05:57:56.116164+00:00",
+      "duration": 3.168,
+      "sha256": "b4e2cf45536e8fa48d6eced141f748b95946fd45a33641ba37d4ae2a904ba1d3",
+      "start": 5,
+      "end": 11,
+      "tempo": 0.85
+    },
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "A later call adds groceries. Keep both requests.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T05:57:57.584511+00:00",
+      "duration": 3.744,
+      "sha256": "7a0c8a9376742a7fa079a58fdb2bd0a7615509d3f39d54c743058b78281c2664",
+      "start": 11,
+      "end": 17,
+      "tempo": 0.85
+    },
+    {
+      "model": "ecnu-tts",
+      "voice": "female_sweet",
+      "input": "Review both requests together before arranging any help.",
+      "response_format": "mp3",
+      "speed": 1,
+      "generatedAt": "2026-10-28T06:00:13.268346+00:00",
+      "duration": 3.648,
+      "sha256": "7fb73bccb7327b419423c517f6f6798db4374394bfa36824f8e83a6ca2cb3f47",
+      "start": 17,
+      "end": 25,
+      "tempo": 0.85
+    }
+  ],
+  "timing": "Short phrases independently synthesized and checked with local speech recognition. Tempo 0.85; silence padded to chapter boundaries, no spoken words truncated."
 }

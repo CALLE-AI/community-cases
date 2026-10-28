@@ -11,7 +11,7 @@ export const cases = {
     name:'Care Call AI', kind:'care', chapters:['Approve','Listen','Combine','Handoff'],
     titles:['A check-in starts with approval.','Listen for everyday needs.','Keep the earlier request.','Review one team handoff.'],
     lines:['A coordinator reviews the fictional recipient and outreach purpose.','The person asks for help with cleaning.','A later callback adds groceries; cleaning stays on the list.','A reviewed sheet helps the team arrange support. It does not confirm delivery.'],
-    narration:'A coordinator approves an everyday support check-in. The person asks for help with cleaning. Later, a callback adds groceries. Keep both requests and their history together. The coordinator reviews one handoff for the team. Recording a request does not mean that help has been delivered.',
+    narration:'Approve a support check-in. First, Morgan asks for help with cleaning. A later call adds groceries. Keep both requests. Review both requests together before arranging any help.',
     labels:['Coordinator','Check-in','Team handoff'],
     mockIntro:'Approve a fictional check-in, preserve same-day requests and review the handoff. Independently authored workflow simulation; no proprietary application code.'
   },
@@ -27,7 +27,7 @@ export const cases = {
     name:'HungryCall', kind:'restaurants', chapters:['Brief','Check','Match','Stop'],
     titles:['Delivery, within your budget.','Check restaurants in order.','A restaurant meets the conditions.','Stop with one match.'],
     lines:['The fictional brief requires delivery with a maximum total price.','Trattoria is over budget. Burger House cannot deliver.','Asia Wok confirms delivery and a total within the limit.','Keep the result and leave Sushi Kudo uncalled. This simulation places no order.'],
-    narration:'Set a delivery requirement and a maximum total price. HungryCall checks restaurants in order. Trattoria is over budget. Burger House cannot deliver. Asia Wok meets the conditions. Keep the match and stop the sequence. The remaining restaurant is not called. This demonstration places no order.',
+    narration:'Set a budget and require delivery. One restaurant costs too much. The next cannot deliver. The third restaurant meets both conditions. Keep the match and stop calling without placing an order.',
     labels:['Your brief','Restaurant calls','Delivery match'],
     mockIntro:'Change the budget, then inspect one saved restaurant response at a time. The sequence stops at the first match.'
   }

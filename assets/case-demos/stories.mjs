@@ -308,7 +308,7 @@ export function buildStory(kind) {
         const queue = [person(1.3, 1.1, C.blue), person(2.5, 1.1, C.green), person(3.7, 1.1, 0x9a9d96)];
         const no = check(root, 1.3, 2.2, 1.12, false), yes = check(root, 2.5, 2.2, 1.12, true), stop = icon(root, 'lock', 3.7, 2.2, 1.12, .6);
         const first = call([-.6, 2.8, -.5], [.9, 1.8, 1.2], 6.25, 9.5), next = call([-.6, 2.8, -.5], [2.1, 1.8, 1.2], 10, 15.5);
-        const booking = tile('person', 2.5, 2, 1.8, root, C.green);
+        const booking = tile('person', 2.5, 3.05, 1.5, root, C.green);
         booking.scale.setScalar(.5);
         booking.name = 'accepted-contact';
         moving.push(booking);
@@ -328,7 +328,7 @@ export function buildStory(kind) {
             booking.visible = t >= 15.5;
             // Raise in front of the queue, then approach the empty diary slot from above.
             if (t < 20)
-                travel(booking, [2.5, 2, 1.8], [-.6, 3.45, .2], 16.5, 20, t, .3);
+                travel(booking, [2.5, 3.05, 1.5], [-.6, 3.45, .2], 16.5, 20, t, .3);
             else
                 travel(booking, [-.6, 3.45, .2], [-.6, 1.65, -.62], 20, 23, t, 0);
             booked.visible = t >= 23;
@@ -396,7 +396,9 @@ export function buildStory(kind) {
             noDelivery.visible = t >= 10.2 && t < 12.5;
             match.visible = t >= 15;
             uncalled.visible = t >= 17;
-            travel(match, [1.5, 2.9, 1], [.65, 1.4, 3.75], 18, 21, t, .3);
+            // Clear the chef sideways before descending toward the brief; depth clearance alone still masks the face.
+            if (t < 19.2) travel(match, [1.5, 2.9, 1], [.3, 2.9, 1], 18, 19.2, t, 0);
+            else travel(match, [.3, 2.9, 1], [.65, 1.4, 3.75], 19.2, 21, t, .3);
             match.scale.setScalar(1 - .3 * between(t, 18, 21));
         };
         focus = t => t < 6.25 ? [0, 1.7, 1.8, 7] : t < 9.5 ? [-4.5, 1.8, .6, 4.7] : t < 12.5 ? [-1.5, 1.8, .6, 4.7] : t < 18 ? [2.4, 1.8, .8, 6] : [1.7, 1.7, 1.8, 7.5];

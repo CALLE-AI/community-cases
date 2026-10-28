@@ -43,10 +43,10 @@
   <div class="demo-world" aria-hidden="true"><p class="demo-fallback">The 3D scene is unavailable. Follow the captions and transcript, or try the interactive mock below.</p></div>
   <div class="demo-labels" aria-hidden="true"><span>Your brief</span><span>Restaurant calls</span><span>Delivery match</span></div>
   <div class="demo-controls"><div class="demo-controls-row"><button class="demo-play" type="button">Play</button><button class="demo-replay" type="button">Replay</button><button class="demo-voice" type="button" aria-pressed="false">Play with narration</button><input class="demo-progress" type="range" min="0" max="25" step="0.1" value="0" aria-label="Demo progress"><time>0 / 25s</time></div><nav class="demo-chapters" aria-label="Explore the 3D story"><button type="button">Brief</button><button type="button">Check</button><button type="button">Match</button><button type="button">Stop</button></nav><p class="demo-error" role="status" hidden></p></div>
-  <audio src="./assets/case-demos/hungrycall.mp3" preload="metadata"></audio>
+  <audio src="./assets/case-demos/hungrycall.mp3?v=398f6c221d" preload="metadata"></audio>
  </div>
  <p class="demo-note">Original conceptual demonstration with fictional people and saved sample responses. No real call, message, booking, order or delivery is made.</p>
- <details><summary>Read the narration</summary><p>Set a delivery requirement and a maximum total price. HungryCall checks restaurants in order. Trattoria is over budget. Burger House cannot deliver. Asia Wok meets the conditions. Keep the match and stop the sequence. The remaining restaurant is not called. This demonstration places no order.</p></details>
+ <details><summary>Read the narration</summary><p>Set a budget and require delivery. One restaurant costs too much. The next cannot deliver. The third restaurant meets both conditions. Keep the match and stop calling without placing an order.</p></details>
  <section id="evidence" class="demo-mock" aria-labelledby="mock-title"><h2 id="mock-title">Try it yourself.</h2><p>Change the budget, then inspect one saved restaurant response at a time. The sequence stops at the first match.</p><p class="demo-note">Interactive mock · state stays in this page and resets on reload.</p>
  <div class="demo-workbench"><div class="demo-settings"><label>Maximum total price ($)<input name="budget" type="number" min="1" max="100" value="25" required></label><p>Delivery required to a fictional address. Restaurant responses are fixed samples; your budget changes the decision.</p></div><div class="demo-result"><div role="status" aria-live="polite"><h3 class="demo-result-title">Ready to explore.</h3><p class="demo-result-body">Review the sample settings, then start the simulation.</p></div><ol class="demo-history" aria-label="Demo activity"></ol><p class="demo-count">0 simulated calls</p><button class="demo-next" type="button">Start simulation</button><button class="demo-reset" type="button">Reset demo</button></div></div>
  </section></section>
@@ -113,6 +113,6 @@
         <nav aria-label="Footer navigation"><a href="https://docs.heycall-e.com/">CALL-E docs</a><a href="https://dashboard.heycall-e.com/">Dashboard</a></nav>
       </div>
     </footer>
-  <script type="module" src="./assets/case-demos/demo.mjs?v=5b217276a6"></script>
+  <script type="module" src="./assets/case-demos/demo.mjs?v=43d181c652"></script>
   </body>
 </html>

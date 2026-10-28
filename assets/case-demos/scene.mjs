@@ -1,5 +1,34 @@
+import { timing, chapterAt, storyTime } from './timing.mjs?v=151a699909';
 import * as THREE from '../local-atlas-demo/vendor/three.module.min.js';
-import { buildStory } from './stories.mjs?v=581ae40e65';
+import { buildStory } from './stories.mjs?v=07e64311b0';
+function cameraPose(story, kind, time, reduced) {
+    let pose = story.sample(time);
+    if (reduced)
+        return pose;
+    const cuts = kind === 'office' ? [10, 16, 19] : kind === 'care' ? [5, 9, 18] : kind === 'studio' ? [6.25, 10, 16.5, 20] : [6.25, 9.5, 12.5, 18];
+    for (const cut of cuts) {
+        if (time >= cut && time < cut + .8) {
+            const before = story.sample(cut - .001), p = (time - cut) / .8, blend = p * p * (3 - 2 * p);
+            pose = pose.map((value, index) => before[index] + (value - before[index]) * blend);
+            story.sample(time);
+            break;
+        }
+    }
+    return pose;
+}
+export function positionCamera(camera, story, kind, time, aspect, reduced = false) {
+    const pose = cameraPose(story, kind, time, reduced);
+    // Portrait shots retain a minimum horizontal safe area rather than cropping arms/props.
+    const halfHeight = Math.max(kind === 'restaurants' ? 3.1 : kind === 'studio' ? 2.8 : 2.5, pose[3] / (2 * aspect));
+    camera.left = -halfHeight * aspect;
+    camera.right = halfHeight * aspect;
+    camera.top = halfHeight;
+    camera.bottom = -halfHeight;
+    camera.position.set(pose[0] + .7, pose[1] + 5.2, pose[2] + 12);
+    camera.lookAt(pose[0], pose[1], pose[2]);
+    camera.updateProjectionMatrix();
+    camera.updateMatrixWorld(true);
+}
 export function createScene(host, config) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(devicePixelRatio || 1);
@@ -23,37 +52,14 @@ export function createScene(host, config) {
     scene.add(light);
     const camera = new THREE.OrthographicCamera(-8, 8, 5, -5, .1, 100);
     let width = 1, height = 1, last = 0, lost = false;
-    function cameraAt(time) {
-        // Blend across shot cuts without depending on playback direction or frame rate.
-        const cutTimes = config.kind === 'office' ? [10, 16, 19] : config.kind === 'care' ? [5, 9, 18] : config.kind === 'studio' ? [6.25, 10, 16.5, 20] : [6.25, 9.5, 12.5, 18];
-        let pose = story.sample(time);
-        for (const cut of cutTimes) {
-            if (time >= cut && time < cut + .8) {
-                const before = story.sample(cut - .001), p = (time - cut) / .8, s = p * p * (3 - 2 * p);
-                pose = pose.map((n, i) => before[i] + (n - before[i]) * s);
-                story.sample(time);
-                break;
-            }
-        }
-        return pose;
-    }
     function render(progress = last, reduced = false) {
         last = progress;
         if (lost)
             return;
-        const beat = Math.min(3, Math.floor(progress * 4));
-        const time = reduced ? Math.min(25, (beat + 1) * 6.25 - .001) : progress * 25;
-        const pose = reduced ? story.sample(time) : cameraAt(time);
-        const aspect = width / height;
-        // Portrait shots retain a minimum horizontal safe area rather than cropping arms/props.
-        const halfHeight = Math.max(config.kind === 'restaurants' ? 3.1 : config.kind === 'studio' ? 2.8 : 2.5, pose[3] / (2 * aspect));
-        camera.left = -halfHeight * aspect;
-        camera.right = halfHeight * aspect;
-        camera.top = halfHeight;
-        camera.bottom = -halfHeight;
-        camera.position.set(pose[0] + .7, pose[1] + 5.2, pose[2] + 12);
-        camera.lookAt(pose[0], pose[1], pose[2]);
-        camera.updateProjectionMatrix();
+        const seconds = progress * 25, beat = chapterAt(config.kind, seconds);
+        const settled = (timing[config.kind].chapters[beat + 1] ?? 25) - .001;
+        const time = storyTime(config.kind, reduced ? settled : seconds);
+        positionCamera(camera, story, config.kind, time, width / height, reduced);
         if (renderer.getPixelRatio() !== (devicePixelRatio || 1))
             renderer.setPixelRatio(devicePixelRatio || 1);
         renderer.render(scene, camera);
