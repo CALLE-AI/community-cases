@@ -27,7 +27,7 @@ audio.onended=()=>playback.ended();audio.onerror=()=>{if(playback.snapshot().nar
 new IntersectionObserver(entries=>playback.setInView(entries[0].isIntersecting),{threshold:.15}).observe(find('.demo-stage'));
 document.addEventListener('visibilitychange',()=>playback.setPageVisible(!document.hidden));
 reduced.addEventListener('change',()=>{if(reduced.matches)playback.seek(duration);else render(playback.snapshot());});
-import('./scene.mjs?v=f16043380c').then(({createScene})=>{scene=createScene(find('.demo-world'),config);render(playback.snapshot());}).catch(()=>{find('.demo-world').dataset.renderer='fallback';});
+import('./scene.mjs?v=4086ea736a').then(({createScene})=>{scene=createScene(find('.demo-world'),config);render(playback.snapshot());}).catch(()=>{find('.demo-world').dataset.renderer='fallback';});
 if(reduced.matches)playback.seek(duration);else playback.play();
 let state=initialState();
 function settings(){return {answer:find('[name=answer]')?.value,callback:find('[name=callback]')?.value,available:find('[name=available]')?.checked,budget:Number(find('[name=budget]')?.value)};}

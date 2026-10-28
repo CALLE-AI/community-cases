@@ -9,7 +9,7 @@ FORM: Precisely requested extension of approved Local Atlas pattern; no new visu
 FINISH: Browser inspection at desktop and mobile, state-model tests, female_sweet audio verification, fresh finish review and narrow documentation reconciliation before deployment.
 
 ## Motion plan
-Focal moments: reply sheet reaches draft tray; two request slips merge on a dispatch trolley; appointment tile fills an empty calendar slot; delivery parcel leaves the matched restaurant while later restaurants stay uncalled.
-Continuity: scene camera tracks the active station; captions remain outside physical actors. Direct chapter selection pauses audio and visuals together.
+Focal moments: an unresolved email choice is confirmed by phone and returns into an unsent draft; cleaning and grocery requests from two calls occupy separate slots in one handoff; a visible waiting queue declines/accepts before the accepted contact fills the diary; restaurant calls test price and delivery, returning only a match record while the fourth phone stays down.
+Continuity: each story has its own physical layout and absolute-time choreography. Handsets follow wrists, moving records use foreground clearance routes, cameras follow the active call or transferring record. Captions stay outside the canvas. Responsive shots preserve the active subject rather than squeezing a whole neighborhood into portrait width. Direct selection and reverse seeking reconstruct the same pose.
 Feedback: mock actions expose approvals, uncertainty and stop conditions; reset restores the complete initial state.
 Budget: one renderer per page, native DPR, no continuous work offscreen; explicit audio, reduced-motion settled state. Reuse installed assets and controller, no new runtime dependency.

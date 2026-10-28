@@ -6,7 +6,7 @@
 .demo-heading h2 { font-size:32px; letter-spacing:-.03em; margin:0; }
 .demo-heading span { font-size:13px; flex-shrink:0; }
 .demo-speech { min-height:88px; margin:0; padding:16px 32px; font-size:21px; line-height:1.4; max-width:65ch; }
-.demo-world { height:430px; position:relative; }
+.demo-world { height:480px; position:relative; }
 .demo-world canvas { width:100%; height:100%; display:block; }
 .demo-labels { display:flex; justify-content:space-around; gap:12px; padding:8px 24px; font-size:14px; color:var(--ink); }
 .demo-labels span { flex:1; text-align:center; }
@@ -40,8 +40,8 @@
 .demo-fallback { display:none; padding:32px; }
 .demo-world[data-renderer=fallback] canvas { display:none; }
 .demo-world[data-renderer=fallback] .demo-fallback { display:block; }
-@media(max-width:760px){.demo-heading{padding:24px 20px 8px;display:block}.demo-heading h2{font-size:27px}.demo-heading span{display:block;margin-top:10px}.demo-speech{padding:14px 20px;min-height:112px;font-size:18px}.demo-world{height:330px}.demo-controls{padding:16px 20px 24px}.demo-labels{font-size:12px;padding-inline:12px;gap:8px}.demo-workbench{grid-template-columns:1fr;padding:24px;gap:24px}.demo-chapters{gap:4px}.demo-chapters button{font-size:13px}.demo-controls-row input{flex-basis:100%;order:2}.demo-stage{border-radius:24px}.demo-mock h2{font-size:29px}}
+@media(max-width:760px){.demo-heading{padding:24px 20px 8px;display:block}.demo-heading h2{font-size:27px}.demo-heading span{display:block;margin-top:10px}.demo-speech{padding:14px 20px;min-height:112px;font-size:18px}.demo-world{height:360px}.demo-controls{padding:16px 20px 24px}.demo-labels{font-size:12px;padding-inline:12px;gap:8px}.demo-workbench{grid-template-columns:1fr;padding:24px;gap:24px}.demo-chapters{gap:4px}.demo-chapters button{font-size:13px}.demo-controls-row input{flex-basis:100%;order:2}.demo-stage{border-radius:24px}.demo-mock h2{font-size:29px}}
 @media(prefers-reduced-motion:reduce){.case-demo *{scroll-behavior:auto!important;transition:none!important}}
 
-.scene-evidence { position:absolute; top:12px; left:50%; transform:translateX(-50%); max-width:calc(100% - 32px); width:max-content; padding:12px 18px; border-radius:16px; background:#fffdf4; color:#25282d; border:2px solid #dfc75a; font-size:18px; font-weight:600; text-align:center; line-height:1.35; pointer-events:none; }
-@media(max-width:760px){.scene-evidence{font-size:16px;top:8px;padding:10px 14px}.demo-labels{display:none}}
+/* Shot framing changes throughout the story; fixed spatial labels would point at the wrong objects. */
+.demo-labels { display:none; }
