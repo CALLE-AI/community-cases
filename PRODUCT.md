@@ -22,6 +22,8 @@ This is an existing static HTML/CSS/JavaScript site. The homepage in `index.html
 
 The Local Atlas page places a full-width, 25-second Three.js WebGL café story above a clickable mock. In the scene, a visitor types and sends a parking question; a café cutaway reveals staff answering the telephone. The reply gains staff and date provenance and shrinks into a persistent shared-FAQ marker. Another visitor asks the same question and receives a copy while the original remains at the café and the call count stays at one. The location label and connection caption occupy separate layout rows outside the canvas. “See the saved FAQ” reveals the original native FAQ renderer; the lower mock retains the author's original public-facts components inside a style-isolated iframe.
 
+Conversation-Clarify, Care Call AI, RingBack and HungryCall also have native Three.js workflow scenes followed immediately by interactive mocks. Their scenes show a reviewed email draft, retained support requests and a team handoff, a replacement appointment, and a restaurant delivery match respectively. Native HTML captions accompany explicit female_sweet narration; playback reuses the site's pause, seek, visibility and reduced-motion behavior. These four mocks are independently authored deterministic workflow explanations, not replicas of the authors’ interfaces or implementations. They use fictional data and make no calls, external submissions or fulfillment claims. Care Call AI distributes none of the proprietary application's code or assets.
+
 ## Capabilities and Constraints
 
 - Local Atlas asks a business one factual question, saves the answer with supporting words and a collection date, and lets later visitors reuse a valid shared answer.
@@ -36,7 +38,7 @@ Preserve the official CALL-E logo and the incumbent warm white, yellow-and-blue,
 
 The case guides share page navigation, type scale and action styles. Neutral reading surfaces keep the guides legible; blue marks links and yellow marks the closing action. Each guide explains its workflow, shows an example output and offers available material. Original concept illustrations, animations and written examples do not establish actual calls or fulfillment.
 
-Detail pages use one compact header with the CALL-E logo and a return-to-cases link. The case name is the main heading, with its purpose in the introduction. Three chapter links follow the opening: Workflow, Example and Try it (Explore for the proprietary Care Call AI project). The Local Atlas page uses Watch the flow, Try the mock and Build your own. Documentation and Dashboard links appear in the footer. Existing evidence anchors lead to the visible example output or mock.
+Detail pages use one compact header with the CALL-E logo and a return-to-cases link. The case name is the main heading, with its purpose in the introduction. Chapter links use Watch the flow and Try the mock; the final link is Try it (Explore for proprietary Care Call AI) or Build your own for Local Atlas. Documentation and Dashboard links appear in the footer. Existing evidence anchors lead to the visible example output or mock.
 
 Shared design rules live in [DESIGN.md](DESIGN.md). Project skill routing and implementation checks live in [AGENTS.md](AGENTS.md).
 

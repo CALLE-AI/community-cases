@@ -1,0 +1,13 @@
+{
+  "model": "ecnu-tts",
+  "voice": "female_sweet",
+  "input": "An email says, that sounds fine. But morning or afternoon is still unanswered. Review the question and destination, then approve one call. The person chooses afternoon. Their words support a reply draft. Review the draft and recipient yourself before sending.",
+  "response_format": "mp3",
+  "speed": 0.85,
+  "generatedAt": "2026-10-28T05:17:46.399006+00:00",
+  "sha256": "346bc411008afedcd5f05cebd50684cd62fa0ec946934a21edd257150bd9e627",
+  "duration": 25,
+  "synthetic": true,
+  "originalSha256": "ea10ecb300ce0071b2df5e1d59fd2da8c7dee9660919c6a57a9a746a7233b407",
+  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+}

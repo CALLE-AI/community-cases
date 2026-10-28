@@ -1,0 +1,13 @@
+{
+  "model": "ecnu-tts",
+  "voice": "female_sweet",
+  "input": "A Thursday appointment opens up. RingBack offers it to the waiting list, one person at a time. Alex declines. Sam accepts, so Taylor is not called. Check that the slot is still available, then save the replacement in the local diary.",
+  "response_format": "mp3",
+  "speed": 0.85,
+  "generatedAt": "2026-10-28T05:17:55.755527+00:00",
+  "sha256": "0f5146c422c7410aa555008c2a535f7029ccc5b687231c36b9821adb413e2b3d",
+  "duration": 25,
+  "synthetic": true,
+  "originalSha256": "5027d5a60fa82fa3b2db2f3901375512bf56d4cabbe0995ec833a7d3af6bd105",
+  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+}

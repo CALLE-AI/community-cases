@@ -1,0 +1,13 @@
+{
+  "model": "ecnu-tts",
+  "voice": "female_sweet",
+  "input": "Set a delivery requirement and a maximum total price. HungryCall checks restaurants in order. Trattoria is over budget. Burger House cannot deliver. Asia Wok meets the conditions. Keep the match and stop the sequence. The remaining restaurant is not called. This demonstration places no order.",
+  "response_format": "mp3",
+  "speed": 0.85,
+  "generatedAt": "2026-10-28T05:17:59.932285+00:00",
+  "sha256": "f7e7444d705904274fa89fada4e5acf83d13f880d27e8ac5c0552202e5361f93",
+  "duration": 25,
+  "synthetic": true,
+  "originalSha256": "10d0565d0ba598874e1b73ee8e5569fa375759a414cdb5dd136c7a26188d7b78",
+  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+}

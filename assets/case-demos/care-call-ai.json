@@ -1,0 +1,13 @@
+{
+  "model": "ecnu-tts",
+  "voice": "female_sweet",
+  "input": "A coordinator approves an everyday support check-in. The person asks for help with cleaning. Later, a callback adds groceries. Keep both requests and their history together. The coordinator reviews one handoff for the team. Recording a request does not mean that help has been delivered.",
+  "response_format": "mp3",
+  "speed": 0.85,
+  "generatedAt": "2026-10-28T05:17:50.911162+00:00",
+  "sha256": "b9168b3f7b981c035de7974b1b3a372e041230a3c64f1712f71a0ca809109021",
+  "duration": 25,
+  "synthetic": true,
+  "originalSha256": "0fb9aab391ada138010c907058d558b59462d1c03d53c877d351bc198567b74c",
+  "timing": "Tempo adjusted to a 25-second explanation; original synthesis retained in development evidence."
+}

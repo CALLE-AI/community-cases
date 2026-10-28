@@ -1,0 +1,7 @@
+# Community workflow demonstrations
+
+These four scenes, mock controls and fictional fixtures are original CALL-E editorial implementations of the workflows already documented in the case guides. They are not recordings or replicas of the authors’ applications. No application code or design asset from proprietary Care Call AI is redistributed. The individual guides retain their author links, licensing information and known limitations; those limitations still apply to the actual applications. The mock uses deliberately simple, deterministic choices, not the authors’ detection or answer-validation algorithms.
+
+The native scenes reuse the site's official vendored Three.js 0.180.0 modules and existing playback controller. See ../local-atlas-demo/vendor/SOURCE.md and its retained MIT license. English text is native HTML. All shown people, messages, requests, restaurant responses and bookings are fictional; mock state is page-local and makes no calls or external submissions.
+
+The four MP3 files were generated on 28 October 2026 with ECNU ecnu-tts, voice female_sweet, then tempo-adjusted for the 25-second explanations. Each companion JSON records the script, original generation parameters and source/final hashes. Credentials are retrieved from the local keychain during generation and are never included in this site. Sound requires an explicit action; captions and transcripts remain available without audio or WebGL.
