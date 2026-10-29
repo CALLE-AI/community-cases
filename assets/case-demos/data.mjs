@@ -1,54 +1,90 @@
 export const cases = {
-  'conversation-clarify': {
-    name:'Conversation-Clarify', kind:'office', chapters:['Inspect','Approve','Call','Review'],
-    titles:['A reply leaves a choice open.','Review one question.','Hear the missing detail.','A draft, ready for your review.'],
-    lines:['“That sounds fine” does not choose morning or afternoon.','Check the question and masked destination before calling.','“Afternoon, please.” Keep the words that support the answer.','Review the draft, original thread and recipient before sending.'],
-    narration:'An email says, that sounds fine. But morning or afternoon is still unanswered. Review the question and destination, then approve one call. The person chooses afternoon. Their words support a reply draft. Review the draft and recipient yourself before sending.',
-    labels:['Email thread','One approved call','Reply draft'],
-    mockIntro:'Inspect the missing choice, approve a simulated call and decide whether the answer supports a draft.'
-  },
-  'care-call-ai': {
-    name:'Care Call AI', kind:'care', chapters:['Approve','Listen','Combine','Handoff'],
-    titles:['A check-in starts with approval.','Listen for everyday needs.','Keep the earlier request.','Review one team handoff.'],
-    lines:['A coordinator reviews the fictional recipient and outreach purpose.','The person asks for help with cleaning.','A later callback adds groceries; cleaning stays on the list.','A reviewed sheet helps the team arrange support. It does not confirm delivery.'],
-    narration:'Approve a support check-in. First, Morgan asks for help with cleaning. A later call adds groceries. Keep both requests. Review both requests together before arranging any help.',
-    labels:['Coordinator','Check-in','Team handoff'],
-    mockIntro:'Approve a fictional check-in, preserve same-day requests and review the handoff. Independently authored workflow simulation; no proprietary application code.'
-  },
-  hungrycall: {
-    name:'HungryCall', kind:'restaurants', chapters:['Brief','Check','Match','Stop'],
-    titles:['Delivery, within your budget.','Check restaurants in order.','A restaurant meets the conditions.','Stop with one match.'],
-    lines:['The fictional brief requires delivery with a maximum total price.','Trattoria is over budget. Burger House cannot deliver.','Asia Wok confirms delivery and a total within the limit.','Keep the result and leave Sushi Kudo uncalled. This simulation places no order.'],
-    narration:'Set a budget and require delivery. One restaurant costs too much. The next cannot deliver. The third restaurant meets both conditions. Keep the match and stop calling without placing an order.',
-    labels:['Your brief','Restaurant calls','Delivery match'],
-    mockIntro:'Change the budget, then inspect one saved restaurant response at a time. The sequence stops at the first match.'
-  }
+  'conversation-clarify': { name: 'Conversation-Clarify', kind: 'office' },
+  'care-call-ai': { name: 'Care Call AI', kind: 'care' },
+  hungrycall: { name: 'HungryCall', kind: 'restaurants' },
 };
-export const restaurants=[{name:'Trattoria',price:32,delivery:true},{name:'Burger House',price:18,delivery:false},{name:'Asia Wok',price:24,delivery:true},{name:'Sushi Kudo',price:29,delivery:true}];
-export function restaurantDecision(restaurant,budget){return !restaurant.delivery?'No delivery':restaurant.price>budget?'Over budget':'Match';}
-export function draftFrom(answer){return answer==='afternoon'?'Thanks for confirming the afternoon visit.':null;}
-export function addNeed(needs,need){return needs.includes(need)?needs:[...needs,need];}
-export function initialState(){return {step:0,calls:0,history:[],needs:[],done:false,title:'Ready to explore.',body:'Review the sample settings, then start the simulation.',action:'Start simulation'};}
-export function advanceMock(id,state,settings={}){
-  if(state.done)return state;
-  const s={...state,history:[...state.history],needs:[...state.needs],step:state.step+1};
-  function result(title,body,action,done=false){return Object.assign(s,{title,body,action,done});}
-  if(id==='conversation-clarify'){
-    if(s.step===1)return result('A choice is still open.','Email: “That sounds fine.” Question: “Morning or afternoon?” Destination: fictional contact · ending 0142.','Approve simulated call');
-    if(s.step===2){s.calls=1;s.history.push(settings.answer==='afternoon'?'Phone quote: “Afternoon, please.”':'Phone result: no clear choice.');return result('Read the call result.',s.history.at(-1),'Review answer');}
-    const draft=draftFrom(settings.answer);return result(draft?'Draft ready for review.':'Keep the question open.',draft?draft+' Check the recipient and original thread yourself; nothing has been sent.':'This sample has no supported choice. No draft is produced. A human decides what to do next.','Completed',true);
+export const restaurants = [
+  { name: 'Trattoria', price: 32, delivery: true },
+  { name: 'Burger House', price: 18, delivery: false },
+  { name: 'Asia Wok', price: 24, delivery: true },
+  { name: 'Sushi Kudo', price: 29, delivery: true },
+];
+export function restaurantDecision(restaurant, budget) {
+  return !restaurant.delivery ? 'No delivery' : restaurant.price > budget ? 'Over budget' : 'Match';
+}
+export function initialState(id) {
+  return { id, phase: id === 'hungrycall' ? 'brief' : 'start', calls: 0, history: [], needs: [], budget: 25, index: 0, results: [], answer: null, uncertain: false };
+}
+export function advance(state, action, value) {
+  const s = { ...state, history: [...state.history], needs: [...state.needs], results: [...state.results] };
+  const move = (phase, event) => { s.phase = phase; if (event) s.history.push(event); return s; };
+  const key = state.phase + ':' + action;
+  if (state.id === 'conversation-clarify') {
+    switch (key) {
+      case 'start:inspect': return move('approval');
+      case 'approval:call': s.calls = 1; return move('calling', 'Approved one simulated call: morning or afternoon?');
+      case 'calling:afternoon': s.answer = 'Afternoon, please.'; return move('answer', 'Phone quote: “Afternoon, please.”');
+      case 'calling:unclear': return move('unresolved', 'No clear choice. No draft was created.');
+      case 'answer:draft': return move('draft', 'Afternoon added to an unsent draft. Recipient and original thread still need review.');
+    }
+  } else if (state.id === 'care-call-ai') {
+    switch (key) {
+      case 'start:check-in': s.calls = 1; return move('checkin', '09:30 · Coordinator approved a simulated check-in with Morgan.');
+      case 'checkin:cleaning': s.needs.push('Cleaning'); return move('recorded', '09:30 · “Could someone help with cleaning?”');
+      case 'recorded:callback': s.calls = 2; return move('callback', '11:10 · Morgan calls back. The cleaning request is retained.');
+      case 'callback:groceries': s.needs.push('Groceries'); return move('combined', '11:10 · “I also need groceries.”');
+      case 'callback:unclear': s.uncertain = true; return move('combined', '11:10 · Callback unclear; flagged for a person to follow up.');
+      case 'combined:handoff': return move('handoff', 'Prepared one handoff for coordinator review. No support has been arranged or delivered.');
+    }
+  } else if (state.id === 'hungrycall') {
+    if (key === 'brief:budget') return { ...state, budget: value };
+    if (key === 'brief:search') {
+      if (!Number.isFinite(state.budget) || state.budget < 1 || state.budget > 100) return state;
+      s.calls = 1; return move('calling', `Delivery required. Maximum total $${state.budget}. Calling Trattoria.`);
+    }
+    if (key === 'calling:response') {
+      const r = restaurants[state.index], decision = restaurantDecision(r, state.budget);
+      s.results.push(decision);
+      return move(decision === 'Match' ? 'matched' : state.index === restaurants.length - 1 ? 'exhausted' : 'rejected', `${r.name}: ${decision} · $${r.price} total.`);
+    }
+    if (key === 'rejected:next') { s.index++; s.calls++; return move('calling', `Calling ${restaurants[s.index].name}.`); }
   }
-  if(id==='care-call-ai'){
-    if(s.step===1)return result('Review the check-in.','Fictional recipient: Morgan. Purpose: everyday cleaning and groceries. A coordinator must approve outreach.','Approve simulated check-in');
-    if(s.step===2){s.calls=1;s.needs=addNeed(s.needs,'Cleaning');s.history.push('First check-in: “Could someone help with cleaning?”');return result('Cleaning request recorded.',s.history.at(-1),'Add same-day callback');}
-    if(s.step===3){s.calls=2;if(settings.callback==='groceries'){s.needs=addNeed(s.needs,'Groceries');s.history.push('Callback: “I also need groceries.”');}else{s.history.push('Callback unclear: coordinator review required.');}return result('Earlier needs stay on the list.',s.history.at(-1),'Review handoff');}
-    return result('Handoff ready for coordinator review.',s.needs.join(' + ')+'. '+(settings.callback==='unclear'?'The unclear callback is flagged for follow-up. ':'')+'Support has not been arranged or delivered by this mock.','Completed',true);
+  return state;
+}
+const office = {
+  start: ['One reply. One missing detail.', 'At the desk', 'inspect', 'Find the missing detail', 6],
+  approval: ['Ask just what is missing.', 'Before the call', 'call', 'Approve this sample call', 6],
+  calling: ['Let the person choose.', 'On the other end', 'afternoon', '“Afternoon, please.”', 7],
+  answer: ['Keep the answer and its words.', 'Back to the email', 'draft', 'Prepare the draft', 4],
+  draft: ['A clearer reply, still yours to send.', 'Draft for review'],
+  unresolved: ['The question stays open.', 'Human follow-up'],
+};
+const care = {
+  start: ['A small check-in, with permission.', 'Morgan’s home', 'check-in', 'Approve sample check-in', 6],
+  checkin: ['Listen to what Morgan needs.', '09:30 · First check-in', 'cleaning', 'Record the cleaning request', 6],
+  recorded: ['One need is on the record.', '09:30 · Cleaning retained', 'callback', 'Take the later callback', 4],
+  callback: ['“There’s one more thing…”', '11:10 · Same-day callback', 'groceries', '“I also need groceries.”', 7],
+  combined: ['The new request joins the first.', 'One record for today', 'handoff', 'Prepare the team handoff', 5],
+  handoff: ['Two conversations. One handoff.', 'For the coordinator'],
+};
+export function viewOf(state) {
+  const kind = cases[state.id].kind;
+  let row, location;
+  if (kind === 'office') { row = office[state.phase]; location = state.phase === 'calling' ? 'recipient' : 'desk'; }
+  else if (kind === 'care') {
+    row = care[state.phase];
+    if (state.phase === 'combined' && state.uncertain) row = ['Keep the request. Follow up on the callback.', ...row.slice(1)];
+    location = ['combined', 'handoff'].includes(state.phase) ? 'coordinator' : 'home';
   }
-  if(id==='hungrycall'){
-    if(!Number.isFinite(settings.budget)||settings.budget<1||settings.budget>100)return {...state,title:'Enter a budget from $1 to $100.',body:'Use a valid maximum total price before starting.'};
-    if(s.step===1)return result('Delivery required. Maximum $'+settings.budget+'.','Fictional address: 12 Example Lane. Check total price including delivery.','Check Trattoria');
-    const r=restaurants[s.step-2],decision=restaurantDecision(r,settings.budget);s.calls++;s.history.push(r.name+': '+decision+' · $'+r.price+' total');
-    const matched=decision==='Match',last=s.step===5;return result(matched?'One delivery match.':last?'No match within the brief.':'Continue the search.',matched?r.name+' meets the sample conditions. Later restaurants are not called. No order has been placed.':s.history.at(-1),matched||last?'Completed':'Check '+restaurants[s.step-1].name,matched||last);
+  else {
+    const r = restaurants[state.index];
+    location = state.phase === 'brief' ? 'street' : r.name;
+    row = state.phase === 'brief' ? ['Dinner starts with the brief.', 'A short walk through the options', 'search', 'Start the sample search', 7]
+      : state.phase === 'calling' ? [`Ask ${r.name}.`, 'Check price and delivery', 'response', 'Hear the saved response', 5]
+      : state.phase === 'rejected' ? [state.results.at(-1) === 'Over budget' ? 'Good food. Too much for this brief.' : 'No delivery. Try the next restaurant.', r.name, 'next', `Try ${restaurants[state.index + 1].name}`, 4]
+      : state.phase === 'matched' ? ['Both conditions met. Stop here.', r.name + ' · delivery match']
+      : ['The brief has no match today.', 'All four checked'];
   }
-  throw new Error('Unknown case');
+  const [title, place, action, label, delay] = row;
+  return { ...state, kind, title, place, action, label, delay, location, done: !action };
 }

@@ -10,7 +10,7 @@ function startStory() {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const entry = makeEntry(samples[0], Date.now());
   let cafeScene = null, sceneState = { time: 0, reduced: reduced.matches };
-  import('./local-atlas-demo/cafe-scene.mjs?v=2443c44577').then(({ createCafeScene }) => {
+  import('./local-atlas-demo/cafe-scene.mjs?v=a5495b515b').then(({ createCafeScene }) => {
     cafeScene = createCafeScene(world, { entry }); cafeScene.render(sceneState);
   }).catch(() => { world.dataset.renderer = 'fallback'; });
   const play = byId('atlas-play'), seek = byId('atlas-progress'), voice = byId('atlas-voice');

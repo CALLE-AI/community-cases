@@ -8,7 +8,7 @@
     <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/local-atlas.css?v=cf6322ea">
     <title>Care Call AI — CALL-E Community Cases</title>
-  <link rel="stylesheet" href="./assets/case-demos/demo.css?v=d432dd9455">
+  <link rel="stylesheet" href="./assets/case-demos/demo.css?v=93dc1e53dc">
 </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -35,23 +35,23 @@
           </div>
         </section>
       </div>
-<section id="example" class="case-demo wrap" data-case-demo="care-call-ai" data-duration="25" aria-label="Care Call AI interactive demonstration">
+<section id="example" class="case-demo wrap flow-game" data-case-demo="care-call-ai" aria-labelledby="flow-heading">
  <div class="demo-stage">
-  <div class="demo-heading"><h2 class="demo-title">A check-in starts with approval.</h2><span>Fictional scenario · simulated calls</span></div>
-  <p class="demo-speech">A coordinator reviews the fictional recipient and outreach purpose.</p>
-  <div class="demo-world" aria-hidden="true"><p class="demo-fallback">The 3D scene is unavailable. Follow the captions and transcript, or try the interactive mock below.</p></div>
-  <div class="demo-labels" aria-hidden="true"><span>Coordinator</span><span>Check-in</span><span>Team handoff</span></div>
-  <div class="demo-controls"><div class="demo-controls-row"><button class="demo-play" type="button">Play</button><button class="demo-replay" type="button">Replay</button><button class="demo-voice" type="button" aria-pressed="false">Play with narration</button><input class="demo-progress" type="range" min="0" max="25" step="0.1" value="0" aria-label="Demo progress"><time>0 / 25s</time></div><nav class="demo-chapters" aria-label="Explore the 3D story"><button type="button">Approve</button><button type="button">Listen</button><button type="button">Combine</button><button type="button">Handoff</button></nav><p class="demo-error" role="status" hidden></p></div>
-  <audio src="./assets/case-demos/care-call-ai.mp3?v=6b47793339" preload="metadata"></audio>
+  <div class="demo-heading"><h2 id="flow-heading">Every request stays.</h2><span>Fictional scenario · no real calls</span></div>
+  <p class="flow-instructions">Choose an action, or let the scene continue after a few seconds.</p>
+  <div class="flow-caption"><span class="flow-place"></span><h3 class="flow-title"></h3></div>
+  <div id="evidence" class="flow-world" data-renderer="fallback">
+   <section class="flow-panel" aria-label="Interactive care-call-ai scenario"></section>
+  </div>
+  <div class="flow-toolbar"><p class="flow-auto-status"></p><div><button type="button" class="flow-auto">Pause auto</button><button type="button" class="flow-reset">Start over</button></div></div>
+  <p class="flow-announcement" role="status" aria-live="polite"></p>
  </div>
- <p class="demo-note">Original conceptual demonstration with fictional people and saved sample responses. No real call, message, booking, order or delivery is made.</p>
- <details><summary>Read the narration</summary><p>Approve a support check-in. First, Morgan asks for help with cleaning. A later call adds groceries. Keep both requests. Review both requests together before arranging any help.</p></details>
- <section id="evidence" class="demo-mock" aria-labelledby="mock-title"><h2 id="mock-title">Try it yourself.</h2><p>Approve a fictional check-in, preserve same-day requests and review the handoff. Independently authored workflow simulation; no proprietary application code.</p><p class="demo-note">Interactive mock · state stays in this page and resets on reload.</p>
- <div class="demo-workbench"><div class="demo-settings"><label>Same-day callback<select name="callback"><option value="groceries">Add groceries</option><option value="unclear">Unclear request — needs review</option></select></label><p>Morgan is fictional. This is an everyday support workflow, not clinical care or emergency response.</p></div><div class="demo-result"><div role="status" aria-live="polite"><h3 class="demo-result-title">Ready to explore.</h3><p class="demo-result-body">Review the sample settings, then start the simulation.</p></div><ol class="demo-history" aria-label="Demo activity"></ol><p class="demo-count">0 simulated calls</p><button class="demo-next" type="button">Start simulation</button><button class="demo-reset" type="button">Reset demo</button></div></div>
- </section></section>
+ <p class="demo-note">Add groceries or try an unclear callback. Earlier requests stay visible; no support is arranged. An independently authored simulation with fictional people and saved sample responses. State resets on reload.</p>
+ <details class="flow-history"><summary>What happened</summary><ol></ol></details>
+ <details class="flow-overview"><summary>Listen to the short overview</summary><audio src="./assets/case-demos/care-call-ai.mp3?v=6b47793339" controls preload="none"></audio><p>Approve a support check-in. First, Morgan asks for help with cleaning. A later call adds groceries. Keep both requests. Review both requests together before arranging any help.</p></details>
+</section>
       <nav class="contents wrap" aria-label="On this page">
-        <a href="#example">Watch the flow</a>
-        <a href="#evidence">Try the mock</a>
+        <a href="#example">Try the 3D flow</a>
         <a href="#reuse">Explore</a>
       </nav>
       <div class="case-body wrap">
@@ -111,6 +111,6 @@
         <nav aria-label="Footer navigation"><a href="https://docs.heycall-e.com/">CALL-E docs</a><a href="https://dashboard.heycall-e.com/">Dashboard</a></nav>
       </div>
     </footer>
-  <script type="module" src="./assets/case-demos/demo.mjs?v=d363c3aa3c"></script>
+  <script type="module" src="./assets/case-demos/demo.mjs?v=537920e6a1"></script>
   </body>
 </html>

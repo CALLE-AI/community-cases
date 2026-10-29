@@ -68,3 +68,14 @@ test('the studio walk settles at the desk and call gestures continue past the en
  w.sample(viewOf({...initialState(),phase:'conflict'}),2);assert.equal(w.slip.visible,false);
  w.sample(viewOf({...initialState(),phase:'booked'}),2);assert.equal(w.slip.visible,true);
 });
+
+test('the stylist swings their free arm while walking and settles after arrival',async()=>{
+ const [{buildWorld},,{initialState,viewOf}]=await load();const w=buildWorld();
+ const opening=viewOf(initialState()),standing=viewOf({...initialState(),phase:'unclear'});
+ for(const time of [.9,1.1,1.4,2.2]) {
+  w.sample(opening,time);const walkingArm=w.stylist.freeArm.rotation.x;
+  w.sample(standing,time);assert.ok(Math.abs(walkingArm-w.stylist.freeArm.rotation.x)>.01,`missing arm swing at ${time}s`);
+ }
+ w.sample(opening,4);const settledArm=w.stylist.freeArm.rotation.x;
+ w.sample(standing,4);assert.equal(w.stylist.freeArm.rotation.x,settledArm);
+});

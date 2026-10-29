@@ -364,6 +364,8 @@ export function createCafeScene(host, { entry }) {
   const cord=new THREE.Line(cordGeometry,new THREE.LineBasicMaterial({color:'#33483c'}));root.add(cord);
   const rings=[];
   for(let i=0;i<2;i++)rings.push(mesh(new THREE.TorusGeometry(.24,.018,6,32),new THREE.MeshBasicMaterial({color:'#edbd27',transparent:true,opacity:.8}),0,0,0,root,false));
+  // The first phone sits beside the storefront, never across the sign.
+  const PHONE_ASK=new THREE.Vector3(-3.85,1.78,4.35),PHONE_FLIGHT=new THREE.Vector3(-3.15,3.35,4.75),PHONE_REUSE=new THREE.Vector3(4.55,2.0,3.9);
   const questionPath=new THREE.CatmullRomCurve3([new THREE.Vector3(-2.2,2.6,4.2),new THREE.Vector3(-1.4,3.15,4.1),new THREE.Vector3(-.65,3.4,3.7)]);
   const copyPoints=[new THREE.Vector3(2.65,2.75,2.70),new THREE.Vector3(3.7,2.80,3.3),new THREE.Vector3(4.3,1.7,3.5),new THREE.Vector3(4.0,.85,3.4),new THREE.Vector3(3.253,.824,3.22)];
   const copyPath=new THREE.CatmullRomCurve3(copyPoints);
@@ -371,12 +373,12 @@ export function createCafeScene(host, { entry }) {
   const copyLine=mesh(new THREE.TubeGeometry(route,60,.012,6,false),new THREE.MeshBasicMaterial({color:'#477abd',transparent:true,opacity:.4}),0,0,0,root,false);
   let current={time:0,reduced:false},width=1,height=1,lost=false;
   function cameraPose(t,portrait) {
-    const phoneX=-2.2,nextX=4.55;
+    const nextX=PHONE_REUSE.x;
     const poses=[
       [0,0,1,0,Math.max(7.8,12/(width/height)),.56,.51],
       [.55,0,1,0,Math.max(7.8,12/(width/height)),.56,.51],
-      [1.25,phoneX,2.0,3.9,4.35,.08,.17],
-      [2.7,phoneX,2.0,3.9,4.35,.08,.17],
+      [1.25,-2.35,1.95,1.4,5.15,.12,.19],
+      [2.7,-2.35,1.95,1.4,5.15,.12,.19],
       [4.2,-.65,2.0,1.2,portrait?4.2:3.8,.06,.15],
       [6.1,-.65,2.0,1.2,portrait?4.2:3.8,.06,.15],
       [7.1,2.5,2.0,1.0,portrait?7.4:6.6,.75,.38],
@@ -425,11 +427,13 @@ export function createCafeScene(host, { entry }) {
     parkingPaint.color.set(t>=5.4&&t<8.1?'#f1ca2e':'#f7f5df');
     const phoneOne=t<3.35,phoneTwo=t>=13.7;
     phoneView.group.visible=phoneOne||phoneTwo;
-    const expand=reduced?1:phoneOne?phase(t,.8,1.22):phase(t,13.7,15.1),out=reduced?0:phoneOne?phase(t,2.9,3.35):phase(t,21.75,23.3);
-    const p1=v(-2.2,2.0,3.9),p2=v(4.55,2.0,3.9);
+    const expand=reduced?1:phoneOne?phase(t,1.0,1.4):phase(t,13.7,15.1),out=reduced?0:phoneOne?phase(t,2.9,3.35):phase(t,21.75,23.3);
     const hand=(phoneOne?first:next).grip.getWorldPosition(v(0,0,0));
     const placement=phoneOne&&!reduced?phase(t,.45,1.0):expand;
-    phoneView.group.position.lerpVectors(hand,phoneOne?p1:p2,placement);
+    // The first phone lifts above the awning on its way out, so it never crosses the sign.
+    if(phoneOne){const u=placement,a=hand,b=PHONE_FLIGHT,c=PHONE_ASK;
+      phoneView.group.position.set((1-u)*(1-u)*a.x+2*(1-u)*u*b.x+u*u*c.x,(1-u)*(1-u)*a.y+2*(1-u)*u*b.y+u*u*c.y,(1-u)*(1-u)*a.z+2*(1-u)*u*b.z+u*u*c.z);}
+    else phoneView.group.position.lerpVectors(hand,PHONE_REUSE,placement);
     if(phoneOne)phoneView.group.position.lerp(hand,out);else phoneView.group.position.lerp(v(4.7,1.85,3.9),out);
     const retrieve=reduced?0:phase(t,15.5,15.95)*(1-phase(t,18.2,18.7));
     if(!phoneOne)phoneView.group.position.lerp(hand,retrieve);

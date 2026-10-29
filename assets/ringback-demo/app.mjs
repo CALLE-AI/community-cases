@@ -90,4 +90,4 @@ new IntersectionObserver(entries => { inView = entries[0].isIntersecting; visibi
 document.addEventListener('visibilitychange', visibility);
 reduced.addEventListener('change', () => { if (reduced.matches) auto = false; idle = 0; render(); updateStatus(); visibility(); });
 setUI();
-import('./scene.mjs?v=090999832f').then(({ createScene }) => { scene = createScene(world); render(); }).catch(() => { world.dataset.renderer = 'fallback'; });
+import('./scene.mjs?v=94ee9ebac5').then(({ createScene }) => { scene = createScene(world); render(); }).catch(() => { world.dataset.renderer = 'fallback'; });
