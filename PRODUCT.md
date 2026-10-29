@@ -36,7 +36,9 @@ RingBack unifies its 3D scene and controls: visitors act inside the scene, and i
 
 ## Brand Commitments
 
-Preserve the official CALL-E logo and the incumbent warm white, yellow-and-blue, dark-button appearance evidenced in `index.html` and `assets/local-atlas.css`. This sample extends the existing site; it does not establish a replacement visual system.
+Preserve the official CALL-E logo, yellow-and-blue concept illustrations and dark primary actions on case cards. The Use Cases homepage has its own visual identity: a continuous neutral background and locally hosted Geist across its header, introduction, case cards and footer. The header groups the logo and Use Cases label on the left, with a low-emphasis Explore CALL-E text link on the right. The label sits below the logo on narrow screens and remains visible. The title and introduction share a desktop row and stack on narrower screens. Website, Docs, GitHub and Dashboard remain available in the homepage footer.
+
+Apple Design is a methodology reference for purpose, hierarchy, alignment, legibility and adaptation. The homepage does not copy Apple's website composition or CALL-E Blog's layout. Case facts, illustrations, destinations and licensing remain intact; the case guides retain their existing warm white, yellow-and-blue appearance and type styles.
 
 The case guides share page navigation, type scale and action styles. Neutral reading surfaces keep the guides legible; blue marks links and yellow marks the closing action. Each guide explains its workflow, shows an example output and offers available material. Original concept illustrations, animations and written examples do not establish actual calls or fulfillment.
 
@@ -58,4 +60,4 @@ Shared design rules live in [DESIGN.md](DESIGN.md). Project skill routing and im
 ## Ownership and Publication
 
 - Omar Miri maintains Local Atlas under the MIT license; the starter retains its notice. CALL-E maintains the editorial case guide and receives case feedback. App issues belong in the author's repository.
-- GitHub Pages publishes this repository's `main` branch at [CALL-E Community Cases](https://calle-ai.github.io/community-cases/). The Local Atlas editorial copy is still awaiting the author's review.
+- GitHub Pages publishes this repository's `main` branch at [CALL-E Community Cases](https://usecases.heycall-e.com/). The Local Atlas editorial copy is still awaiting the author's review.

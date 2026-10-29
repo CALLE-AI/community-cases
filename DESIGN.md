@@ -17,10 +17,11 @@ colors:
   success: "#276442"
   code: "#293b51"
   selection: "#cbdafe"
-  index-background: "#f9f9f5"
+  index-background: "#f6f7f5"
   index-ink: "#2e2f33"
   index-muted: "#5b6472"
   index-link: "#2563eb"
+  index-border: "#dde5ef"
 typography:
   display:
     fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
@@ -45,6 +46,22 @@ typography:
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.4
+  index-display:
+    fontFamily: 'Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+    fontSize: clamp(42px, 5.3vw, 64px)
+    fontWeight: 600
+    lineHeight: 1.05
+    letterSpacing: -0.04em
+  index-display-compact:
+    fontSize: clamp(36px, 9vw, 44px)
+    lineHeight: 1.1
+  index-intro:
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 1.65
+  index-intro-compact:
+    fontSize: 17px
+    lineHeight: 1.6
 rounded:
   feature: 28px
   panel: 32px
@@ -79,11 +96,11 @@ components:
 
 让读者看懂项目解决什么问题、如何使用 CALL-E、会得到什么结果，以及自己怎么尝试。页面应清楚、亲切、易读；用具体场景、使用步骤和示例输出建立辨识度。
 
-本规范适用于 `index.html` 的案例列表，以及 Local Atlas、Conversation-Clarify、Care Call AI、RingBack、HungryCall 和后续同类案例的详情页。保留 CALL-E 标识、暖白底色、黄蓝点缀和深色主按钮。新案例沿用这些规则，内容结构可以按实际材料增减。
+本规范适用于 `index.html` 的案例列表，以及 Local Atlas、Conversation-Clarify、Care Call AI、RingBack、HungryCall 和后续同类案例的详情页。保留 CALL-E 标识、黄蓝场景插画和案例卡深色主按钮。首页使用连续中性背景和统一 Geist，Logo 与 Use Cases 组成栏目身份；详情页保留暖白、黄蓝点缀和既有字体。新案例沿用这些规则，内容结构可以按实际材料增减。
 
 ### 参考依据与取舍
 
-- **Apple Design：** 用户指定的[设计入口](https://developer.apple.com/cn/design/)作为图文层级和留白的视觉参考。[HIG Layout](https://developer.apple.com/design/human-interface-guidelines/layout)关于重要性排序、对齐、分组、逐步展开和尺寸适配的建议，落实为短卡片、独立详情页和共享栅格。这里是 Web 项目的应用取舍，不是 Apple 的官方样式或认证。
+- **Apple Design：** 用户指定的[设计入口](https://developer.apple.com/cn/design/)作为用途、层级、对齐、可读性和尺寸适配的方法论参考。[HIG Layout](https://developer.apple.com/design/human-interface-guidelines/layout)关于重要性排序、对齐、分组、逐步展开和尺寸适配的建议，落实为短卡片、独立详情页和共享栅格。首页围绕现有案例建立自己的布局，不照搬 Apple 网站或 CALL-E Blog 页面；这里是 Web 项目的应用取舍，不是 Apple 的官方样式或认证。
 - **可访问性：** 参考 [HIG Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility)，提供可见焦点、足够对比度、键盘操作和减少动态效果。下文的像素尺寸是本项目规则，不把原生平台的 pt 直接等同于 CSS px。
 - **Taste Skill 与 Hallmark：** 检查内容具体性、留白、图像选择和重复组件的一致性。现有设计已经确定，不为每个案例重新抽取主题、字体或版式。
 - **UI/UX Pro Max 与 Impeccable：** 用于响应式、交互、可访问性和收尾检查；建议与本规范不一致时，以用户需求和本项目规范为准。
@@ -92,20 +109,24 @@ components:
 
 ## Colors
 
-暖白背景承托内容，白色表示主要阅读面，深色用于正文和主操作。蓝色识别链接；浅蓝承托可复用模式或解释；浅灰组织流程、代码与示例；浅黄用于收尾行动区。成功状态同时提供文字，绿色不单独承担含义。
+详情页用暖白背景承托内容，白色表示主要阅读面，深色用于正文和主操作。蓝色识别链接；浅蓝承托可复用模式或解释；浅灰组织流程、代码与示例；浅黄用于收尾行动区。成功状态同时提供文字，绿色不单独承担含义。
 
-前面的 token 对应详情页基线。首页保留 `index-*` 的轻微色差，由共享卡片读取页面变量；不要在单张卡里另设一套颜色。新组件优先引用既有 CSS 变量，新增颜色需要明确语义和实际用途。
+颜色 token 中的 `index-*` 对应首页，其余保留详情页与共享组件基线。首页共享卡片读取页面变量；不要在单张卡里另设一套颜色。新组件优先引用既有 CSS 变量，新增颜色需要明确语义和实际用途。
 
 普通文字对比度至少 4.5:1，大字至少 3:1；不要把正文、作者或关键限制降成难读的浅灰。白底蓝字、浅灰底正文、黄色收尾区和按钮状态都需要实际计算。
 
-首页顶部现有黄蓝渐变属于品牌开场区域。案例卡和详情页保持平整的阅读背景，不把渐变、玻璃效果扩展到每个容器。
+首页页头、介绍区、案例间隙和页脚共用 `index-background`，以留白、对齐和 `index-border` 分隔内容；白色案例卡承托图文，黄蓝色来自既有场景插画。官网入口使用正文色文字链接，悬停时转为 `index-link` 并加下划线。蓝色还用于案例辅助链接与键盘焦点，不装饰静态标题。首页不使用渐变或白、黄、白的分段横带。
 
 ## Typography
 
-沿用系统无衬线字体栈。`Inter` 目前只是首选声明，仓库没有打包该字体；排版必须在系统回退字体下成立，不假设所有设备都加载 Inter。代码使用 `SFMono-Regular, Consolas, "Liberation Mono", monospace`。
+详情页沿用系统无衬线字体栈。`Inter` 目前只是首选声明，仓库没有打包该字体；排版必须在系统回退字体下成立，不假设所有设备都加载 Inter。代码使用 `SFMono-Regular, Consolas, "Liberation Mono", monospace`。
+
+首页的页头、介绍、案例卡和页脚统一使用本地 Geist，回退栈与 `index-display` 相同。Latin 可变字体随站点存放在 `assets/fonts/`，保留 OFL 许可和来源；加载失败时使用系统无衬线字体。栏目名 15px、官网入口 14px，字重 600、行高 1.5；600px 以下两者均为 13px。详情页的字体保持现有规则。
 
 | 角色 | 当前用法 |
 |---|---|
+| 首页主标题 | 使用 `index-display`；680px 以下以 `index-display-compact` 覆盖字号与行高，并取消强制换行 |
+| 首页介绍 | 使用 `index-intro`；680px 以下以 `index-intro-compact` 覆盖字号与行高 |
 | 详情主标题（案例名） | 桌面 `clamp(40px, 4.5vw, 60px)`；1000px 以下 46px，760px 以下 `clamp(38px, 9vw, 52px)`，380px 以下 36px |
 | 首页案例名 | `clamp(34px, 3.6vw, 44px)`；半粗，作为该卡的标题 |
 | 详情章节标题 | 桌面 `clamp(32px, 3.6vw, 44px)`；手机 32px，窄屏 29px |
@@ -113,7 +134,7 @@ components:
 | 正文 | 16–19px，行高约 1.6–1.65；流程说明可用 15px |
 | 作者、日期、来源与说明 | 12–14px；保留足够对比度，关键限制不能只藏在小字里 |
 
-标题用正体，保持清楚的大小和粗细层级。正文控制在适合阅读的宽度，现有介绍约 48–68ch。不要为了强行单行而压缩文字或降低可读性；长名称、放大文字和翻译内容可以换行，不能截断。
+标题用正体，保持清楚的大小和粗细层级。正文控制在适合阅读的宽度，详情页现有介绍约 48–68ch。不要为了强行单行而压缩文字或降低可读性；长名称、放大文字和翻译内容可以换行，不能截断。
 
 ## Layout
 
@@ -126,6 +147,8 @@ components:
 ### 栅格与留白
 
 - 内容区最大 1120px。详情页桌面两侧至少 32px；760px 以下改为两侧 18px、内容最大 560px。
+- 首页页头、介绍、案例列表和页脚桌面两侧至少 20px；680px 以下介绍、案例列表和页脚改为两侧 14px，页头保留 20px。
+- 首页标题与介绍桌面以 1.5:1 两列并排，底部对齐、间隔 64px，上下留白为 56px 与 48px；介绍限宽 38ch。900px 以下改为单列，间隔 24px、上下留白各 48px，介绍限宽 56ch。680px 以下间隔 20px、上下留白各 40px。
 - 首页卡片桌面图文比例为 1.06:1，800px 以下上下排列。图像在上，文字在下；手机图像为 8:5，最高 360px。
 - 详情开场桌面两列、间距 60px；1000px 以下间距 32px，900px 以下单列。图片比例按布局变为约 1:1、16:9、4:3，主体必须在各尺寸中清楚可见。
 - 卡片内边距桌面 `clamp(28px, 4vw, 52px)`，手机 32px，400px 以下 24px。详情大面板桌面 48px，手机 24–28px；窄屏可降至 20px。
@@ -146,6 +169,12 @@ components:
 图像裁切与外层圆角一致。不要添加模拟浏览器、手机边框或代码窗口的装饰按钮。
 
 ## Components
+
+### 首页页头与页脚
+
+首页页头与介绍区共用连续中性背景，以底部分隔线和留白区分。左侧官方 Logo 与 Use Cases 栏目名并排，使用 1px 竖线区分；栏目名是带 `aria-current="page"` 的文字，不是重复跳回当前页的链接。右侧 `Explore CALL-E` 使用低强调文字链接与右上箭头，和 Logo 一样进入官网。Website、Docs、GitHub 和 Dashboard 位于页脚，页脚链接允许换行。
+
+页头与桌面 1120px 正文栅格对齐，两侧至少 20px，最小高度 80px，垂直内边距 12px。桌面 Logo 为 134×44px，与栏目名间隔 20px；600px 以下 Logo 宽 104px，Use Cases 排在 Logo 下方并持续可见，移除竖线。官网链接上下内边距 10px；文字放大时允许整组换行。页头和页脚链接至少 44px 高，焦点使用 2px 蓝色轮廓并留 3px 间距。680px 以下页脚内容上下排列。
 
 ### 案例卡
 
@@ -188,7 +217,7 @@ RingBack 的交互演示将 3D 场景与操作合为一个流程：同一份状�
 
 ### 操作与反馈
 
-交互目标至少 44px 高，图标独立操作至少 44×44px；详情主按钮最小高度 46px。普通状态、悬停和键盘焦点都要清楚；焦点使用 3px 蓝色轮廓并留 4px 间距。辅助链接通过蓝色和悬停下划线识别。
+交互目标至少 44px 高，图标独立操作至少 44×44px；详情主按钮最小高度 46px。普通状态、悬停和键盘焦点都要清楚；案例卡和详情页焦点使用 3px 蓝色轮廓并留 4px 间距。辅助链接通过蓝色和悬停下划线识别。
 
 现有按压反馈缩放到 0.98，状态过渡约 160ms。尊重 `prefers-reduced-motion`：关闭缩放和过渡，平滑滚动仅在用户未要求减少动态效果时启用。静态链接不增加虚假的加载或成功状态。
 

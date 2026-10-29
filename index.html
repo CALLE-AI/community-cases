@@ -4,13 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Reusable CALL-E phone-task examples from the community.">
-    <meta name="theme-color" content="#ffd733">
+    <meta name="theme-color" content="#f6f7f5">
     <link rel="icon" href="./assets/call-e-mark.svg" type="image/svg+xml">
-    <title>CALL-E Community Cases</title>
+    <title>CALL-E Use Cases</title>
     <style>
+      @font-face {
+        font-family: Geist;
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url("./assets/fonts/geist-latin.woff2") format("woff2");
+      }
+
       :root {
         color-scheme: light;
-        --page: #f9f9f5;
+        --page: #f6f7f5;
         --surface: #ffffff;
         --ink: #2e2f33;
         --muted: #5b6472;
@@ -18,7 +26,7 @@
         --signal: #2563eb;
         --action: #26272b;
         --action-hover: #111827;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background: var(--page);
         color: var(--ink);
       }
@@ -49,15 +57,6 @@
         color: inherit;
       }
 
-      .brand-shell {
-        overflow: hidden;
-        border-bottom: 1px solid rgba(46, 47, 51, 0.12);
-        background:
-          radial-gradient(circle at 34% -18%, rgba(161, 222, 255, 0.9) 0, rgba(161, 222, 255, 0.45) 20%, transparent 43%),
-          radial-gradient(circle at 84% 8%, rgba(255, 250, 218, 0.78) 0, transparent 34%),
-          linear-gradient(135deg, #ffe13f 0%, #f7df75 100%);
-      }
-
       .site-header,
       .intro,
       main,
@@ -69,69 +68,58 @@
       .site-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        min-height: 76px;
-        border-bottom: 1px solid rgba(46, 47, 51, 0.12);
+        flex-wrap: wrap;
+        gap: 16px;
+        min-height: 80px;
+        padding-block: 12px;
+        border-bottom: 1px solid var(--border);
+        line-height: 1.5;
+      }
+
+      .header-identity {
+        display: flex;
+        align-items: center;
+        gap: 20px;
       }
 
       .brand {
         display: inline-flex;
         align-items: center;
+        min-height: 44px;
         text-decoration: none;
       }
 
       .brand-logo {
-        width: 110px;
+        width: 134px;
         height: auto;
         display: block;
       }
 
-      .site-nav {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .site-link {
-        position: relative;
-        padding: 10px 12px;
-        color: rgba(46, 47, 51, 0.78);
-        font-size: 14px;
+      .site-section {
+        padding-left: 20px;
+        border-left: 1px solid #d6d7ce;
+        font-size: 15px;
         font-weight: 600;
-        text-decoration: none;
-      }
-
-      .site-link:hover {
-        color: var(--ink);
-      }
-
-      .site-link[aria-current="page"]::after {
-        position: absolute;
-        right: 12px;
-        bottom: 4px;
-        left: 12px;
-        height: 2px;
-        background: var(--signal);
-        content: "";
+        letter-spacing: -0.01em;
       }
 
       .header-cta {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 38px;
         gap: 8px;
-        padding: 0 16px;
-        border-radius: 999px;
-        background: var(--action);
-        color: #ffffff;
+        margin-left: auto;
+        min-height: 44px;
+        padding-block: 10px;
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 600;
         text-decoration: none;
       }
 
       .header-cta:hover {
-        background: var(--action-hover);
+        color: var(--signal);
+        text-decoration: underline;
+        text-underline-offset: 4px;
       }
 
       a:focus-visible {
@@ -140,68 +128,37 @@
       }
 
       .intro {
-        max-width: 900px;
-        padding-block: 82px 100px;
-        text-align: center;
-      }
-
-      .eyebrow {
-        margin: 0;
-        font-family: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 11px;
-        border: 1px solid rgba(255, 255, 255, 0.72);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.38);
-      }
-
-      .eyebrow::before {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--signal);
-        content: "";
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        align-items: end;
+        gap: 64px;
+        padding-block: 56px 48px;
       }
 
       h1 {
-        margin: 24px 0 20px;
-        font-size: clamp(44px, 7vw, 68px);
-        font-weight: 400;
-        line-height: 1.06;
-        letter-spacing: -0.045em;
-      }
-
-      h1 span {
-        text-decoration: underline;
-        text-decoration-color: var(--signal);
-        text-decoration-thickness: 4px;
-        text-underline-offset: 0.12em;
+        margin: 0;
+        font-size: clamp(42px, 5.3vw, 64px);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        text-wrap: balance;
       }
 
       .intro-copy {
-        max-width: 650px;
-        margin: 0 auto;
-        color: rgba(46, 47, 51, 0.82);
+        max-width: 38ch;
+        margin: 0;
+        color: var(--muted);
         font-size: 18px;
         line-height: 1.65;
       }
 
       main {
-        padding-block: 64px 88px;
+        padding-bottom: 88px;
       }
 
       footer {
         border-top: 1px solid var(--border);
-        background: var(--surface);
+        background: var(--page);
       }
 
       .footer-inner {
@@ -216,48 +173,44 @@
 
       .footer-links {
         display: flex;
-        gap: 18px;
+        flex-wrap: wrap;
+        gap: 4px 18px;
       }
 
       .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
         text-underline-offset: 3px;
       }
 
+      @media (max-width: 900px) {
+        .intro {
+          grid-template-columns: minmax(0, 1fr);
+          align-items: start;
+          gap: 24px;
+          padding-block: 48px;
+        }
+
+        .intro-copy {
+          max-width: 56ch;
+        }
+      }
+
       @media (max-width: 680px) {
-        .site-header,
         .intro,
         main,
         .footer-inner {
           width: min(calc(100% - 28px), 1120px);
         }
 
-        .brand-logo {
-          width: 96px;
-        }
-
-        .site-nav {
-          gap: 2px;
-        }
-
-        .nav-cases,
-        .nav-github {
-          display: none;
-        }
-
-        .site-link {
-          padding-inline: 9px;
-        }
-
-        .header-cta {
-          padding-inline: 13px;
-        }
-
         .intro {
-          padding-block: 58px 70px;
+          gap: 20px;
+          padding-block: 40px;
         }
 
         h1 {
-          font-size: 36px;
+          font-size: clamp(36px, 9vw, 44px);
           line-height: 1.1;
         }
 
@@ -266,12 +219,43 @@
         }
 
         main {
-          padding-block: 42px 64px;
+          padding-bottom: 64px;
+        }
+
+        .intro-copy {
+          font-size: 17px;
+          line-height: 1.6;
         }
 
         .footer-inner {
           align-items: flex-start;
           flex-direction: column;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .site-header {
+          gap: 12px;
+        }
+
+        .header-identity {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2px;
+        }
+
+        .brand-logo {
+          width: 104px;
+        }
+
+        .site-section {
+          padding-left: 0;
+          border-left: 0;
+          font-size: 13px;
+        }
+
+        .header-cta {
+          font-size: 13px;
         }
       }
 
@@ -287,25 +271,23 @@
     <link rel="stylesheet" href="./assets/community-cards.css">
   </head>
   <body>
-    <div class="brand-shell">
-      <header class="site-header">
-        <a class="brand" href="https://www.heycall-e.com/">
-          <img class="brand-logo" src="./assets/call-e-logo.svg" alt="CALL-E" />
+    <header class="site-header">
+      <div class="header-identity">
+        <a class="brand" href="https://www.heycall-e.com/" aria-label="CALL-E home">
+          <img class="brand-logo" src="./assets/call-e-logo.svg" width="134" height="44" alt="CALL-E" />
         </a>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a class="site-link nav-cases" href="./" aria-current="page">Cases</a>
-          <a class="site-link nav-docs" href="https://docs.heycall-e.com/">Docs</a>
-          <a class="site-link nav-github" href="https://github.com/CALLE-AI/community-cases">GitHub</a>
-          <a class="header-cta" href="https://dashboard.heycall-e.com/">Dashboard <span aria-hidden="true">↗</span></a>
-        </nav>
-      </header>
+        <span class="site-section" aria-current="page">Use Cases</span>
+      </div>
+      <a class="header-cta" href="https://www.heycall-e.com/">
+        Explore CALL-E
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </header>
 
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">Community cases</p>
-        <h1 id="page-title">See what you can<br> <span>build with CALL-E.</span></h1>
-        <p class="intro-copy">Explore community projects, see how they work and what they produce, then try a demo or build on the idea.</p>
-      </section>
-    </div>
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">See what you can<br> build with CALL-E.</h1>
+      <p class="intro-copy">Explore community projects, see how they work and what they produce, then try a demo or build on the idea.</p>
+    </section>
 
     <main>
       <section class="cases-section" aria-labelledby="hackathon-title">
@@ -417,6 +399,7 @@
           <a href="https://www.heycall-e.com/">Website</a>
           <a href="https://docs.heycall-e.com/">Docs</a>
           <a href="https://github.com/CALLE-AI/community-cases">GitHub</a>
+          <a href="https://dashboard.heycall-e.com/">Dashboard</a>
         </nav>
       </div>
     </footer>
